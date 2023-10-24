@@ -255,7 +255,7 @@ function proceedToNextLevel() {
         game.speed = 2.5;
     } else if (scene.score > 1000 && scene.score < 2000) {
         game.speed = 3;
-    } else if (scene.score > 2000) {
+    } else if (scene.score > 2000 && scene.score < 3000) {
         game.speed = 3.5;
     } else if (scene.score > 3000) {
         game.speed = 4;
