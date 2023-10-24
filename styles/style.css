@@ -83,19 +83,19 @@ ul p {
 .character {
     position: absolute;
     z-index: 100;
-    width: 90px;
-    height: 150px;
-    background-image: url(./images/char.png);
+    width: 110px;
+    height: 170px;
+    background-image: url(../images/char.png);
     background-size: cover;
 }
 
-.character-shoots {
-    background-image: url(./images/char-shoot.png);
+.character-shoot {
+    background-image: url(../images/char-shoot.png);
     background-size: cover;
 }
 
 .character-flying {
-    background-image: url(./images/char-flying.png);
+    background-image: url(../images/char-flying.png);
     background-size: cover;
 }
 
@@ -103,7 +103,7 @@ ul p {
     position: absolute;
     width: 80px;
     height: 20px;
-    background-image: url(./images/bullet.png);
+    background-image: url(../images/bullet.png);
     background-size: cover;
 }
 
@@ -112,7 +112,7 @@ ul p {
     z-index: 0;
     width: 300px;
     height: 250px;
-    background-image: url(./images/matrixcloud.png);
+    background-image: url(../images/matrixcloud.png);
     background-size: cover;
 }
 
@@ -120,7 +120,7 @@ ul p {
     position: absolute;
     width: 70px;
     height: 50px;
-    background-image: url(./images/newbug.png);
+    background-image: url(../images/newbug.png);
     background-size: cover;
 }
 
@@ -148,7 +148,7 @@ ul p {
 .live {
     z-index: 1;
     display: inline-block;
-    background-image: url(./images/life.png);
+    background-image: url(../images/life.png);
     background-size: cover;
     height: 50px;
     width: 50px;
