@@ -75,62 +75,21 @@ function onGameStart(event) {
 //game loop function
 function gameAction(timestamp) {
     const character = document.querySelector('.character');
+    const bugs = document.querySelectorAll('.bug');
 
     //increment score count
     scene.score += 0.1;
 
+    //proceed to next levels
+    if (scene.score > 500) proceedToNextLevel();
+
     //apply gravitation
     const isInAir = (player.y + player.height) <= gameArea.offsetHeight;
+    if (isInAir) player.y += game.speed;
 
-    if (isInAir) {
-        player.y += game.speed;
-    }
-
-    //add bugs
-    if (timestamp - scene.lastBugSpawn > game.bugSpawnInterval + 5000 * Math.random()) {
-        const bug = document.createElement('div');
-        bug.classList.add('bug');
-        bug.x = gameArea.offsetWidth - 60;
-        bug.style.left = bug.x + 'px';
-        bug.style.top = (gameArea.offsetHeight - 60) * Math.random() + 'px';
-
-        gameArea.appendChild(bug);
-        scene.lastBugSpawn = timestamp;
-    }
-
-    //modify bug positions
-    const bugs = document.querySelectorAll('.bug');
-    bugs.forEach(bug => {
-        bug.x -= game.speed * game.bugMultiplier;
-        bug.style.left = bug.x + 'px';
-
-        if (bug.x + bug.offsetWidth <= 0) {
-            bug.remove();
-        }
-    });
-
-    //add clouds
-    if (timestamp - scene.lastCloudSpawn > game.cloudSpawnInterval + 20000 * Math.random()) {
-        const cloud = document.createElement('div');
-        cloud.classList.add('cloud');
-        cloud.x = gameArea.offsetWidth;
-        cloud.style.left = cloud.x + 'px';
-        cloud.style.top = (gameArea.offsetHeight - 200) * Math.random() + 'px';
-
-        gameArea.appendChild(cloud);
-        scene.lastCloudSpawn = timestamp;
-    }
-
-    //modify clouds position
-    const clouds = document.querySelectorAll('.cloud');
-    clouds.forEach(cloud => {
-        cloud.x -= game.speed;
-        cloud.style.left = cloud.x + 'px';
-
-        if (cloud.x + clouds.offsetWidth <= 0) {
-            cloud.remove();
-        }
-    });
+    //add bugs and clouds
+    addAndModifyBugs(timestamp);
+    addAndModifyClouds(timestamp);
 
     //modify bullets positions
     const bullets = document.querySelectorAll('.bullet');
@@ -145,7 +104,10 @@ function gameAction(timestamp) {
 
     //register user input
     if (keys.ArrowUp && player.y > 0 || keys.KeyW && player.y > 0) {
+        character.classList.add('character-flying');
         player.y -= game.speed * game.movingMultiplier;
+    } else {
+        character.classList.remove('character-flying');
     }
 
     if (keys.ArrowDown && isInAir || keys.KeyS && isInAir) {
@@ -191,6 +153,68 @@ function gameAction(timestamp) {
     if (scene.isGameActive) window.requestAnimationFrame(gameAction);
 }
 
+function addAndModifyBugs(timestamp) {
+    //add bugs
+    if (timestamp - scene.lastBugSpawn > game.bugSpawnInterval + 5000 * Math.random()) {
+        const bug = document.createElement('div');
+        bug.classList.add('bug');
+        bug.x = gameArea.offsetWidth - 60;
+        bug.style.left = bug.x + 'px';
+        bug.style.top = (gameArea.offsetHeight - 100) * Math.random() + 'px';
+
+        gameArea.appendChild(bug);
+        scene.lastBugSpawn = timestamp;
+    }
+
+    //modify bug positions
+    const bugs = document.querySelectorAll('.bug');
+    bugs.forEach(bug => {
+        bug.x -= game.speed * game.bugMultiplier;
+        bug.style.left = bug.x + 'px';
+
+        if (bug.x + bug.offsetWidth <= 0) {
+            bug.remove();
+        }
+    });
+}
+
+function addAndModifyClouds(timestamp) {
+    //add clouds
+    if (timestamp - scene.lastCloudSpawn > game.cloudSpawnInterval + 20000 * Math.random()) {
+        const cloud = document.createElement('div');
+        cloud.classList.add('cloud');
+        cloud.x = gameArea.offsetWidth;
+        cloud.style.left = cloud.x + 'px';
+        cloud.style.top = (gameArea.offsetHeight - 200) * Math.random() + 'px';
+
+        gameArea.appendChild(cloud);
+        scene.lastCloudSpawn = timestamp;
+    }
+
+    //modify clouds position
+    const clouds = document.querySelectorAll('.cloud');
+    clouds.forEach(cloud => {
+        cloud.x -= game.speed;
+        cloud.style.left = cloud.x + 'px';
+
+        if (cloud.x + clouds.offsetWidth <= 0) {
+            cloud.remove();
+        }
+    });
+}
+
+function addBullet(player) {
+    const bullet = document.createElement('div');
+
+    bullet.classList.add('bullet');
+    bullet.y = player.y + player.height / 3 + 5;
+    bullet.style.top = bullet.y + 'px';
+    bullet.x = player.x + player.width;
+    bullet.style.left = bullet.x + 'px';
+
+    gameArea.appendChild(bullet);
+}
+
 //key handlers
 function onKeyDown(event) {
     keys[event.code] = true;
@@ -198,18 +222,6 @@ function onKeyDown(event) {
 
 function onKeyUp(event) {
     keys[event.code] = false;
-}
-
-function addBullet(player) {
-    const bullet = document.createElement('div');
-
-    bullet.classList.add('bullet');
-    bullet.y = player.y + player.height / 2;
-    bullet.style.top = bullet.y + 'px';
-    bullet.x = player.x + player.width;
-    bullet.style.left = bullet.x + 'px';
-
-    gameArea.appendChild(bullet);
 }
 
 function isCollision(firstElement, secondElement) {
@@ -224,14 +236,29 @@ function isCollision(firstElement, secondElement) {
 
 function loseLive(timestamp) {
     if (timestamp - scene.lastLostLive > game.lostLiveInterval) {
+
         const currLive = document.querySelector('.live');
         currLive.remove();
-
         player.lives--;
+
         scene.score -= game.lostLivePenalty;
+        if (scene.score < 0) scene.score = 0;
+
         scene.lastLostLive = timestamp;
 
         if (player.lives < 1) gameOverAction();
+    }
+}
+
+function proceedToNextLevel() {
+    if (scene.score > 500 && scene.score < 1000) {
+        game.speed = 2.5;
+    } else if (scene.score > 1000 && scene.score < 2000) {
+        game.speed = 3;
+    } else if (scene.score > 2000) {
+        game.speed = 3.5;
+    } else if (scene.score > 3000) {
+        game.speed = 4;
     }
 }
 

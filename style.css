@@ -44,7 +44,7 @@ body {
 .character {
     position: absolute;
     z-index: 100;
-    width: 150px;
+    width: 90px;
     height: 150px;
     background-image: url(./images/char.png);
     background-size: cover;
@@ -55,10 +55,15 @@ body {
     background-size: cover;
 }
 
+.character-flying {
+    background-image: url(./images/char-flying.png);
+    background-size: cover;
+}
+
 .bullet {
     position: absolute;
-    width: 100px;
-    height: 30px;
+    width: 80px;
+    height: 20px;
     background-image: url(./images/bullet.png);
     background-size: cover;
 }
@@ -66,16 +71,16 @@ body {
 .cloud {
     position: absolute;
     z-index: 0;
-    width: 250px;
-    height: 200px;
+    width: 300px;
+    height: 250px;
     background-image: url(./images/matrixcloud.png);
     background-size: cover;
 }
 
 .bug {
     position: absolute;
-    width: 90px;
-    height: 60px;
+    width: 70px;
+    height: 50px;
     background-image: url(./images/newbug.png);
     background-size: cover;
 }
