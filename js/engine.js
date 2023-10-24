@@ -14,7 +14,7 @@ function gameAction(timestamp) {
     //add elements
     addAndModifyBugs(timestamp);
     addAndModifyClouds(timestamp);
-    modifyBulletPositions();
+    modifyBulletsPositions();
 
     //register user input
     if (keys.ArrowUp && player.y > 0 || keys.KeyW && player.y > 0) {
@@ -51,6 +51,7 @@ function gameAction(timestamp) {
         bullets.forEach(bullet => {
             if (isCollision(bullet, bug)) {
                 scene.score += game.bugKillBonus;
+                scene.killedBugs++;
                 bullet.remove();
                 bug.remove();
             }
@@ -65,7 +66,7 @@ function gameAction(timestamp) {
     gamePoints.textContent = Math.trunc(scene.score);
 
     //proceed to next levels
-    if (scene.score > 500) proceedToNextLevel();
+    proceedToNextLevel();
 
     if (scene.isGameActive) window.requestAnimationFrame(gameAction);
 }
@@ -78,4 +79,17 @@ function isCollision(firstElement, secondElement) {
         firstRect.bottom < secondRect.top ||
         firstRect.right < secondRect.left ||
         firstRect.left > secondRect.right);
+}
+
+function loseLive(timestamp) {
+    if (timestamp - scene.lastLostLive > game.lostLiveInterval) {
+
+        const currLive = document.querySelector('.live');
+        currLive.remove();
+        player.lives--;
+
+        scene.lastLostLive = timestamp;
+
+        if (player.lives < 1) gameOverAction();
+    }
 }

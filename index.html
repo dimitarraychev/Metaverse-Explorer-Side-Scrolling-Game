@@ -14,24 +14,33 @@
 
         <div class="start-menu">
             <button class="game-start">Press to Play!</button>
-            <div class="legend">
+            <article class="legend">
                 <h3>Welcome to Metaverse Explorer the Side-Scrolling Adventure!</h3>
                 <ul>
                     <li>
-                        <p>Software Bugs - exterminate them for 50 points each</p><img class="legend-bug" src="./images/newbug.png" alt="bug">
+                        <p>Software Bugs - exterminate them for points!</p><img class="legend-bug" src="./images/newbug.png" alt="bug">
                     </li>
                     <li>
-                        <p>Mechanical Hearts - collect them to replenish a life</p><img class="legend-life" src="./images/life.png" alt="life">
+                        <p>Mechanical Hearts - collect them to replenish a life!</p><img class="legend-life" src="./images/life.png" alt="life">
                     </li>
                 </ul>
-            </div>
+            </article>
         </div>
         
         <div class="game-score"><span class="points">0</span> pts.</div>
 
         <div class="game-area"></div>
 
-        <div class="game-over hide">Game Over!</div>
+        <div class="game-over hide">
+            <article class="endgame-stats">
+                <h3>Game Over!</h3>
+                <ul>
+                    <li>Killed Bugs: <span class="bug-stats">0</span></li>
+                    <li>Collected Hearts: <span class="heart-stats">0</span></li>
+                </ul>
+            </article>
+            <button class="restart-game">Restart Game</button>
+        </div>
 
     </div>
 

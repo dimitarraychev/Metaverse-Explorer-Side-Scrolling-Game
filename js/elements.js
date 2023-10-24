@@ -48,7 +48,7 @@ function addAndModifyClouds(timestamp) {
     });
 }
 
-// add and modify bullet functions
+// add and modify bullets functions
 function addBullet(player) {
     const bullet = document.createElement('div');
 
@@ -61,7 +61,7 @@ function addBullet(player) {
     gameArea.appendChild(bullet);
 }
 
-function modifyBulletPositions() {
+function modifyBulletsPositions() {
     const bullets = document.querySelectorAll('.bullet');
 
     bullets.forEach(bullet => {

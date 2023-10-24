@@ -38,7 +38,7 @@ body {
     width: 45%;
     height: 200px;
     top: 220px;
-    left: 26%;
+    left: 25.5%;
     z-index: 1;
     background-color: rgba(0,212,255,1);
     border-radius: 30px;
@@ -48,11 +48,11 @@ body {
     padding: 30px;
 }
 
-ul {
+.legend ul {
     list-style-type: none;
 }
 
-ul p {
+.legend ul p {
     display: inline-block;
     margin-right: 50px;
 }
@@ -68,7 +68,6 @@ ul p {
     height: 50px;
     display: inline-block;
 }
-
 
 .game-score {
     background-color: black;
@@ -124,16 +123,48 @@ ul p {
     background-size: cover;
 }
 
-.game-over {
+.endgame-stats {
+    position: absolute;
+    width: 45%;
+    height: 200px;
+    top: 220px;
+    left: 25.5%;
+    z-index: 1;
+    background-color: rgba(0,212,255,1);
+    border-radius: 30px;
+    border: 2px solid  rgba(0,152,195,1);
+    text-align: center;
+    font-size: 16px;
+    padding: 30px;
+}
+
+.endgame-stats ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.endgame-stats ul p {
+    text-align: center;
+}
+
+.restart-game {
+    font-family: 'Orbitron';
+    font-size: 32px;
     position: absolute;
     width: 30%;
-    background-color: red;
-    border-radius: 30px;
-    top: 100px;
-    left: 33%;
+    top: 500px;
+    left: 35%;
     z-index: 1;
+    background-color: rgba(0,212,255,1);
+    border-radius: 30px;
     text-align: center;
     padding: 30px;
+}
+
+.restart-game:hover {
+    cursor: pointer;
+    background-color:  rgba(0,152,195,1);
+    border: 2px solid  rgba(0,92,135,1);
 }
 
 .lives-container {
