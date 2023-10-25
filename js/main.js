@@ -54,30 +54,10 @@ function onKeyUp(event) {
     keys[event.code] = false;
 }
 
-function proceedToNextLevel() {
-    if (scene.score > 250 && scene.score < 1000) {
-        game.speed = 2.5;
-        game.bugSpawnInterval = 700;
-        game.bugKillBonus = 75;
-    } else if (scene.score > 1000 && scene.score < 2000) {
-        game.speed = 3;
-        game.bugSpawnInterval = 600;
-        game.bugKillBonus = 100;
-    } else if (scene.score > 2000 && scene.score < 3000) {
-        game.speed = 3.5;
-        game.bugSpawnInterval = 500;
-        game.bugKillBonus = 150;
-    } else if (scene.score > 3000 && scene.isBossFight === false) {
-        game.speed = 2;
-        game.bugSpawnInterval = Infinity;
-        startBossFight();
-    }
-}
-
 function gameOverAction() {
     scene.isGameActive = false;
     bugStats.textContent = scene.killedBugs;
-    heartStats.textContent = scene.collectedHearts;
+    heartStats.textContent = scene.collectedBitcoins;
     gameOver.classList.remove('hide');
 }
 
@@ -111,10 +91,32 @@ function removeAllElements() {
     const clouds = document.querySelectorAll('.cloud');
     const bugs = document.querySelectorAll('.bug');
     const bullets = document.querySelectorAll('.bullet');
+    const bitcoins = document.querySelectorAll('.bitcoin');
 
     clouds.forEach(cloud => cloud.remove());
     bugs.forEach(bug => bug.remove());
     bullets.forEach(bullet => bullet.remove());
+    bitcoins.forEach(bitcoin => bitcoin.remove());
+}
+
+function proceedToNextLevel() {
+    if (scene.score > 1000 && scene.score < 2000) {
+        game.speed = 2.5;
+        game.bugSpawnInterval = 800;
+        game.bitcoinSpawnInterval = 2750;
+    } else if (scene.score > 2000 && scene.score < 3000) {
+        game.speed = 3;
+        game.bugSpawnInterval = 650;
+        game.bitcoinSpawnInterval = 2500;
+    } else if (scene.score > 3000 && scene.score < 5000) {
+        game.speed = 3.5;
+        game.bugSpawnInterval = 500;
+        game.bitcoinSpawnInterval = 2000;
+    } else if (scene.score > 5000 && scene.isBossFight === false) {
+        game.speed = 2;
+        game.bugSpawnInterval = Infinity;
+        startBossFight();
+    }
 }
 
 //boss fight

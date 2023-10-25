@@ -7,6 +7,8 @@ function addAndModifyBugs(timestamp) {
         bug.style.left = bug.x + 'px';
         bug.style.top = (gameArea.offsetHeight - 100) * Math.random() + 'px';
 
+        if (bug.style.top.replace('px', '') < 50) bug.style.top = '50px';
+
         gameArea.appendChild(bug);
         scene.lastBugSpawn = timestamp;
     }
@@ -30,7 +32,7 @@ function addAndModifyClouds(timestamp) {
         cloud.classList.add('cloud');
         cloud.x = gameArea.offsetWidth;
         cloud.style.left = cloud.x + 'px';
-        cloud.style.top = (gameArea.offsetHeight - 200) * Math.random() + 'px';
+        cloud.style.top = (gameArea.offsetHeight - 100) * Math.random() + 'px';
 
         gameArea.appendChild(cloud);
         scene.lastCloudSpawn = timestamp;
@@ -42,7 +44,7 @@ function addAndModifyClouds(timestamp) {
         cloud.x -= game.speed;
         cloud.style.left = cloud.x + 'px';
 
-        if (cloud.x + clouds.offsetWidth <= 0) {
+        if (cloud.x + cloud.offsetWidth <= 0) {
             cloud.remove();
         }
     });
@@ -70,6 +72,31 @@ function modifyBulletsPositions() {
     
         if (bullet.x + bullet.offsetWidth > gameArea.offsetWidth) {
             bullet.remove();
+        }
+    });
+}
+
+function addAndModifyBitcoins(timestamp) {
+    //add bitcoins
+    if (timestamp - scene.lastBitcoinSpawn > game.bitcoinSpawnInterval + 5000 * Math.random()) {
+        const bitcoin = document.createElement('div');
+        bitcoin.classList.add('bitcoin');
+        bitcoin.x = gameArea.offsetWidth;
+        bitcoin.style.left = bitcoin.x + 'px';
+        bitcoin.style.top = (gameArea.offsetHeight - 100) * Math.random() + 'px';
+
+        gameArea.appendChild(bitcoin);
+        scene.lastBitcoinSpawn = timestamp;
+    }
+
+    //modify bitcoins position
+    const bitcoins = document.querySelectorAll('.bitcoin');
+    bitcoins.forEach(bitcoin => {
+        bitcoin.x -= game.speed * game.bitcoinMultiplier;
+        bitcoin.style.left = bitcoin.x + 'px';
+
+        if (bitcoin.x + bitcoin.offsetWidth <= 0) {
+            bitcoin.remove();
         }
     });
 }

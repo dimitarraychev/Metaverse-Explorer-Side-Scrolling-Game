@@ -14,19 +14,23 @@ const game = {
     movingMultiplier: 4,
     bulletMutliplier: 5,
     bugMultiplier: 3,
+    bitcoinMultiplier: 5,
     bulletInterval: 1000,
-    cloudSpawnInterval: 3000,
-    bugSpawnInterval: 800,
-    bugKillBonus: 50,
+    cloudSpawnInterval: 2500,
+    bugSpawnInterval: 1000,
+    bitcoinSpawnInterval: 3000,
+    bugKillBonus: 100,
+    bitcoinCollectBonus: 200,
     lostLiveInterval: 1000
 };
 
 const scene = {
     score: 0,
     killedBugs: 0,
-    collectedHearts: 0,
+    collectedBitcoins: 0,
     lastCloudSpawn: 0,
     lastBugSpawn: 0,
+    lastBitcoinSpawn: 0,
     lastLostLive: 0,
     isGameActive: true,
     isBossFight: false

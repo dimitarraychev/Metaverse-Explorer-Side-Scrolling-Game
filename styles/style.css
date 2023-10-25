@@ -36,7 +36,7 @@ body {
 .legend {
     position: absolute;
     width: 45%;
-    height: 200px;
+    height: 300px;
     top: 220px;
     left: 25.5%;
     z-index: 1;
@@ -57,15 +57,22 @@ body {
     margin-right: 50px;
 }
 
+.legend h4 {
+    margin-top: 60px;
+    padding: 0;
+    text-align: center;
+    font-style: italic;
+}
+
 .legend-bug {
     width: 70px;
     height: 50px;
     display: inline-block;
 }
 
-.legend-life {
-    width: 50px;
-    height: 50px;
+.legend-bitcoin {
+    width: 60px;
+    height: 40px;
     display: inline-block;
 }
 
@@ -98,6 +105,16 @@ body {
     background-size: cover;
 }
 
+.character-flyingshoot {
+    background-image: url(../images/char-flyingshoot.png);
+    background-size: cover;
+}
+
+.character-hit {
+    background-image: url(../images/char-hit.png);
+    background-size: cover;
+}
+
 .bullet {
     position: absolute;
     width: 80px;
@@ -120,6 +137,14 @@ body {
     width: 70px;
     height: 50px;
     background-image: url(../images/newbug.png);
+    background-size: cover;
+}
+
+.bitcoin {
+    position: absolute;
+    width: 70px;
+    height: 45px;
+    background-image: url(../images/bitcoin.png);
     background-size: cover;
 }
 
