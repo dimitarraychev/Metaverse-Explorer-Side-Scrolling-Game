@@ -6,7 +6,7 @@ const gameArea = document.querySelector('.game-area');
 const gameOver = document.querySelector('.game-over');
 const gamePoints = document.querySelector('.points');
 const bugStats = document.querySelector('.bug-stats');
-const heartStats = document.querySelector('.heart-stats');
+const bitcoinStats = document.querySelector('.bitcoin-stats');
 
 gameStartBtn.addEventListener('click', onGameStart);
 restartGameBtn.addEventListener('click', restartGame);
@@ -57,7 +57,7 @@ function onKeyUp(event) {
 function gameOverAction() {
     scene.isGameActive = false;
     bugStats.textContent = scene.killedBugs;
-    heartStats.textContent = scene.collectedBitcoins;
+    bitcoinStats.textContent = scene.collectedBitcoins;
     gameOver.classList.remove('hide');
 }
 

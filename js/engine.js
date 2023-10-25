@@ -38,7 +38,8 @@ function gameAction(timestamp) {
         player.x -= game.speed * game.movingMultiplier;
     }
 
-    if (keys.ArrowRight && player.x + player.width < gameArea.offsetWidth || keys.KeyD && player.x + player.width < gameArea.offsetWidth) {
+    if (keys.ArrowRight && player.x + player.width < gameArea.offsetWidth || 
+        keys.KeyD && player.x + player.width < gameArea.offsetWidth) {
         player.x += game.speed * game.movingMultiplier;
     }
 
@@ -129,7 +130,7 @@ function isCollision(firstElement, secondElement) {
 function loseLive(timestamp) {
     const character = document.querySelector('.character');
 
-    if (timestamp - scene.lastLostLive > game.lostLiveInterval) {
+    if (timestamp - player.lastLostLive > game.lostLiveInterval) {
         character.classList.add('character-hit');
 
         function removeHitEffect() {
@@ -140,7 +141,7 @@ function loseLive(timestamp) {
         const currLive = document.querySelector('.live');
         currLive.remove();
         player.lives--;
-        scene.lastLostLive = timestamp;
+        player.lastLostLive = timestamp;
 
         if (player.lives < 1) gameOverAction();
     }

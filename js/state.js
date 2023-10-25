@@ -6,7 +6,8 @@ const player = {
     width: 0,
     height: 0,
     lastBullet: 0,
-    lives: 3
+    lives: 3,
+    lastLostLive: 0
 };
 
 const game = {
@@ -31,7 +32,6 @@ const scene = {
     lastCloudSpawn: 0,
     lastBugSpawn: 0,
     lastBitcoinSpawn: 0,
-    lastLostLive: 0,
     isGameActive: true,
     isBossFight: false
 };
