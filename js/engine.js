@@ -10,7 +10,7 @@ function gameAction(timestamp) {
     scene.score += 0.1;
 
     //apply gravitation
-    const isInAir = (player.y + player.height) <= gameArea.offsetHeight;
+    const isInAir = (player.y + player.height) <= gameArea.offsetHeight - 33;
     if (isInAir) player.y += game.speed;
 
     //add and modify elements

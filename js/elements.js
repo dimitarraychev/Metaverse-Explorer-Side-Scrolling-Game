@@ -5,7 +5,7 @@ function addAndModifyBugs(timestamp) {
         bug.classList.add('bug');
         bug.x = gameArea.offsetWidth - 60;
         bug.style.left = bug.x + 'px';
-        bug.style.top = (gameArea.offsetHeight - 100) * Math.random() + 'px';
+        bug.style.top = (gameArea.offsetHeight - 130) * Math.random() + 'px';
 
         if (bug.style.top.replace('px', '') < 50) bug.style.top = '50px';
 
