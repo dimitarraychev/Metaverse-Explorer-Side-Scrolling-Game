@@ -162,6 +162,14 @@ body {
     width: 50px;
 }
 
+.meteorite {
+    position: absolute;
+    width: 250px;
+    height: 50px;
+    background-image: url(../images/meteorite.png);
+    background-size: cover;
+}
+
 
 /* game over menu */
 .endgame-stats {

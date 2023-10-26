@@ -5,6 +5,8 @@ function gameAction(timestamp) {
     const bullets = document.querySelectorAll('.bullet');
     const bitcoins = document.querySelectorAll('.bitcoin');
     const boss = document.querySelector('.boss');
+    const meteorites = document.querySelectorAll('.meteorite');
+
 
     //increment score count
     scene.score += 0.1;
@@ -18,8 +20,11 @@ function gameAction(timestamp) {
     addAndModifyClouds(timestamp);
     addAndModifyBitcoins(timestamp);
     modifyBulletsPositions();
-    if (scene.isBossFight) modifyBoss();
-
+    if (scene.isBossFight) {
+        modifyBoss();
+        addAndModifyMeteorites(timestamp);
+    }
+    
     //register user input
     if (keys.ArrowUp && player.y > 0 || keys.KeyW && player.y > 0) {
         player.y -= game.speed * game.movingMultiplier;
@@ -62,7 +67,7 @@ function gameAction(timestamp) {
                 bullet.remove();
                 bug.remove();
             }
-        })
+        });
     });
 
     bitcoins.forEach(bitcoin => {
@@ -79,6 +84,10 @@ function gameAction(timestamp) {
                 addBossHitEffect();
                 bullet.remove();
             }
+        });
+
+        meteorites.forEach(meteorite => {
+            if(isCollision(character, meteorite)) loseLive(timestamp);
         });
     }
 
@@ -114,6 +123,6 @@ function loseLive(timestamp) {
         player.lives--;
         player.lastLostLive = timestamp;
 
-        if (player.lives < 1) gameOverAction();
+        if (player.lives <= 0) gameOverAction();
     }
 }

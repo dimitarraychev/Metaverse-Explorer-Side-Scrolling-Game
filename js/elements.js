@@ -130,3 +130,28 @@ function modifyBoss() {
         if (boss.y > gameArea.offsetHeight - 320) bossController.goingUp = true;
     }
 }
+
+function addAndModifyMeteorites(timestamp) {
+    //add metorites
+    if (timestamp - scene.lastMeteoriteSpawn > game.meteoriteSpawnInterval + 5000 * Math.random()) {
+        const meteorite = document.createElement('div');
+        meteorite.classList.add('meteorite');
+        meteorite.x = gameArea.offsetWidth;
+        meteorite.style.left = meteorite.x + 'px';
+        meteorite.style.top = (gameArea.offsetHeight - 100) * Math.random() + 'px';
+
+        gameArea.appendChild(meteorite);
+        scene.lastMeteoriteSpawn = timestamp;
+    }
+
+    //modify meteorites position
+    const meteorites = document.querySelectorAll('.meteorite');
+    meteorites.forEach(meteorite => {
+        meteorite.x -= game.speed * game.meteoriteMultiplier;
+        meteorite.style.left = meteorite.x + 'px';
+
+        if (meteorite.x + meteorite.offsetWidth <= 0) {
+            meteorite.remove();
+        }
+    });
+}
