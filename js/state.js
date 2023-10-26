@@ -20,8 +20,8 @@ const game = {
     cloudSpawnInterval: 2500,
     bugSpawnInterval: 1000,
     bitcoinSpawnInterval: 3000,
-    bugKillBonus: 100,
-    bitcoinCollectBonus: 200,
+    bugKillBonus: 75,
+    bitcoinCollectBonus: 125,
     lostLiveInterval: 1000
 };
 
@@ -35,3 +35,8 @@ const scene = {
     isGameActive: true,
     isBossFight: false
 };
+
+const bossController = {
+    health: 100,
+    goingUp: true
+}

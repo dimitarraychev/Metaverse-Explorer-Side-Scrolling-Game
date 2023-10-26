@@ -4,6 +4,7 @@ function gameAction(timestamp) {
     const bugs = document.querySelectorAll('.bug');
     const bullets = document.querySelectorAll('.bullet');
     const bitcoins = document.querySelectorAll('.bitcoin');
+    const boss = document.querySelector('.boss');
 
     //increment score count
     scene.score += 0.1;
@@ -12,11 +13,12 @@ function gameAction(timestamp) {
     const isInAir = (player.y + player.height) <= gameArea.offsetHeight;
     if (isInAir) player.y += game.speed;
 
-    //add elements
+    //add and modify elements
     addAndModifyBugs(timestamp);
     addAndModifyClouds(timestamp);
     addAndModifyBitcoins(timestamp);
     modifyBulletsPositions();
+    if (scene.isBossFight) modifyBoss();
 
     //register user input
     if (keys.ArrowUp && player.y > 0 || keys.KeyW && player.y > 0) {
@@ -71,6 +73,15 @@ function gameAction(timestamp) {
         }
     });
 
+    if (scene.isBossFight) {
+        bullets.forEach(bullet => {
+            if(isCollision(boss, bullet)) {
+                addBossHitEffect();
+                bullet.remove();
+            }
+        });
+    }
+
     //apply movement
     character.style.top = player.y + 'px';
     character.style.left = player.x + 'px';
@@ -84,39 +95,6 @@ function gameAction(timestamp) {
     if (scene.isGameActive) window.requestAnimationFrame(gameAction);
 }
 
-function addShootEffect() {
-    const character = document.querySelector('.character');
-    character.classList.add('character-shoot');
-
-    function removeShootEffect() {
-        character.classList.remove('character-shoot');
-    }
-
-    setTimeout(removeShootEffect, 100);
-}
-
-function addFlyEffect() {
-    const character = document.querySelector('.character');
-    character.classList.add('character-flying');
-
-    function removeFlyingEffect() {
-        character.classList.remove('character-flying');
-    }
-
-    setTimeout(removeFlyingEffect, 100);
-}
-
-function addShootAndFlyEffects() {
-    const character = document.querySelector('.character');
-    character.classList.add('character-flyingshoot');
-
-    function removeFlyingEffect() {
-        character.classList.remove('character-flyingshoot');
-    }
-
-    setTimeout(removeFlyingEffect, 100);
-}
-
 function isCollision(firstElement, secondElement) {
     let firstRect = firstElement.getBoundingClientRect();
     let secondRect = secondElement.getBoundingClientRect();
@@ -128,16 +106,9 @@ function isCollision(firstElement, secondElement) {
 }
 
 function loseLive(timestamp) {
-    const character = document.querySelector('.character');
-
     if (timestamp - player.lastLostLive > game.lostLiveInterval) {
-        character.classList.add('character-hit');
 
-        function removeHitEffect() {
-            character.classList.remove('character-hit');
-        }
-        setTimeout(removeHitEffect, 150);
-
+        addHitEffect();
         const currLive = document.querySelector('.live');
         currLive.remove();
         player.lives--;

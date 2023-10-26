@@ -123,4 +123,5 @@ function proceedToNextLevel() {
 function startBossFight() {
     scene.isBossFight = true;
     removeAllElements();
+    addBoss();
 }

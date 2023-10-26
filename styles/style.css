@@ -6,13 +6,14 @@ body {
 
 .game-area {
     position: fixed;
-    background: rgb(2,0,36);
-    background: linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(0,212,255,1) 33%, rgba(9,9,121,1) 100%);
+    background: rgb(13,2,8);
+    background: linear-gradient(0deg, rgba(13,2,8,1) 0%, rgba(9,9,121,1) 33%, rgba(13,2,8,1) 100%);
     width: 100%;
     height: 100%;
     margin: 0;
 }
 
+/* start menu */
 .game-start {
     font-family: 'Orbitron';
     font-size: 32px;
@@ -71,7 +72,7 @@ body {
 }
 
 .legend-bitcoin {
-    width: 60px;
+    width: 70px;
     height: 40px;
     display: inline-block;
 }
@@ -86,35 +87,39 @@ body {
     display: none;
 }
 
+
+/* character styling */
 .character {
     position: absolute;
     z-index: 100;
-    width: 110px;
-    height: 170px;
-    background-image: url(../images/char.png);
+    width: 100px;
+    height: 180px;
+    background-image: url(../images/char/char.png);
     background-size: cover;
 }
 
 .character-shoot {
-    background-image: url(../images/char-shoot.png);
+    background-image: url(../images/char/char-shoot.png);
     background-size: cover;
 }
 
 .character-flying {
-    background-image: url(../images/char-flying.png);
+    background-image: url(../images/char/char-flying.png);
     background-size: cover;
 }
 
 .character-flyingshoot {
-    background-image: url(../images/char-flyingshoot.png);
+    background-image: url(../images/char/char-flyingshoot.png);
     background-size: cover;
 }
 
 .character-hit {
-    background-image: url(../images/char-hit.png);
+    background-image: url(../images/char/char-hit.png);
     background-size: cover;
 }
 
+
+/* elements styling */
 .bullet {
     position: absolute;
     width: 80px;
@@ -126,8 +131,8 @@ body {
 .cloud {
     position: absolute;
     z-index: 0;
-    width: 300px;
-    height: 250px;
+    width: 400px;
+    height: 200px;
     background-image: url(../images/matrixcloud.png);
     background-size: cover;
 }
@@ -143,11 +148,22 @@ body {
 .bitcoin {
     position: absolute;
     width: 70px;
-    height: 45px;
+    height: 40px;
     background-image: url(../images/bitcoin.png);
     background-size: cover;
 }
 
+.live {
+    z-index: 1;
+    display: inline-block;
+    background-image: url(../images/life.png);
+    background-size: cover;
+    height: 50px;
+    width: 50px;
+}
+
+
+/* game over menu */
 .endgame-stats {
     position: absolute;
     width: 45%;
@@ -201,11 +217,17 @@ body {
     left: 87%;
 }
 
-.live {
-    z-index: 1;
-    display: inline-block;
-    background-image: url(../images/life.png);
+
+/* boss styling */
+.boss {
+    position: absolute;
+    width: 350px;
+    height: 280px;
+    background-image: url(../images/boss/boss.png);
     background-size: cover;
-    height: 50px;
-    width: 50px;
+}
+
+.boss-hit {
+    background-image: url(../images/boss/boss-hit.png);
+    background-size: cover;
 }

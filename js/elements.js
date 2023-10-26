@@ -100,3 +100,33 @@ function addAndModifyBitcoins(timestamp) {
         }
     });
 }
+
+//add and modify boss position
+function addBoss() {
+    const boss = document.createElement('div');
+    boss.classList.add('boss');
+    boss.x = gameArea.offsetWidth - 400;
+    boss.y = gameArea.offsetHeight / 4;
+    boss.style.left = boss.x + 'px';
+    boss.style.top = boss.y + 'px';
+
+    gameArea.appendChild(boss);
+}
+
+function modifyBoss() {
+    const boss = document.querySelector('.boss');
+
+    if (bossController.goingUp) {
+        boss.y -= game.speed;
+        boss.style.top = boss.y + 'px';
+
+        if (boss.y < 0) bossController.goingUp = false;
+    } 
+
+    if (!bossController.goingUp) {
+        boss.y += game.speed;
+        boss.style.top = boss.y + 'px';
+
+        if (boss.y > gameArea.offsetHeight - 320) bossController.goingUp = true;
+    }
+}
