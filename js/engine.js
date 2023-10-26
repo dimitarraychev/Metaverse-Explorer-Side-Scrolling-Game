@@ -6,6 +6,7 @@ function gameAction(timestamp) {
     const bitcoins = document.querySelectorAll('.bitcoin');
     const boss = document.querySelector('.boss');
     const meteorites = document.querySelectorAll('.meteorite');
+    const bossSingleHPBar = document.querySelector('.boss-hp');
 
 
     //increment score count
@@ -23,6 +24,8 @@ function gameAction(timestamp) {
     if (scene.isBossFight) {
         modifyBoss();
         addAndModifyMeteorites(timestamp);
+
+        if (bossController.health <= 0) endBossFight();
     }
     
     //register user input
@@ -62,27 +65,29 @@ function gameAction(timestamp) {
 
         bullets.forEach(bullet => {
             if (isCollision(bullet, bug)) {
-                scene.score += game.bugKillBonus;
-                scene.killedBugs++;
                 bullet.remove();
                 bug.remove();
+                scene.score += game.bugKillBonus;
+                scene.killedBugs++;
             }
         });
     });
 
     bitcoins.forEach(bitcoin => {
         if (isCollision(character, bitcoin)) {
+            bitcoin.remove();
             scene.score += game.bitcoinCollectBonus;
             scene.collectedBitcoins++;
-            bitcoin.remove();
         }
     });
 
     if (scene.isBossFight) {
         bullets.forEach(bullet => {
             if(isCollision(boss, bullet)) {
-                addBossHitEffect();
                 bullet.remove();
+                addBossHitEffect();
+                bossController.health -= 5;
+                bossSingleHPBar.remove();
             }
         });
 
@@ -123,6 +128,9 @@ function loseLive(timestamp) {
         player.lives--;
         player.lastLostLive = timestamp;
 
-        if (player.lives <= 0) gameOverAction();
+        if (player.lives <= 0) {
+            if (scene.isBossFight) player.killedByBoss = true;
+            gameOverAction();
+        }
     }
 }

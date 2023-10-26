@@ -13,6 +13,10 @@ body {
     margin: 0;
 }
 
+.hide {
+    display: none;
+}
+
 /* start menu */
 .game-start {
     font-family: 'Orbitron';
@@ -77,16 +81,22 @@ body {
     display: inline-block;
 }
 
+
+/* user interface elements */
 .game-score {
     background-color: rgb(13,2,8);
     color: white;
     text-align: center;
 }
 
-.hide {
-    display: none;
+.lives-container {
+    position: absolute;
+    z-index: 1;
+    width: 12%;
+    height: 10%;
+    top: 20px;
+    left: 87%;
 }
-
 
 /* character styling */
 .character {
@@ -216,16 +226,6 @@ body {
     border: 2px solid  rgba(0,92,135,1);
 }
 
-.lives-container {
-    position: absolute;
-    z-index: 1;
-    width: 12%;
-    height: 10%;
-    top: 20px;
-    left: 87%;
-}
-
-
 /* boss styling */
 .boss {
     position: absolute;
@@ -238,4 +238,30 @@ body {
 .boss-hit {
     background-image: url(../images/boss/boss-hit.png);
     background-size: cover;
+}
+
+.boss-health {
+    position: absolute;
+    color: white;
+    text-align: center;
+    z-index: 1;
+    width: 75%;
+    height: 12%;
+    top: 600px;
+    left: 12.5%;
+}
+
+.boss-health p {
+    margin: 0;
+    padding: 0;
+}
+
+.boss-hp {
+    z-index: 1;
+    display: inline-block;
+    background-image: url(../images/boss/boss-hp.png);
+    background-size: cover;
+    height: 33px;
+    width: 45px;
+    margin: 2px;
 }

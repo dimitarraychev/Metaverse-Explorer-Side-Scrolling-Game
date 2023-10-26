@@ -7,7 +7,8 @@ const player = {
     height: 0,
     lastBullet: 0,
     lives: 3,
-    lastLostLive: 0
+    lastLostLive: 0,
+    killedByBoss: false
 };
 
 const game = {
@@ -36,7 +37,8 @@ const scene = {
     lastBitcoinSpawn: 0,
     lastMeteoriteSpawn: 0,
     isGameActive: true,
-    isBossFight: false
+    isBossFight: false,
+    defeatedBoss: false,
 };
 
 const bossController = {

@@ -7,6 +7,8 @@ const gameOver = document.querySelector('.game-over');
 const gamePoints = document.querySelector('.points');
 const bugStats = document.querySelector('.bug-stats');
 const bitcoinStats = document.querySelector('.bitcoin-stats');
+const bossHealthBox = document.querySelector('.boss-health');
+const bossHealthBar = document.querySelector('.boss-bar');
 
 gameStartBtn.addEventListener('click', onGameStart);
 restartGameBtn.addEventListener('click', restartGame);
@@ -59,6 +61,7 @@ function gameOverAction() {
     bugStats.textContent = scene.killedBugs;
     bitcoinStats.textContent = scene.collectedBitcoins;
     gameOver.classList.remove('hide');
+    if (player.killedByBoss) bossHealthBox.classList.add('hide');
 }
 
 function restartGame() {
@@ -73,15 +76,25 @@ function restartGame() {
     player.y = 300;
     player.lastBullet = 0;
     player.lives = 3;
+    player.lastLostLive = 0;
+    player.killedByBoss = false;
 
     game.speed = 2;
     game.bugSpawnInterval = 1000;
 
     scene.score = 0;
+    scene.killedBugs = 0;
+    scene.collectedBitcoins = 0;
     scene.lastCloudSpawn = 0;
     scene.lastBugSpawn = 0;
-    scene.lastLostLive = 0;
+    scene.lastBitcoinSpawn = 0;
+    scene.lastMeteoriteSpawn = 0;
     scene.isGameActive = true;
+    scene.isBossFight = false;
+    scene.defeatedBoss = false;
+
+    bossController.health = 100;
+    bossController.goingUp = true;
 
     onGameStart();
 }
@@ -97,6 +110,14 @@ function removeAllElements() {
     bugs.forEach(bug => bug.remove());
     bullets.forEach(bullet => bullet.remove());
     bitcoins.forEach(bitcoin => bitcoin.remove());
+
+    if (scene.defeatedBoss || player.killedByBoss) {
+        const meteorites = document.querySelectorAll('.meteorite');
+        const boss = document.querySelector('.boss');
+
+        meteorites.forEach(meteorite => meteorite.remove());
+        boss.remove();
+    }
 }
 
 function proceedToNextLevel() {
@@ -112,7 +133,7 @@ function proceedToNextLevel() {
         game.speed = 3.5;
         game.bugSpawnInterval = 500;
         game.bitcoinSpawnInterval = 2000;
-    } else if (scene.score > 5000 && scene.isBossFight === false) {
+    } else if (scene.score > 5000 && scene.isBossFight === false && scene.defeatedBoss === false) {
         game.speed = 2;
         game.bugSpawnInterval = Infinity;
         startBossFight();
@@ -124,4 +145,20 @@ function startBossFight() {
     scene.isBossFight = true;
     removeAllElements();
     addBoss();
+
+    bossHealthBox.classList.remove('hide');
+
+    for (let index = 0; index < bossController.health / 5; index++) {
+        let bossHealth = document.createElement('div');
+        bossHealth.classList.add('boss-hp');
+        bossHealthBar.appendChild(bossHealth);
+    }
+}
+
+function endBossFight() {
+    scene.isBossFight = false;
+    scene.defeatedBoss = true;
+
+    bossHealthBox.classList.add('hide');
+    gameOverAction();
 }
