@@ -7,8 +7,9 @@ const player = {
     height: 0,
     lastBullet: 0,
     lives: 3,
-    lastLostLive: 0,
-    killedByBoss: false
+    lastLostLife: 0,
+    killedByBoss: false,
+    isAtBottom: false,
 };
 
 const game = {
@@ -25,7 +26,9 @@ const game = {
     meteoriteSpawnInterval: 1000,
     bugKillBonus: 75,
     bitcoinCollectBonus: 125,
-    lostLiveInterval: 1000
+    bossHitBonus: 100,
+    bossKillbonus: 2000,
+    lostLifeInterval: 1500
 };
 
 const scene = {

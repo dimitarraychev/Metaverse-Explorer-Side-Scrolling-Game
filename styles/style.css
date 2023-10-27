@@ -98,6 +98,19 @@ body {
     left: 87%;
 }
 
+.level {
+    position: absolute;
+    color: whitesmoke;
+    z-index: 1;
+    width: 10%;
+    height: 10%;
+    top: 0;
+    margin: 0;
+    padding: 0;
+    left: 45%;
+    text-align: center;
+}
+
 /* character styling */
 .character {
     position: absolute;
@@ -163,13 +176,18 @@ body {
     background-size: cover;
 }
 
-.live {
+.life {
     z-index: 1;
     display: inline-block;
-    background-image: url(../images/life.png);
+    background-image: url(../images/life/life.png);
     background-size: cover;
     height: 50px;
     width: 50px;
+}
+
+.life-hit {
+    background-image: url(../images/life/life-hit.png);
+    background-size: cover;
 }
 
 .meteorite {
@@ -247,7 +265,7 @@ body {
     z-index: 1;
     width: 75%;
     height: 12%;
-    top: 600px;
+    top: 80%;
     left: 12.5%;
 }
 

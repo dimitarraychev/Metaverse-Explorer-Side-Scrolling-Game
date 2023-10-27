@@ -8,23 +8,33 @@ function gameAction(timestamp) {
     const meteorites = document.querySelectorAll('.meteorite');
     const bossSingleHPBar = document.querySelector('.boss-hp');
 
-
     //increment score count
     scene.score += 0.1;
 
     //apply gravitation
-    const isInAir = (player.y + player.height) <= gameArea.offsetHeight - 33;
-    if (isInAir) player.y += game.speed;
+    const isInAir = (player.y + player.height) <= gameArea.offsetHeight - 30;
+    if (isInAir) {
+        player.y += game.speed;
+        player.isAtBottom = false;
 
+    //penalty for staying at the bottom
+    } else {
+        addHitEffect();
+        player.isAtBottom = true;
+    }
+    
     //add and modify elements
     addAndModifyBugs(timestamp);
     addAndModifyClouds(timestamp);
     addAndModifyBitcoins(timestamp);
     modifyBulletsPositions();
+
+    //add and modify elements in boss fight
     if (scene.isBossFight) {
         modifyBoss();
         addAndModifyMeteorites(timestamp);
 
+        //check if boss is killed
         if (bossController.health <= 0) endBossFight();
     }
     
@@ -61,7 +71,7 @@ function gameAction(timestamp) {
 
     //detect collisions
     bugs.forEach(bug => {
-        if (isCollision(character, bug)) loseLive(timestamp);
+        if (isCollision(character, bug)) loseLife(timestamp);
 
         bullets.forEach(bullet => {
             if (isCollision(bullet, bug)) {
@@ -81,18 +91,22 @@ function gameAction(timestamp) {
         }
     });
 
+    //detect collisions in boss fight
     if (scene.isBossFight) {
         bullets.forEach(bullet => {
             if(isCollision(boss, bullet)) {
                 bullet.remove();
-                addBossHitEffect();
-                bossController.health -= 5;
                 bossSingleHPBar.remove();
+
+                bossController.health -= 5;
+                scene.score += game.bossHitBonus;
+
+                addBossHitEffect();
             }
         });
 
         meteorites.forEach(meteorite => {
-            if(isCollision(character, meteorite)) loseLive(timestamp);
+            if(isCollision(character, meteorite)) loseLife(timestamp);
         });
     }
 
@@ -119,15 +133,23 @@ function isCollision(firstElement, secondElement) {
         firstRect.left > secondRect.right);
 }
 
-function loseLive(timestamp) {
-    if (timestamp - player.lastLostLive > game.lostLiveInterval) {
+//get hit
+function loseLife(timestamp) {
+    if (timestamp - player.lastLostLife > game.lostLifeInterval) {
 
         addHitEffect();
-        const currLive = document.querySelector('.live');
-        currLive.remove();
-        player.lives--;
-        player.lastLostLive = timestamp;
+        addLifeHitEffect();
 
+        function removeLife() {
+            const currLife = document.querySelector('.life');
+            currLife.remove();
+        }
+
+        player.lives--;
+        player.lastLostLife = timestamp;
+        setTimeout(removeLife, 250);
+
+        //get killed
         if (player.lives <= 0) {
             if (scene.isBossFight) player.killedByBoss = true;
             gameOverAction();

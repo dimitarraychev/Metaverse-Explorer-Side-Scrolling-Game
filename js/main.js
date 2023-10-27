@@ -9,6 +9,8 @@ const bugStats = document.querySelector('.bug-stats');
 const bitcoinStats = document.querySelector('.bitcoin-stats');
 const bossHealthBox = document.querySelector('.boss-health');
 const bossHealthBar = document.querySelector('.boss-bar');
+const endMessage = document.querySelector('.end-message');
+const level = document.querySelector('.level');
 
 gameStartBtn.addEventListener('click', onGameStart);
 restartGameBtn.addEventListener('click', restartGame);
@@ -20,6 +22,7 @@ document.addEventListener('keyup', onKeyUp);
 function onGameStart(event) {
 
     startMenu.classList.add('hide');
+    level.textContent = 'Level 1';
 
     // render character
     const character = document.createElement('div');
@@ -36,9 +39,9 @@ function onGameStart(event) {
     livesContainer.classList.add('lives-container');
 
     for (let index = 0; index < player.lives; index++) {
-        let live = document.createElement('div');
-        live.classList.add('live');
-        livesContainer.appendChild(live);
+        let life = document.createElement('div');
+        life.classList.add('life');
+        livesContainer.appendChild(life);
     }
 
     gameArea.appendChild(livesContainer);
@@ -56,27 +59,42 @@ function onKeyUp(event) {
     keys[event.code] = false;
 }
 
+//end game
 function gameOverAction() {
+    //standart case
     scene.isGameActive = false;
     bugStats.textContent = scene.killedBugs;
     bitcoinStats.textContent = scene.collectedBitcoins;
     gameOver.classList.remove('hide');
+    endMessage.textContent = 'Game Over!';
+    endMessage.style.color = 'red';
+    
+    //killed by boss case
     if (player.killedByBoss) bossHealthBox.classList.add('hide');
+
+    //defeated boss case
+    if (scene.defeatedBoss) {
+        endMessage.textContent = 'Congratulations you have defeated the Bugs!';
+        endMessage.style.color = 'green';
+    }
 }
 
+//restart game
 function restartGame() {
+
+    //remove elements
     const character = document.querySelector('.character');
     character.remove();
     removeAllElements();
 
     gameOver.classList.add('hide');
 
-    // reset state objects
+    //reset state objects
     player.x = 150;
     player.y = 300;
     player.lastBullet = 0;
     player.lives = 3;
-    player.lastLostLive = 0;
+    player.lastLostLife = 0;
     player.killedByBoss = false;
 
     game.speed = 2;
@@ -111,6 +129,7 @@ function removeAllElements() {
     bullets.forEach(bullet => bullet.remove());
     bitcoins.forEach(bitcoin => bitcoin.remove());
 
+    //delete additional elements in boss fight
     if (scene.defeatedBoss || player.killedByBoss) {
         const meteorites = document.querySelectorAll('.meteorite');
         const boss = document.querySelector('.boss');
@@ -120,32 +139,47 @@ function removeAllElements() {
     }
 }
 
+//next level requirements
 function proceedToNextLevel() {
+
+    //level 2
     if (scene.score > 1000 && scene.score < 2000) {
+        level.textContent = 'Level 2';
         game.speed = 2.5;
         game.bugSpawnInterval = 800;
         game.bitcoinSpawnInterval = 2750;
+
+    //level 3
     } else if (scene.score > 2000 && scene.score < 3000) {
+        level.textContent = 'Level 3';
         game.speed = 3;
         game.bugSpawnInterval = 650;
         game.bitcoinSpawnInterval = 2500;
+
+    //level 4
     } else if (scene.score > 3000 && scene.score < 5000) {
+        level.textContent = 'Level 4';
         game.speed = 3.5;
         game.bugSpawnInterval = 500;
         game.bitcoinSpawnInterval = 2000;
+
+    //level Boss
     } else if (scene.score > 5000 && scene.isBossFight === false && scene.defeatedBoss === false) {
+        level.textContent = 'BOSS';
+        level.style.color = '#880808';
         game.speed = 2;
         game.bugSpawnInterval = Infinity;
         startBossFight();
     }
 }
 
-//boss fight
+//boss fight start and end
 function startBossFight() {
     scene.isBossFight = true;
     removeAllElements();
     addBoss();
 
+    //render boss health bar
     bossHealthBox.classList.remove('hide');
 
     for (let index = 0; index < bossController.health / 5; index++) {
@@ -158,6 +192,7 @@ function startBossFight() {
 function endBossFight() {
     scene.isBossFight = false;
     scene.defeatedBoss = true;
+    scene.score += game.bossKillbonus;
 
     bossHealthBox.classList.add('hide');
     gameOverAction();

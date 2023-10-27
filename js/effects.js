@@ -1,3 +1,4 @@
+//character effects
 function addShootEffect() {
     const character = document.querySelector('.character');
     character.classList.add('character-shoot');
@@ -41,6 +42,18 @@ function addHitEffect() {
     setTimeout(removeHitEffect, 150);
 }
 
+//life effects
+function addLifeHitEffect() {
+    const life = document.querySelector('.life');
+    life.classList.add('life-hit');
+
+    function removeLifeHitEffect() {
+        life.classList.remove('life-hit');
+    }
+    setTimeout(removeLifeHitEffect, 250);
+}
+
+//boss effects
 function addBossHitEffect() {
     const boss = document.querySelector('.boss');
     boss.classList.add('boss-hit');
