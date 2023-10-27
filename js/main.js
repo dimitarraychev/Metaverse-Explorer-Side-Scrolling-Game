@@ -74,7 +74,7 @@ function gameOverAction() {
 
     //defeated boss case
     if (scene.defeatedBoss) {
-        endMessage.textContent = 'Congratulations you have defeated the Bugs!';
+        endMessage.textContent = 'Congratulations, you got rid of all the Bugs in the Metaverse!';
         endMessage.style.color = 'green';
     }
 }

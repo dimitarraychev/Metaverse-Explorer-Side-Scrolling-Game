@@ -198,6 +198,13 @@ body {
     background-size: cover;
 }
 
+.boss-bullet {
+    position: absolute;
+    width: 100px;
+    height: 30px;
+    background-image: url(../images/boss/boss-bullet.png);
+    background-size: cover;
+}
 
 /* game over menu */
 .endgame-stats {
@@ -255,6 +262,11 @@ body {
 
 .boss-hit {
     background-image: url(../images/boss/boss-hit.png);
+    background-size: cover;
+}
+
+.boss-shoot {
+    background-image: url(../images/boss/boss-shoot.png);
     background-size: cover;
 }
 

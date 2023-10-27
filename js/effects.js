@@ -63,3 +63,13 @@ function addBossHitEffect() {
     }
     setTimeout(removeHitEffect, 150);
 }
+
+function addBossShootEffect() {
+    const boss = document.querySelector('.boss');
+    boss.classList.add('boss-shoot');
+    
+    function removeShootEffect() {
+        boss.classList.remove('boss-shoot');
+    }
+    setTimeout(removeShootEffect, 150);
+}

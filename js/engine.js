@@ -33,6 +33,7 @@ function gameAction(timestamp) {
     if (scene.isBossFight) {
         modifyBoss();
         addAndModifyMeteorites(timestamp);
+        addAndModifyBossBullets(timestamp, boss);
 
         //check if boss is killed
         if (bossController.health <= 0) endBossFight();

@@ -69,7 +69,7 @@ function modifyBulletsPositions() {
     bullets.forEach(bullet => {
         bullet.x += game.speed * game.bulletMutliplier;
         bullet.style.left = bullet.x + 'px';
-    
+
         if (bullet.x + bullet.offsetWidth > gameArea.offsetWidth) {
             bullet.remove();
         }
@@ -121,7 +121,7 @@ function modifyBoss() {
         boss.style.top = boss.y + 'px';
 
         if (boss.y < 0) bossController.goingUp = false;
-    } 
+    }
 
     if (!bossController.goingUp) {
         boss.y += game.speed;
@@ -152,6 +152,33 @@ function addAndModifyMeteorites(timestamp) {
 
         if (meteorite.x + meteorite.offsetWidth <= 0) {
             meteorite.remove();
+        }
+    });
+}
+
+function addAndModifyBossBullets(timestamp, boss) {
+    //add boss bullets
+    if (timestamp - bossController.bossLastBullet > bossController.bossBulletInterval) {
+        const bossBullet = document.createElement('div');
+        bossBullet.classList.add('boss-bullet');
+        bossBullet.y = boss.y + boss.offsetHeight - 100;
+        bossBullet.style.top = bossBullet.y + 'px';
+        bossBullet.x = boss.x - 100;
+        bossBullet.style.left = bossBullet.x + 'px';
+
+        addBossShootEffect();
+        gameArea.appendChild(bossBullet);
+        bossController.bossLastBullet = timestamp;
+    }
+
+    //modify boss bullets
+    const bossBullets = document.querySelectorAll('.boss-bullet');
+    bossBullets.forEach(bossBullet => {
+        bossBullet.x -= game.speed * bossController.bossBulletMultiplier;
+        bossBullet.style.left = bossBullet.x + 'px';
+
+        if (bossBullet.x + bossBullet.offsetWidth <= 0) {
+            bossBullet.remove();
         }
     });
 }
