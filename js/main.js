@@ -195,7 +195,18 @@ function startBossFight() {
     bossController.loadingBoss = true;
 
     removeAllElements();
-    setTimeout(addBoss, 2000);
+    setTimeout(addBoss, 2500);
+
+    //show and remove get ready message
+    const getReady = document.createElement('div');
+    getReady.classList.add('get-ready');
+    getReady.textContent = 'Get Ready...';
+    gameArea.appendChild(getReady);
+
+    function removeGetReady() {
+        getReady.remove()
+    }
+    setTimeout(removeGetReady, 2500)
 
     //render boss health bar
     bossHealthBox.classList.remove('hide');
