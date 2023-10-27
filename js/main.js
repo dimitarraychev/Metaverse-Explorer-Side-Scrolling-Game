@@ -113,6 +113,7 @@ function restartGame() {
 
     bossController.health = 100;
     bossController.goingUp = true;
+    bossController.bossLastBullet = 2000;
 
     onGameStart();
 }

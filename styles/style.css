@@ -200,8 +200,8 @@ body {
 
 .boss-bullet {
     position: absolute;
-    width: 100px;
-    height: 30px;
+    width: 130px;
+    height: 50px;
     background-image: url(../images/boss/boss-bullet.png);
     background-size: cover;
 }

@@ -5,8 +5,9 @@ function gameAction(timestamp) {
     const bullets = document.querySelectorAll('.bullet');
     const bitcoins = document.querySelectorAll('.bitcoin');
     const boss = document.querySelector('.boss');
-    const meteorites = document.querySelectorAll('.meteorite');
     const bossSingleHPBar = document.querySelector('.boss-hp');
+    const meteorites = document.querySelectorAll('.meteorite');
+    const bossBullets = document.querySelectorAll('.boss-bullet');
 
     //increment score count
     scene.score += 0.1;
@@ -109,6 +110,13 @@ function gameAction(timestamp) {
         meteorites.forEach(meteorite => {
             if(isCollision(character, meteorite)) loseLife(timestamp);
         });
+
+        bossBullets.forEach(bossBullet => {
+            if(isCollision(character, bossBullet)) {
+                bossBullet.remove();
+                loseLife(timestamp);
+            }
+        })
     }
 
     //apply movement

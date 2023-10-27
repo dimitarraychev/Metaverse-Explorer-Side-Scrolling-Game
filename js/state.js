@@ -47,7 +47,7 @@ const scene = {
 const bossController = {
     health: 100,
     goingUp: true,
-    bossLastBullet: 1000,
+    bossLastBullet: 2000,
     bossBulletInterval: 3000,
     bossBulletMultiplier: 6
 }
