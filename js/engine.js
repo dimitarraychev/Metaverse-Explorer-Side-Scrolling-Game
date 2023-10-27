@@ -8,6 +8,7 @@ function gameAction(timestamp) {
     const bossSingleHPBar = document.querySelector('.boss-hp');
     const meteorites = document.querySelectorAll('.meteorite');
     const bossBullets = document.querySelectorAll('.boss-bullet');
+    const gamePoints = document.querySelector('.points');
 
     //increment score count
     scene.score += 0.1;
@@ -37,7 +38,10 @@ function gameAction(timestamp) {
         addAndModifyBossBullets(timestamp, boss);
 
         //check if boss is killed
-        if (bossController.health <= 0) endBossFight();
+        if (bossController.health <= 0) {
+            scene.timePlayed = timestamp;
+            endBossFight();
+        }
     }
     
     //register user input
@@ -95,6 +99,9 @@ function gameAction(timestamp) {
 
     //detect collisions in boss fight
     if (scene.isBossFight) {
+        
+        if (isCollision(character, boss)) loseLife(timestamp);
+
         bullets.forEach(bullet => {
             if(isCollision(boss, bullet)) {
                 bullet.remove();
@@ -116,7 +123,7 @@ function gameAction(timestamp) {
                 bossBullet.remove();
                 loseLife(timestamp);
             }
-        })
+        });
     }
 
     //apply movement
@@ -161,6 +168,7 @@ function loseLife(timestamp) {
         //get killed
         if (player.lives <= 0) {
             if (scene.isBossFight) player.killedByBoss = true;
+            scene.timePlayed = timestamp;
             gameOverAction();
         }
     }

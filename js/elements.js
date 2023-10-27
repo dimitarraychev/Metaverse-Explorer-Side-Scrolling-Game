@@ -103,6 +103,8 @@ function addAndModifyBitcoins(timestamp) {
 
 //add and modify boss position
 function addBoss() {
+    bossController.loadingBoss = false;
+    scene.isBossFight = true;
     const boss = document.createElement('div');
     boss.classList.add('boss');
     boss.x = gameArea.offsetWidth - 400;
@@ -158,7 +160,7 @@ function addAndModifyMeteorites(timestamp) {
 
 function addAndModifyBossBullets(timestamp, boss) {
     //add boss bullets
-    if (timestamp - bossController.bossLastBullet > bossController.bossBulletInterval) {
+    if (timestamp - bossController.bossLastBullet > bossController.bossBulletInterval + 5000 * Math.random()) {
         const bossBullet = document.createElement('div');
         bossBullet.classList.add('boss-bullet');
         bossBullet.y = boss.y + boss.offsetHeight - 100;

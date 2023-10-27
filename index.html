@@ -16,7 +16,7 @@
         <div class="start-menu">
             <button class="game-start">Press to Play!</button>
             <article class="legend">
-                <h3>Welcome to Metaverse Explorer the Side-Scrolling Adventure!</h3>
+                <div class="title-logo"></div>
                 <ul>
                     <li>
                         <p>Software Bugs - exterminate them for 75 points!</p><img class="legend-bug" src="./images/newbug.png" alt="bug">
@@ -29,7 +29,7 @@
             </article>
         </div>
         
-        <div class="game-score"><span class="points">0</span> pts.</div>
+        <div class="game-score"></div>
 
         <div class="game-area">
             <p class="level"></p>
@@ -42,12 +42,12 @@
         <div class="game-over hide">
             <article class="endgame-stats">
                 <p class="end-message"></p>
-                <ul>
-                    <li>Killed Bugs: <span class="bug-stats">0</span></li>
-                    <li>Collected Bitcoins: <span class="bitcoin-stats">0</span></li>
-                </ul>
+                    <p class="stats">Killed Bugs: <span class="bug-stats">0</span></p>
+                    <p class="stats">Mint Bitcoins: <span class="bitcoin-stats">0</span></p>
+                    <p class="stats">Total Time: <span class="time-stats">0</span></p>
+                    <p class="stats">Score: <span class="score-stats">0</span></p>
             </article>
-            <button class="restart-game">Restart Game</button>
+            <button class="restart-game">Play Again?</button>
         </div>
 
     </div>

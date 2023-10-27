@@ -7,8 +7,11 @@ const gameOver = document.querySelector('.game-over');
 const gamePoints = document.querySelector('.points');
 const bugStats = document.querySelector('.bug-stats');
 const bitcoinStats = document.querySelector('.bitcoin-stats');
+const timeStats = document.querySelector('.time-stats');
+const scoreStats = document.querySelector('.score-stats')
 const bossHealthBox = document.querySelector('.boss-health');
 const bossHealthBar = document.querySelector('.boss-bar');
+const bossSingleHPBar = document.querySelector('.boss-hp');
 const endMessage = document.querySelector('.end-message');
 const level = document.querySelector('.level');
 
@@ -23,6 +26,8 @@ function onGameStart(event) {
 
     startMenu.classList.add('hide');
     level.textContent = 'Level 1';
+    level.style.color = '#00FF41';
+    gameScore.innerHTML = 'Score: <span class="points">0</span>'
 
     // render character
     const character = document.createElement('div');
@@ -62,13 +67,19 @@ function onKeyUp(event) {
 //end game
 function gameOverAction() {
     //standart case
+    gameScore.textContent = '';
+    level.textContent = '';
     scene.isGameActive = false;
-    bugStats.textContent = scene.killedBugs;
-    bitcoinStats.textContent = scene.collectedBitcoins;
+
     gameOver.classList.remove('hide');
     endMessage.textContent = 'Game Over!';
     endMessage.style.color = 'red';
-    
+
+    bugStats.textContent = scene.killedBugs;
+    bitcoinStats.textContent = scene.collectedBitcoins;
+    timeStats.textContent = convertMillisecondsToMinutesAndSeconds(scene.timePlayed);
+    scoreStats.textContent = Math.trunc(scene.score);
+
     //killed by boss case
     if (player.killedByBoss) bossHealthBox.classList.add('hide');
 
@@ -134,9 +145,13 @@ function removeAllElements() {
     if (scene.defeatedBoss || player.killedByBoss) {
         const meteorites = document.querySelectorAll('.meteorite');
         const boss = document.querySelector('.boss');
+        const bossAllHPBars = document.querySelectorAll('.boss-hp');
+        const bossBullets = document.querySelectorAll('.boss-bullet');
 
         meteorites.forEach(meteorite => meteorite.remove());
         boss.remove();
+        bossAllHPBars.forEach(bar => bar.remove());
+        bossBullets.forEach(bossBullet => bossBullet.remove());
     }
 }
 
@@ -165,7 +180,8 @@ function proceedToNextLevel() {
         game.bitcoinSpawnInterval = 2000;
 
     //level Boss
-    } else if (scene.score > 5000 && scene.isBossFight === false && scene.defeatedBoss === false) {
+    } else if (scene.score > 5000 && scene.isBossFight === false && 
+        scene.defeatedBoss === false && bossController.loadingBoss === false) {
         level.textContent = 'BOSS';
         level.style.color = '#880808';
         game.speed = 2;
@@ -176,9 +192,10 @@ function proceedToNextLevel() {
 
 //boss fight start and end
 function startBossFight() {
-    scene.isBossFight = true;
+    bossController.loadingBoss = true;
+
     removeAllElements();
-    addBoss();
+    setTimeout(addBoss, 2000);
 
     //render boss health bar
     bossHealthBox.classList.remove('hide');
@@ -198,3 +215,14 @@ function endBossFight() {
     bossHealthBox.classList.add('hide');
     gameOverAction();
 }
+
+function convertMillisecondsToMinutesAndSeconds(milliseconds) {
+    // Convert milliseconds to seconds
+    let totalSeconds = Math.floor(milliseconds / 1000);
+  
+    // Calculate minutes and remaining seconds
+    let minutes = Math.floor(totalSeconds / 60);
+    let seconds = totalSeconds % 60;
+  
+    return `${minutes}:${seconds}`;
+  }

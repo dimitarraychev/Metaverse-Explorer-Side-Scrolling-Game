@@ -26,16 +26,27 @@ body {
     top: 100px;
     left: 35%;
     z-index: 1;
-    background-color: rgba(0,212,255,1);
+    background-color: #0D0208;
     border-radius: 30px;
     text-align: center;
+    color: #00FF41;
     padding: 30px;
 }
 
 .game-start:hover {
     cursor: pointer;
-    background-color:  rgba(0,152,195,1);
-    border: 2px solid  rgba(0,92,135,1);
+    background-color:  #003B00;
+    border: 2px solid  #008F11;
+}
+
+.title-logo {
+    position: absolute;
+    z-index: 1;
+    background-image: url(../images/title-logo.png);
+    width: 280px;
+    height: 120px;
+    top: 0px;
+    left: 31%;
 }
 
 .legend {
@@ -45,15 +56,17 @@ body {
     top: 220px;
     left: 25.5%;
     z-index: 1;
-    background-color: rgba(0,212,255,1);
+    background-color: #0D0208;
     border-radius: 30px;
-    border: 2px solid  rgba(0,152,195,1);
+    border: 2px solid  #008F11;
     text-align: center;
     font-size: 16px;
+    color: #00FF41;
     padding: 30px;
 }
 
 .legend ul {
+    margin-top: 80px;
     list-style-type: none;
 }
 
@@ -85,8 +98,9 @@ body {
 /* user interface elements */
 .game-score {
     background-color: rgb(13,2,8);
-    color: white;
+    color: #00FF41;
     text-align: center;
+    height: 32px;
 }
 
 .lives-container {
@@ -100,7 +114,7 @@ body {
 
 .level {
     position: absolute;
-    color: whitesmoke;
+    color: #00FF41;
     z-index: 1;
     width: 10%;
     height: 10%;
@@ -192,16 +206,16 @@ body {
 
 .meteorite {
     position: absolute;
-    width: 250px;
-    height: 50px;
+    width: 180px;
+    height: 65px;
     background-image: url(../images/meteorite.png);
     background-size: cover;
 }
 
 .boss-bullet {
     position: absolute;
-    width: 130px;
-    height: 50px;
+    width: 160px;
+    height: 45px;
     background-image: url(../images/boss/boss-bullet.png);
     background-size: cover;
 }
@@ -209,26 +223,30 @@ body {
 /* game over menu */
 .endgame-stats {
     position: absolute;
-    width: 45%;
+    width: 30%;
     height: 200px;
     top: 220px;
-    left: 25.5%;
+    left: 33%;
     z-index: 1;
-    background-color: rgba(0,212,255,1);
+    background-color: #0D0208;
     border-radius: 30px;
-    border: 2px solid  rgba(0,152,195,1);
-    text-align: center;
+    border: 2px solid  #008F11;
     font-size: 16px;
+    color: #00FF41;
     padding: 30px;
 }
 
-.endgame-stats ul {
-    list-style-type: none;
-    padding: 0;
+.end-message {
+    text-align: center;
 }
 
-.endgame-stats ul p {
+.stats {
     text-align: center;
+    margin: 5px;
+}
+
+.stats:last-of-type {
+    margin-top: 30px;
 }
 
 .restart-game {
@@ -239,16 +257,17 @@ body {
     top: 500px;
     left: 35%;
     z-index: 1;
-    background-color: rgba(0,212,255,1);
+    background-color: #0D0208;
     border-radius: 30px;
     text-align: center;
+    color: #00FF41;
     padding: 30px;
 }
 
 .restart-game:hover {
     cursor: pointer;
-    background-color:  rgba(0,152,195,1);
-    border: 2px solid  rgba(0,92,135,1);
+    background-color:  #003B00;
+    border: 2px solid  #008F11;
 }
 
 /* boss styling */

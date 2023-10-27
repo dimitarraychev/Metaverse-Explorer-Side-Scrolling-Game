@@ -9,7 +9,7 @@ const player = {
     lives: 3,
     lastLostLife: 0,
     killedByBoss: false,
-    isAtBottom: false,
+    isAtBottom: false
 };
 
 const game = {
@@ -35,6 +35,7 @@ const scene = {
     score: 0,
     killedBugs: 0,
     collectedBitcoins: 0,
+    timePlayed: 0,
     lastCloudSpawn: 0,
     lastBugSpawn: 0,
     lastBitcoinSpawn: 0,
@@ -48,6 +49,7 @@ const bossController = {
     health: 100,
     goingUp: true,
     bossLastBullet: 2000,
-    bossBulletInterval: 3000,
-    bossBulletMultiplier: 6
+    bossBulletInterval: 2000,
+    bossBulletMultiplier: 6,
+    loadingBoss: false
 }
