@@ -1,7 +1,8 @@
 const gameStartBtn = document.querySelector('.game-start');
 const restartGameBtn = document.querySelector('.restart-game');
 const startMenu = document.querySelector('.start-menu');
-const gameScore = document.querySelector('.game-score');
+const pauseBtn = document.querySelector('.pause-menu');
+const gameScore = document.querySelector('.score');
 const gameArea = document.querySelector('.game-area');
 const gameOver = document.querySelector('.game-over');
 const gamePoints = document.querySelector('.points');
@@ -17,6 +18,7 @@ const level = document.querySelector('.level');
 
 gameStartBtn.addEventListener('click', onGameStart);
 restartGameBtn.addEventListener('click', restartGame);
+pauseBtn.addEventListener('click', pauseMenu);
 
 document.addEventListener('keydown', onKeyDown);
 document.addEventListener('keyup', onKeyUp);
@@ -25,9 +27,10 @@ document.addEventListener('keyup', onKeyUp);
 function onGameStart(event) {
 
     startMenu.classList.add('hide');
+    pauseBtn.classList.remove('hide');
+    gameScore.classList.remove('hide');
     level.textContent = 'Level 1';
     level.style.color = '#00FF41';
-    gameScore.innerHTML = 'Score: <span class="points">0</span>'
 
     // render character
     const character = document.createElement('div');
@@ -64,10 +67,42 @@ function onKeyUp(event) {
     keys[event.code] = false;
 }
 
+function pauseMenu() {
+
+    scene.isGameActive = false;
+
+    startMenu.classList.remove('hide');
+    pauseBtn.classList.add('hide');
+
+    //remove start btn and create continue btn
+    gameStartBtn.remove();
+    const continueBtn = document.createElement('button');
+    continueBtn.classList.add('continue-btn');
+    continueBtn.textContent = 'Continue?'
+    continueBtn.addEventListener('click', continueGame)
+
+    startMenu.insertBefore(continueBtn, startMenu.firstChild);
+
+    function continueGame() {
+
+        scene.isGameActive = true;
+
+        startMenu.classList.add('hide');
+        pauseBtn.classList.remove('hide');
+    
+        continueBtn.remove();
+        startMenu.insertBefore(gameStartBtn, startMenu.firstChild);
+
+        //start game loop
+        window.requestAnimationFrame(gameAction);
+    }
+}
+
 //end game
 function gameOverAction() {
     //standart case
-    gameScore.textContent = '';
+    gameScore.classList.add('hide');
+    pauseBtn.classList.add('hide');
     level.textContent = '';
     scene.isGameActive = false;
 
@@ -216,7 +251,7 @@ function startBossFight() {
             let bossHealth = document.createElement('div');
             bossHealth.classList.add('boss-hp');
             bossHealthBar.appendChild(bossHealth);
-            await delay(150); // Delay each iteration by 1000ms (1 second)
+            await delay(150); // Delay each iteration by 150ms
         }
     })();
 

@@ -23,7 +23,7 @@ const game = {
     cloudSpawnInterval: 2500,
     bugSpawnInterval: 1000,
     bitcoinSpawnInterval: 3000,
-    meteoriteSpawnInterval: 1000,
+    meteoriteSpawnInterval: 800,
     bugKillBonus: 75,
     bitcoinCollectBonus: 125,
     bossHitBonus: 100,
@@ -49,7 +49,7 @@ const bossController = {
     health: 100,
     goingUp: true,
     bossLastBullet: 0,
-    bossBulletInterval: 2000,
+    bossBulletInterval: 1500,
     bossBulletMultiplier: 6,
     loadingBoss: false
 }

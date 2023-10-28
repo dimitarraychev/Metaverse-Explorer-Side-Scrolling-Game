@@ -73,3 +73,13 @@ function addBossShootEffect() {
     }
     setTimeout(removeShootEffect, 150);
 }
+
+function addBossLifeHitEffect() {
+    const bossSingleHPBar = document.querySelector('.boss-hp:last-child');
+    bossSingleHPBar.classList.add('bosshp-hit');
+
+    function removeLifeHitEffect() {
+        bossSingleHPBar.classList.remove('bosshp-hit');
+    }
+    setTimeout(removeLifeHitEffect, 250);
+}

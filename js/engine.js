@@ -5,7 +5,6 @@ function gameAction(timestamp) {
     const bullets = document.querySelectorAll('.bullet');
     const bitcoins = document.querySelectorAll('.bitcoin');
     const boss = document.querySelector('.boss');
-    const bossSingleHPBar = document.querySelector('.boss-hp');
     const meteorites = document.querySelectorAll('.meteorite');
     const bossBullets = document.querySelectorAll('.boss-bullet');
     const gamePoints = document.querySelector('.points');
@@ -103,14 +102,9 @@ function gameAction(timestamp) {
         if (isCollision(character, boss)) loseLife(timestamp);
 
         bullets.forEach(bullet => {
-            if(isCollision(boss, bullet)) {
+            if(isCollision(bullet, boss)) {
                 bullet.remove();
-                bossSingleHPBar.remove();
-
-                bossController.health -= 5;
-                scene.score += game.bossHitBonus;
-
-                addBossHitEffect();
+                hitBoss();
             }
         });
 
@@ -140,17 +134,19 @@ function gameAction(timestamp) {
 }
 
 function isCollision(firstElement, secondElement) {
-    let firstRect = firstElement.getBoundingClientRect();
-    let secondRect = secondElement.getBoundingClientRect();
+    const firstRect = firstElement.getBoundingClientRect();
+    const secondRect = secondElement.getBoundingClientRect();
 
-    //moving the collision further inside for the character
+    //moving the collisions further inside for the character and boss
     const character = document.querySelector('.character');
-    let charException = firstElement === character ? 30 : 0;
+    const boss = document.querySelector('.boss');
+    const charException = firstElement === character ? 30 : 0;
+    const bossException = secondElement === boss ? 50 : 0;
 
-    return !(firstRect.top + charException > secondRect.bottom ||
-        firstRect.bottom - charException < secondRect.top ||
-        firstRect.right - charException < secondRect.left ||
-        firstRect.left + charException > secondRect.right);
+    return !(firstRect.top + charException > secondRect.bottom - bossException ||
+        firstRect.bottom - charException < secondRect.top + bossException ||
+        firstRect.right - charException < secondRect.left + bossException ||
+        firstRect.left + charException > secondRect.right - bossException);
 }
 
 //get hit
@@ -164,10 +160,10 @@ function loseLife(timestamp) {
             const currLife = document.querySelector('.life');
             currLife.remove();
         }
+        setTimeout(removeLife, 250);
 
         player.lives--;
         player.lastLostLife = timestamp;
-        setTimeout(removeLife, 250);
 
         //get killed
         if (player.lives <= 0) {
@@ -176,4 +172,19 @@ function loseLife(timestamp) {
             gameOverAction();
         }
     }
+}
+
+function hitBoss() {
+
+    addBossHitEffect();
+    addBossLifeHitEffect();
+
+    function removeBossLife() {
+        const bossSingleHPBar = document.querySelector('.boss-hp:last-child');
+        bossSingleHPBar.remove();
+    }
+    setTimeout(removeBossLife, 250);
+
+    bossController.health -= 5;
+    scene.score += game.bossHitBonus;
 }
