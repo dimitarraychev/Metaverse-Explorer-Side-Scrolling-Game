@@ -74,6 +74,10 @@ function gameAction(timestamp) {
         player.lastBullet = timestamp;
     } 
 
+    if (keys.Escape) {
+        pauseMenu();
+    }
+
     //detect collisions
     bugs.forEach(bug => {
         if (isCollision(character, bug)) loseLife(timestamp);

@@ -67,6 +67,7 @@ function onKeyUp(event) {
     keys[event.code] = false;
 }
 
+//pause menu
 function pauseMenu() {
 
     scene.isGameActive = false;

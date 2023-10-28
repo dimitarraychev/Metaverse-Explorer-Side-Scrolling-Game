@@ -28,7 +28,7 @@ const game = {
     bitcoinCollectBonus: 125,
     bossHitBonus: 100,
     bossKillbonus: 2000,
-    lostLifeInterval: 1500
+    lostLifeInterval: 1000
 };
 
 const scene = {
