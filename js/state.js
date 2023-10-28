@@ -14,6 +14,7 @@ const player = {
 
 const game = {
     speed: 2,
+    isHardMode: false,
     movingMultiplier: 4,
     bulletMutliplier: 5,
     bugMultiplier: 3,

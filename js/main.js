@@ -1,6 +1,8 @@
 const gameStartBtn = document.querySelector('.game-start');
 const restartGameBtn = document.querySelector('.restart-game');
 const startMenu = document.querySelector('.start-menu');
+const toggleHard = document.querySelector('.toggle');
+const hardModeSwitch = document.getElementById('switch');
 const pauseBtn = document.querySelector('.pause-menu');
 const gameScore = document.querySelector('.score');
 const gameArea = document.querySelector('.game-area');
@@ -26,9 +28,12 @@ document.addEventListener('keyup', onKeyUp);
 // game start function
 function onGameStart(event) {
 
+    checkHardMode();
+
     startMenu.classList.add('hide');
     pauseBtn.classList.remove('hide');
     gameScore.classList.remove('hide');
+    toggleHard.classList.add('hide');
     level.textContent = 'Level 1';
     level.style.color = '#00FF41';
 
@@ -75,7 +80,7 @@ function pauseMenu() {
     startMenu.classList.remove('hide');
     pauseBtn.classList.add('hide');
 
-    //remove start btn and create continue btn
+    //remove start button and create continue button
     gameStartBtn.remove();
     const continueBtn = document.createElement('button');
     continueBtn.classList.add('continue-btn');
@@ -91,6 +96,7 @@ function pauseMenu() {
         startMenu.classList.add('hide');
         pauseBtn.classList.remove('hide');
     
+        //remove continue button and add start button
         continueBtn.remove();
         startMenu.insertBefore(gameStartBtn, startMenu.firstChild);
 
@@ -111,6 +117,13 @@ function gameOverAction() {
     endMessage.textContent = 'Game Over!';
     endMessage.style.color = 'red';
 
+    //abillity to remove hard mode if it is on
+    if (hardModeSwitch.checked) {
+        gameOver.appendChild(toggleHard);
+        toggleHard.classList.remove('hide');
+    }
+
+    //stats
     bugStats.textContent = scene.killedBugs;
     bitcoinStats.textContent = scene.collectedBitcoins;
     timeStats.textContent = convertMillisecsToMins(scene.timePlayed);
@@ -121,8 +134,12 @@ function gameOverAction() {
 
     //defeated boss case
     if (scene.defeatedBoss) {
-        endMessage.textContent = 'Congratulations, you got rid of all the Bugs in the Metaverse!';
+        endMessage.textContent = 'Congratulations, you have defeated Bug Prime!';
         endMessage.style.color = 'green';
+
+        //hard mode switch
+        gameOver.appendChild(toggleHard);
+        toggleHard.classList.remove('hide');
     }
 }
 
@@ -140,9 +157,15 @@ function restartGame() {
     player.x = 150;
     player.y = 300;
     player.lastBullet = 0;
-    player.lives = 3;
     player.lastLostLife = 0;
     player.killedByBoss = false;
+
+    //retain hard mode choice if defeated boss
+    if (scene.defeatedBoss === true && game.isHardMode === true) {
+        game.isHardMode = true;
+    } else {
+        game.isHardMode = false;
+    }
 
     game.speed = 2;
     game.bugSpawnInterval = 1000;
@@ -191,7 +214,7 @@ function removeAllElements() {
     }
 }
 
-//next level requirements
+//next level requirements and changes
 function proceedToNextLevel() {
 
     //level 2
@@ -268,6 +291,16 @@ function endBossFight() {
 
     bossHealthBox.classList.add('hide');
     gameOverAction();
+}
+
+function checkHardMode() {
+    if (hardModeSwitch.checked) {
+        game.isHardMode = true;
+        player.lives = 1;
+    } else {
+        game.isHardMode = false;
+        player.lives = 3;
+    }
 }
 
 function convertMillisecsToMins(milliseconds) {

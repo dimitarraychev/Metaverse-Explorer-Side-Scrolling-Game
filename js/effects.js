@@ -42,17 +42,6 @@ function addHitEffect() {
     setTimeout(removeHitEffect, 150);
 }
 
-//life effects
-function addLifeHitEffect() {
-    const life = document.querySelector('.life');
-    life.classList.add('life-hit');
-
-    function removeLifeHitEffect() {
-        life.classList.remove('life-hit');
-    }
-    setTimeout(removeLifeHitEffect, 250);
-}
-
 //boss effects
 function addBossHitEffect() {
     const boss = document.querySelector('.boss');
@@ -72,6 +61,17 @@ function addBossShootEffect() {
         boss.classList.remove('boss-shoot');
     }
     setTimeout(removeShootEffect, 150);
+}
+
+//life effects
+function addLifeHitEffect() {
+    const life = document.querySelector('.life');
+    life.classList.add('life-hit');
+
+    function removeLifeHitEffect() {
+        life.classList.remove('life-hit');
+    }
+    setTimeout(removeLifeHitEffect, 250);
 }
 
 function addBossLifeHitEffect() {
