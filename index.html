@@ -14,7 +14,7 @@
     <div class="main-section">
 
         <div class="start-menu">
-            <button class="game-start">Press to Play!</button>
+            <button class="game-start" type="button" tabindex="0">Press to Play!</button>
             <article class="legend">
                 <div class="title-logo"></div>
                 <ul>
@@ -25,6 +25,11 @@
                         <p>Bitcoins - collecting them rewards you 125 points!</p><img class="legend-bitcoin" src="./images/bitcoin.png" alt="bitcoin">
                     </li>
                 </ul>
+                <div class="controls">
+                    <p>Move: W A S D / ↑ ← ↓ →</p>
+                    <p>Shoot: SPACE</p>
+                    <p>Pause: ESCAPE</p>
+                </div>
                 <h4>Reach 5000 points to face Bug Prime!</h4>
             </article>
         </div>
@@ -54,9 +59,9 @@
         </div>
 
     </div>
-
-    <script src="js/main.js"></script>
+    
     <script src="js/state.js"></script>
+    <script src="js/main.js"></script>
     <script src="js/engine.js"></script>
     <script src="js/elements.js"></script>
     <script src="js/effects.js"></script>

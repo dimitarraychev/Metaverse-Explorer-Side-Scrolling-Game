@@ -49,10 +49,18 @@ body {
     left: 31%;
 }
 
+.controls {
+    position: absolute;
+    z-index: 1;
+    left: 35%;
+    top: 220px;
+    margin: 15px;
+}
+
 .legend {
     position: absolute;
     width: 45%;
-    height: 300px;
+    height: 400px;
     top: 220px;
     left: 25.5%;
     z-index: 1;
@@ -72,11 +80,11 @@ body {
 
 .legend ul p {
     display: inline-block;
-    margin-right: 50px;
+    margin-right: 40px;
 }
 
 .legend h4 {
-    margin-top: 60px;
+    margin-top: 150px;
     padding: 0;
     text-align: center;
     font-style: italic;
