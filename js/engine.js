@@ -143,10 +143,14 @@ function isCollision(firstElement, secondElement) {
     let firstRect = firstElement.getBoundingClientRect();
     let secondRect = secondElement.getBoundingClientRect();
 
-    return !(firstRect.top > secondRect.bottom ||
-        firstRect.bottom < secondRect.top ||
-        firstRect.right < secondRect.left ||
-        firstRect.left > secondRect.right);
+    //moving the collision further inside for the character
+    const character = document.querySelector('.character');
+    let charException = firstElement === character ? 30 : 0;
+
+    return !(firstRect.top + charException > secondRect.bottom ||
+        firstRect.bottom - charException < secondRect.top ||
+        firstRect.right - charException < secondRect.left ||
+        firstRect.left + charException > secondRect.right);
 }
 
 //get hit

@@ -194,7 +194,7 @@ body {
 
 .bitcoin {
     position: absolute;
-    width: 70px;
+    width: 65px;
     height: 40px;
     background-image: url(../images/bitcoin.png);
     background-size: cover;

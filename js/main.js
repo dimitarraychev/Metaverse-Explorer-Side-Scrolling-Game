@@ -77,7 +77,7 @@ function gameOverAction() {
 
     bugStats.textContent = scene.killedBugs;
     bitcoinStats.textContent = scene.collectedBitcoins;
-    timeStats.textContent = convertMillisecondsToMinutesAndSeconds(scene.timePlayed);
+    timeStats.textContent = convertMillisecsToMins(scene.timePlayed);
     scoreStats.textContent = Math.trunc(scene.score);
 
     //killed by boss case
@@ -124,7 +124,7 @@ function restartGame() {
 
     bossController.health = 100;
     bossController.goingUp = true;
-    bossController.bossLastBullet = 2000;
+    bossController.bossLastBullet = 0;
 
     onGameStart();
 }
@@ -195,7 +195,7 @@ function startBossFight() {
     bossController.loadingBoss = true;
 
     removeAllElements();
-    setTimeout(addBoss, 2500);
+    setTimeout(addBoss, 3000);
 
     //show and remove get ready message
     const getReady = document.createElement('div');
@@ -206,15 +206,22 @@ function startBossFight() {
     function removeGetReady() {
         getReady.remove()
     }
-    setTimeout(removeGetReady, 2500)
+    setTimeout(removeGetReady, 3000)
 
-    //render boss health bar
+    //render boss health bar with delay
     bossHealthBox.classList.remove('hide');
 
-    for (let index = 0; index < bossController.health / 5; index++) {
-        let bossHealth = document.createElement('div');
-        bossHealth.classList.add('boss-hp');
-        bossHealthBar.appendChild(bossHealth);
+    (async function slowForLoop() {
+        for (let index = 0; index < bossController.health / 5; index++) {
+            let bossHealth = document.createElement('div');
+            bossHealth.classList.add('boss-hp');
+            bossHealthBar.appendChild(bossHealth);
+            await delay(150); // Delay each iteration by 1000ms (1 second)
+        }
+    })();
+
+    function delay(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
     }
 }
 
@@ -227,7 +234,7 @@ function endBossFight() {
     gameOverAction();
 }
 
-function convertMillisecondsToMinutesAndSeconds(milliseconds) {
+function convertMillisecsToMins(milliseconds) {
     // Convert milliseconds to seconds
     let totalSeconds = Math.floor(milliseconds / 1000);
   
