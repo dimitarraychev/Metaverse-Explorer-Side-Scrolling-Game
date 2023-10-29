@@ -5,6 +5,7 @@ function gameAction(timestamp) {
     const bullets = document.querySelectorAll('.bullet');
     const bitcoins = document.querySelectorAll('.bitcoin');
     const boss = document.querySelector('.boss');
+    const miniBoss = document.querySelector('.miniboss');
     const meteorites = document.querySelectorAll('.meteorite');
     const bossBullets = document.querySelectorAll('.boss-bullet');
     const gamePoints = document.querySelector('.points');
@@ -36,6 +37,12 @@ function gameAction(timestamp) {
     addAndModifyBuildings(timestamp);
     addAndModifyBitcoins(timestamp);
     modifyBulletsPositions();
+
+    //add and modify elements in miniboss fight
+    if (scene.isMiniBossFight) {
+        modifyMiniBoss();
+        if (miniBossController.health <= 0) endMiniBossFight();
+    }
 
     //add and modify elements in boss fight
     if (scene.isBossFight) {
@@ -107,6 +114,19 @@ function gameAction(timestamp) {
             scene.collectedBitcoins++;
         }
     });
+
+    //detect collisions in minibossfight
+    if (scene.isMiniBossFight) {
+        bullets.forEach(bullet => {
+            if(isCollision(bullet, miniBoss)) {
+                bullet.remove();
+                addMiniBossHitEffect();
+
+                miniBossController.health -= 5;
+                scene.score += game.miniBossHitBonus;
+            }
+        });
+    }
 
     //detect collisions in boss fight
     if (scene.isBossFight) {

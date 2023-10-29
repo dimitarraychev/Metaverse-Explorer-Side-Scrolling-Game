@@ -22,7 +22,9 @@ const game = {
     bugKillBonus: 75,
     bitcoinCollectBonus: 125,
     bossHitBonus: 100,
-    bossKillbonus: 2000,
+    miniBossHitBonus: 50,
+    bossKillBonus: 2000,
+    miniBossKillBonus: 1000,
     lostLifeInterval: 1000
 };
 
@@ -36,6 +38,12 @@ const bossController = {
     bossBulletMultiplier: 6,
     loadingBoss: false
 }
+
+const miniBossController = {
+    miniBossBulletInterval: 1500,
+    miniBossBulletMultiplier: 6,
+    loadingMiniBoss: false
+};
 
 function initState() {
     player.x = 150;
@@ -66,11 +74,16 @@ function initState() {
     scene.lastMeteoriteSpawn = 0;
     scene.isGameActive = true;
     scene.isBossFight = false;
+    scene.isMiniBossFight = false;
     scene.defeatedBoss = false;
+    scene.defeatedMiniBoss = false;
     scene.metBoss = false;
 
     bossController.health = 100;
     bossController.goingUp = true;
     bossController.bossLastBullet = 0;
 
+    miniBossController.health = 25;
+    miniBossController.goingUp = true;
+    miniBossController.miniBossLastBullet = 0;
 }

@@ -235,3 +235,36 @@ function addAndModifyBossBullets(timestamp, boss) {
         }
     });
 }
+
+//add and modify miniboss position
+function addMiniBoss() {
+    miniBossController.loadingMiniBoss = false;
+    scene.isMiniBossFight = true;
+
+    const miniBoss = document.createElement('div');
+    miniBoss.classList.add('miniboss');
+    miniBoss.x = gameArea.offsetWidth - 200;
+    miniBoss.y = gameArea.offsetHeight / 4;
+    miniBoss.style.left = miniBoss.x + 'px';
+    miniBoss.style.top = miniBoss.y + 'px';
+
+    gameArea.appendChild(miniBoss);
+}
+
+function modifyMiniBoss() {
+    const miniBoss = document.querySelector('.miniboss');
+
+    if (miniBossController.goingUp) {
+        miniBoss.y -= game.speed;
+        miniBoss.style.top = miniBoss.y + 'px';
+
+        if (miniBoss.y < 0) miniBossController.goingUp = false;
+    }
+
+    if (!miniBossController.goingUp) {
+        miniBoss.y += game.speed;
+        miniBoss.style.top = miniBoss.y + 'px';
+
+        if (miniBoss.y > gameArea.offsetHeight - 220) miniBossController.goingUp = true;
+    }
+}

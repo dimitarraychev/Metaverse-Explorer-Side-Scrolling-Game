@@ -52,6 +52,28 @@ function addCollectEffect() {
     setTimeout(removeHitEffect, 150);
 }
 
+
+//miniboss effects
+function addMiniBossHitEffect() {
+    const miniBoss = document.querySelector('.miniboss');
+    miniBoss.classList.add('miniboss-hit');
+    
+    function removeMiniBossHitEffect() {
+        miniBoss.classList.remove('miniboss-hit');
+    }
+    setTimeout(removeMiniBossHitEffect, 150);
+}
+
+function addMiniBossShootEffect() {
+    const miniBoss = document.querySelector('.miniboss');
+    miniBoss.classList.add('miniboss-shoot');
+    
+    function removeMiniBossShootEffect() {
+        miniBoss.classList.remove('miniboss-shoot');
+    }
+    setTimeout(removeMiniBossShootEffect, 150);
+}
+
 //boss effects
 function addBossHitEffect() {
     const boss = document.querySelector('.boss');

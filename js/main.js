@@ -14,6 +14,7 @@ const totalTimeStats = document.querySelector('.totaltime-stats');
 const runTimeStats = document.querySelector('.runtime-stats');
 const metBossStats = document.querySelector('.metboss-stats');
 const killedBossStats = document.querySelector('.killedboss-stats');
+const killedMiniBossStats = document.querySelector('.killedminiboss-stats');
 const hardModeStats = document.querySelector('.hardmode-stats');
 const scoreStats = document.querySelector('.score-stats');
 const bossHealthBox = document.querySelector('.boss-health');
@@ -103,11 +104,16 @@ function proceedToNextLevel() {
         game.bitcoinSpawnInterval = 2750;
 
         //level 3
-    } else if (scene.score > 2000 && scene.score < 3000) {
+    } else if (scene.score > 2000 && scene.score < 2500) {
         level.textContent = 'Level 3';
         game.speed = 3;
         game.bugSpawnInterval = 650;
         game.bitcoinSpawnInterval = 2500;
+
+        //miniboss
+    } else if (scene.score > 2500 && scene.score < 3000 && !scene.isMiniBossFight &&
+        !scene.defeatedMiniBoss && !miniBossController.loadingMiniBoss) {
+        startMiniBossFight();
 
         //level 4
     } else if (scene.score > 3000 && scene.score < 5000) {
@@ -117,14 +123,29 @@ function proceedToNextLevel() {
         game.bitcoinSpawnInterval = 2000;
 
         //level Boss
-    } else if (scene.score > 5000 && scene.isBossFight === false &&
-        scene.defeatedBoss === false && bossController.loadingBoss === false) {
+    } else if (scene.score > 5000 && !scene.isBossFight &&
+        !scene.defeatedBoss && !bossController.loadingBoss) {
         level.textContent = 'BOSS';
         level.style.color = '#880808';
         game.speed = 2;
         game.bugSpawnInterval = Infinity;
         startBossFight();
     }
+}
+
+//mini boss fight start and end
+function startMiniBossFight() {
+    miniBossController.loadingMiniBoss = true;
+    addMiniBoss();
+}
+
+function endMiniBossFight() {
+    scene.isMiniBossFight = false;
+    scene.defeatedMiniBoss = true;
+    scene.score += game.miniBossKillBonus;
+
+    const miniBoss = document.querySelector('.miniboss');
+    miniBoss.remove();
 }
 
 //boss fight start and end
@@ -166,7 +187,7 @@ function startBossFight() {
 function endBossFight() {
     scene.isBossFight = false;
     scene.defeatedBoss = true;
-    scene.score += game.bossKillbonus;
+    scene.score += game.bossKillBonus;
 
     bossHealthBox.classList.add('hide');
     gameOverAction();
@@ -220,6 +241,14 @@ function gameOverAction() {
     scene.timePlayed += currTime;
     runTimeStats.textContent = convertMillisecsToMins(currTime);
     totalTimeStats.textContent = convertMillisecsToMins(scene.timePlayed);
+
+    if (scene.defeatedMiniBoss) {
+        killedMiniBossStats.textContent = 'Yes';
+        killedMiniBossStats.style.color = 'green';
+    } else {
+        killedMiniBossStats.textContent = 'No';
+        killedMiniBossStats.style.color = 'red';
+    }
 
     if (scene.metBoss) {
         metBossStats.textContent = 'Yes';
