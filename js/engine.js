@@ -9,6 +9,12 @@ function gameAction(timestamp) {
     const bossBullets = document.querySelectorAll('.boss-bullet');
     const gamePoints = document.querySelector('.points');
 
+    // start time snapshot
+    if (!scene.takenSnapshot) {
+        scene.runStartTime = timestamp;
+        scene.takenSnapshot = true;
+    }
+    
     //increment score count
     scene.score += 0.1;
 
@@ -38,7 +44,7 @@ function gameAction(timestamp) {
 
         //check if boss is killed
         if (bossController.health <= 0) {
-            scene.timePlayed = timestamp;
+            scene.runEndTime = timestamp;
             endBossFight();
         }
     }
@@ -172,7 +178,7 @@ function loseLife(timestamp) {
         //get killed
         if (player.lives <= 0) {
             if (scene.isBossFight) player.killedByBoss = true;
-            scene.timePlayed = timestamp;
+            scene.runEndTime = timestamp;
             gameOverAction();
         }
     }

@@ -1,3 +1,29 @@
+//render character
+function addCharacter() {
+    const character = document.createElement('div');
+    character.classList.add('character');
+    character.style.top = player.y + 'px';
+    character.style.left = player.x + 'px';
+    gameArea.appendChild(character);
+
+    player.width = character.offsetWidth;
+    player.height = character.offsetHeight;
+}
+
+//render lives
+function addLives() {
+    const livesContainer = document.createElement('div');
+    livesContainer.classList.add('lives-container');
+
+    for (let index = 0; index < player.lives; index++) {
+        let life = document.createElement('div');
+        life.classList.add('life');
+        livesContainer.appendChild(life);
+    }
+
+    gameArea.appendChild(livesContainer);
+}
+
 function addAndModifyBugs(timestamp) {
     //add bugs
     if (timestamp - scene.lastBugSpawn > game.bugSpawnInterval + 5000 * Math.random()) {
