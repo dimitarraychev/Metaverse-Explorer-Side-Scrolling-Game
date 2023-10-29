@@ -42,6 +42,16 @@ function addHitEffect() {
     setTimeout(removeHitEffect, 150);
 }
 
+function addCollectEffect() {
+    const character = document.querySelector('.character');
+    character.classList.add('character-collect');
+
+    function removeHitEffect() {
+        character.classList.remove('character-collect');
+    }
+    setTimeout(removeHitEffect, 150);
+}
+
 //boss effects
 function addBossHitEffect() {
     const boss = document.querySelector('.boss');

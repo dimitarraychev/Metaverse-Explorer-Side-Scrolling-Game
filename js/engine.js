@@ -33,6 +33,7 @@ function gameAction(timestamp) {
     //add and modify elements
     addAndModifyBugs(timestamp);
     addAndModifyClouds(timestamp);
+    addAndModifyBuildings(timestamp);
     addAndModifyBitcoins(timestamp);
     modifyBulletsPositions();
 
@@ -101,6 +102,7 @@ function gameAction(timestamp) {
     bitcoins.forEach(bitcoin => {
         if (isCollision(character, bitcoin)) {
             bitcoin.remove();
+            addCollectEffect();
             scene.score += game.bitcoinCollectBonus;
             scene.collectedBitcoins++;
         }

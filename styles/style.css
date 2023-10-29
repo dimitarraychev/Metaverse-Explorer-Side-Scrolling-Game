@@ -25,7 +25,7 @@ body {
     width: 30%;
     top: 100px;
     left: 35%;
-    z-index: 1;
+    z-index: 2;
     background-color: #0D0208;
     border-radius: 30px;
     text-align: center;
@@ -41,7 +41,7 @@ body {
 
 .title-logo {
     position: absolute;
-    z-index: 1;
+    z-index: 2;
     background-image: url(../images/title-logo.png);
     width: 280px;
     height: 120px;
@@ -51,7 +51,7 @@ body {
 
 .controls {
     position: absolute;
-    z-index: 1;
+    z-index: 2;
     left: 35%;
     top: 240px;
     margin: 15px;
@@ -63,7 +63,7 @@ body {
     height: 400px;
     top: 220px;
     left: 25.5%;
-    z-index: 1;
+    z-index: 2;
     background-color: #0D0208;
     border-radius: 30px;
     border: 2px solid  #008F11;
@@ -115,7 +115,7 @@ body {
     position: absolute;
     background-image: url(../images/pause-btn.png);
     background-size: cover;
-    z-index: 1;
+    z-index: 2;
     width: 40px;
     height: 50px;
     top: 15px;
@@ -124,7 +124,7 @@ body {
 
 .lives-container {
     position: absolute;
-    z-index: 1;
+    z-index: 2;
     width: 15%;
     height: 10%;
     top: 0px;
@@ -134,7 +134,7 @@ body {
 .level {
     position: absolute;
     color: #00FF41;
-    z-index: 1;
+    z-index: 2;
     width: 10%;
     height: 10%;
     top: 0;
@@ -147,7 +147,7 @@ body {
 .get-ready {
     position: absolute;
     color: #880808;
-    z-index: 1;
+    z-index: 2;
     left: 35%;
     top: 40%;
     text-align: center;
@@ -161,7 +161,7 @@ body {
     width: 30%;
     top: 100px;
     left: 35%;
-    z-index: 1;
+    z-index: 2;
     background-color: #0D0208;
     border-radius: 30px;
     text-align: center;
@@ -206,10 +206,16 @@ body {
     background-size: cover;
 }
 
+.character-collect {
+    background-image: url(../images/char/char-collect.png);
+    background-size: cover;
+}
+
 
 /* elements styling */
 .bullet {
     position: absolute;
+    z-index: 2;
     width: 80px;
     height: 20px;
     background-image: url(../images/bullet.png);
@@ -218,15 +224,25 @@ body {
 
 .cloud {
     position: absolute;
-    z-index: 0;
+    z-index: 1;
     width: 400px;
     height: 200px;
     background-image: url(../images/matrixcloud.png);
     background-size: cover;
 }
 
+.building {
+    position: absolute;
+    z-index: 0;
+    width: 1000px;
+    height: 320px;
+    background-image: url(../images/buildings.png);
+    background-size: cover;
+}
+
 .bug {
     position: absolute;
+    z-index: 2;
     width: 70px;
     height: 70px;
     background-image: url(../images/bug.png);
@@ -235,6 +251,7 @@ body {
 
 .bitcoin {
     position: absolute;
+    z-index: 2;
     width: 65px;
     height: 40px;
     background-image: url(../images/bitcoin.png);
@@ -242,7 +259,7 @@ body {
 }
 
 .life {
-    z-index: 1;
+    z-index: 2;
     display: inline-block;
     background-image: url(../images/life/life.png);
     background-size: cover;
@@ -257,6 +274,7 @@ body {
 
 .meteorite {
     position: absolute;
+    z-index: 2;
     width: 180px;
     height: 65px;
     background-image: url(../images/meteorite.png);
@@ -265,6 +283,7 @@ body {
 
 .boss-bullet {
     position: absolute;
+    z-index: 2;
     width: 160px;
     height: 45px;
     background-image: url(../images/boss/boss-bullet.png);
@@ -278,7 +297,7 @@ body {
     height: 300px;
     top: 100px;
     left: 33%;
-    z-index: 1;
+    z-index: 2;
     background-color: #0D0208;
     border-radius: 30px;
     border: 2px solid  #008F11;
@@ -307,7 +326,7 @@ body {
     width: 30%;
     top: 500px;
     left: 35%;
-    z-index: 1;
+    z-index: 2;
     background-color: #0D0208;
     border-radius: 30px;
     text-align: center;
@@ -324,6 +343,7 @@ body {
 /* boss styling */
 .boss {
     position: absolute;
+    z-index: 3;
     width: 350px;
     height: 280px;
     background-image: url(../images/boss/boss.png);
@@ -344,7 +364,7 @@ body {
     position: absolute;
     color: white;
     text-align: center;
-    z-index: 1;
+    z-index: 2;
     width: 75%;
     height: 12%;
     top: 80%;
@@ -357,7 +377,7 @@ body {
 }
 
 .boss-hp {
-    z-index: 1;
+    z-index: 2;
     display: inline-block;
     background-image: url(../images/boss/boss-hp.png);
     background-size: cover;
@@ -375,7 +395,7 @@ body {
 /* toggle easy/hard mode */
 .toggle {
     position: absolute;
-    z-index: 1;
+    z-index: 2;
     top: 20px;
     left: 47%;
     width: 100px;

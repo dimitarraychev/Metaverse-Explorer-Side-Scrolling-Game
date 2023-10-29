@@ -15,7 +15,8 @@ const game = {
     bitcoinMultiplier: 5,
     meteoriteMultiplier: 5,
     bulletInterval: 1000,
-    cloudSpawnInterval: 2500,
+    cloudSpawnInterval: 1500,
+    buildingSpawnInterval: 4000,
     bitcoinSpawnInterval: 3000,
     meteoriteSpawnInterval: 800,
     bugKillBonus: 75,
@@ -59,6 +60,7 @@ function initState() {
     scene.killedBugs = 0;
     scene.collectedBitcoins = 0;
     scene.lastCloudSpawn = 0;
+    scene.lastBuildingSpawn = 0;
     scene.lastBugSpawn = 0;
     scene.lastBitcoinSpawn = 0;
     scene.lastMeteoriteSpawn = 0;

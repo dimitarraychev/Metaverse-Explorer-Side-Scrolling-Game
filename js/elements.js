@@ -1,4 +1,4 @@
-//render character
+//add character
 function addCharacter() {
     const character = document.createElement('div');
     character.classList.add('character');
@@ -10,7 +10,7 @@ function addCharacter() {
     player.height = character.offsetHeight;
 }
 
-//render lives
+//add lives
 function addLives() {
     const livesContainer = document.createElement('div');
     livesContainer.classList.add('lives-container');
@@ -72,6 +72,31 @@ function addAndModifyClouds(timestamp) {
 
         if (cloud.x + cloud.offsetWidth <= 0) {
             cloud.remove();
+        }
+    });
+}
+
+function addAndModifyBuildings(timestamp) {
+    //add buildings
+    if (timestamp - scene.lastBuildingSpawn > game.buildingSpawnInterval + 20000 * Math.random()) {
+        const building = document.createElement('div');
+        building.classList.add('building');
+        building.x = gameArea.offsetWidth;
+        building.style.left = building.x + 'px';
+        building.style.top = (gameArea.offsetHeight - 340) + 'px';
+
+        gameArea.appendChild(building);
+        scene.lastBuildingSpawn = timestamp;
+    }
+
+    //modify building position
+    const buildings = document.querySelectorAll('.building');
+    buildings.forEach(building => {
+        building.x -= game.speed;
+        building.style.left = building.x + 'px';
+
+        if (building.x + building.offsetWidth <= 0) {
+            building.remove();
         }
     });
 }

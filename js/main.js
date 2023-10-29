@@ -280,11 +280,13 @@ function restartGame() {
 //delete all present elements
 function removeAllElements() {
     const clouds = document.querySelectorAll('.cloud');
+    const buildings = document.querySelectorAll('.building');
     const bugs = document.querySelectorAll('.bug');
     const bullets = document.querySelectorAll('.bullet');
     const bitcoins = document.querySelectorAll('.bitcoin');
 
     clouds.forEach(cloud => cloud.remove());
+    buildings.forEach(building => building.remove());
     bugs.forEach(bug => bug.remove());
     bullets.forEach(bullet => bullet.remove());
     bitcoins.forEach(bitcoin => bitcoin.remove());
