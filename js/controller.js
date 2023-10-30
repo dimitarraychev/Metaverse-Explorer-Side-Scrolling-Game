@@ -160,16 +160,20 @@ function gameOverAction() {
         hardModeStats.textContent = 'Yes +20%';
         hardModeStats.style.color = 'green';
         scene.score *= 1.2;
+        scoreStats.style.color = 'green';
     } else {
         hardModeStats.textContent = 'No';
         hardModeStats.style.color = 'red';
+        scoreStats.style.color = '#00FF41';
     }
 
     if (Math.trunc(scene.score) > scene.highScore) {
         highScoreStats.textContent = Math.trunc(scene.score);
         scene.highScore = Math.trunc(scene.score);
+        highScoreStats.style.color = 'green';
     } else {
         highScoreStats.textContent = scene.highScore;
+        highScoreStats.style.color = '#00FF41';
     }
 
     scoreStats.textContent = Math.trunc(scene.score);
