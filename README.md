@@ -12,11 +12,19 @@ Your determination and strategic prowess will be put to the test as you confront
 
 _Are you ready to take on the challenge and become the hero of the digital world? The metaverse awaits, explorer. Good luck, and happy gaming!_
 
+## Availabe on
+https://metaverse-explorer.web.app/
+
+https://metaverse-explorer.firebaseapp.com/
+
 ## Author
 
 Dimitar Raychev
+
 draytchev@gmail.com
+
 [GitHub](https://github.com/dimitarraychev)
+
 [LinkedIn](https://linkedin.com/in/dimitaraychev)
 
 ## Version History
