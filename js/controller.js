@@ -17,6 +17,7 @@ const killedBossStats = document.querySelector('.killedboss-stats');
 const killedMiniBossStats = document.querySelector('.killedminiboss-stats');
 const hardModeStats = document.querySelector('.hardmode-stats');
 const scoreStats = document.querySelector('.score-stats');
+const highScoreStats = document.querySelector('.highscore-stats');
 const bossHealthBox = document.querySelector('.boss-health');
 const bossHealthBar = document.querySelector('.boss-bar');
 const bossSingleHPBar = document.querySelector('.boss-hp');
@@ -156,11 +157,19 @@ function gameOverAction() {
     }
 
     if (game.isHardMode) {
-        hardModeStats.textContent = 'Yes';
+        hardModeStats.textContent = 'Yes x1.2';
         hardModeStats.style.color = 'green';
+        scene.score *= 1.2;
     } else {
         hardModeStats.textContent = 'No';
         hardModeStats.style.color = 'red';
+    }
+
+    if (Math.trunc(scene.score) > scene.highScore) {
+        highScoreStats.textContent = Math.trunc(scene.score);
+        scene.highScore = Math.trunc(scene.score);
+    } else {
+        highScoreStats.textContent = scene.highScore;
     }
 
     scoreStats.textContent = Math.trunc(scene.score);

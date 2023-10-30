@@ -31,6 +31,7 @@ const game = {
 const scene = {
     timePlayed: 0,
     startTimeSnapshot: 0,
+    highScore: 0
 };
 
 const bossController = {
