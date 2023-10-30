@@ -157,7 +157,7 @@ function gameOverAction() {
     }
 
     if (game.isHardMode) {
-        hardModeStats.textContent = 'Yes x1.2';
+        hardModeStats.textContent = 'Yes +20%';
         hardModeStats.style.color = 'green';
         scene.score *= 1.2;
     } else {
