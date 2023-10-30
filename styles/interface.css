@@ -52,8 +52,8 @@ body {
 .controls {
     position: absolute;
     z-index: 2;
-    left: 35%;
-    top: 240px;
+    left: 30%;
+    top: 220px;
     margin: 15px;
 }
 
@@ -74,7 +74,7 @@ body {
 }
 
 .legend ul {
-    margin-top: 100px;
+    margin-top: 80px;
     list-style-type: none;
 }
 
