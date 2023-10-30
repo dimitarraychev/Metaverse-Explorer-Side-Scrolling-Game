@@ -240,11 +240,11 @@ function removeAllElements() {
     if (scene.isMiniBossFight) {
         const miniBoss = document.querySelector('.miniboss');
         const miniBossBullets = document.querySelectorAll('.miniboss-bullet');
+        const miniBossAllHPBars = document.querySelectorAll('.boss-hp');
 
         miniBoss.remove();
-        miniBossBullets.forEach(miniBossBullet => {
-            miniBossBullet.remove();
-        });
+        miniBossBullets.forEach(miniBossBullet => miniBossBullet.remove());
+        miniBossAllHPBars.forEach(bar => bar.remove());
     }
 
     //handles difference between displayed lives and actual lives
