@@ -1,0 +1,68 @@
+/* elements styling */
+.bullet {
+    position: absolute;
+    z-index: 2;
+    width: 80px;
+    height: 20px;
+    background-image: url(../images/char/bullet.png);
+    background-size: cover;
+}
+
+.cloud {
+    position: absolute;
+    z-index: 1;
+    width: 400px;
+    height: 200px;
+    background-image: url(../images/environment/matrixcloud.png);
+    background-size: cover;
+}
+
+.building {
+    position: absolute;
+    z-index: 0;
+    width: 1000px;
+    height: 320px;
+    background-image: url(../images/environment/buildings.png);
+    background-size: cover;
+}
+
+.bug {
+    position: absolute;
+    z-index: 2;
+    width: 70px;
+    height: 70px;
+    background-image: url(../images/bug.png);
+    background-size: cover;
+}
+
+.bitcoin {
+    position: absolute;
+    z-index: 2;
+    width: 65px;
+    height: 40px;
+    background-image: url(../images/bitcoin.png);
+    background-size: cover;
+}
+
+.life {
+    z-index: 2;
+    display: inline-block;
+    background-image: url(../images/life/life.png);
+    background-size: cover;
+    height: 50px;
+    width: 50px;
+}
+
+.life-hit {
+    background-image: url(../images/life/life-hit.png);
+    background-size: cover;
+}
+
+.meteorite {
+    position: absolute;
+    z-index: 2;
+    width: 180px;
+    height: 65px;
+    background-image: url(../images/meteorite.png);
+    background-size: cover;
+}

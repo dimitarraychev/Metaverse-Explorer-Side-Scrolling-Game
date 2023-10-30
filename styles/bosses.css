@@ -1,0 +1,89 @@
+/* mini boss styling */
+.miniboss {
+    position: absolute;
+    z-index: 3;
+    width: 90px;
+    height: 140px;
+    background-image: url(../images/miniboss/miniboss.png);
+    background-size: cover;
+}
+
+.miniboss-hit {
+    background-image: url(../images/miniboss/miniboss-hit.png);
+    background-size: cover;
+}
+
+.miniboss-shoot {
+    background-image: url(../images/miniboss/miniboss-shoot.png);
+    background-size: cover;
+}
+
+.miniboss-bullet {
+    position: absolute;
+    z-index: 2;
+    width: 62px;
+    height: 15px;
+    background-image: url(../images/miniboss/miniboss-bullet.png);
+    background-size: cover;
+}
+
+
+/* boss styling */
+.boss {
+    position: absolute;
+    z-index: 3;
+    width: 350px;
+    height: 280px;
+    background-image: url(../images/boss/boss.png);
+    background-size: cover;
+}
+
+.boss-hit {
+    background-image: url(../images/boss/boss-hit.png);
+    background-size: cover;
+}
+
+.boss-shoot {
+    background-image: url(../images/boss/boss-shoot.png);
+    background-size: cover;
+}
+
+.boss-health {
+    position: absolute;
+    color: white;
+    text-align: center;
+    z-index: 2;
+    width: 75%;
+    height: 12%;
+    top: 80%;
+    left: 12.5%;
+}
+
+.boss-health p {
+    margin: 0;
+    padding: 0;
+}
+
+.boss-hp {
+    z-index: 2;
+    display: inline-block;
+    background-image: url(../images/boss/boss-hp.png);
+    background-size: cover;
+    height: 33px;
+    width: 45px;
+    margin: 2px;
+}
+
+.bosshp-hit {
+    background-image: url(../images/boss/bosshp-hit.png);
+    background-size: cover;
+}
+
+.boss-bullet {
+    position: absolute;
+    z-index: 2;
+    width: 160px;
+    height: 45px;
+    background-image: url(../images/boss/boss-bullet.png);
+    background-size: cover;
+}

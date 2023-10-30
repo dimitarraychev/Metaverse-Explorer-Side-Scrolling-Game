@@ -93,106 +93,6 @@ function pauseMenu() {
     }
 }
 
-//next level requirements and changes
-function proceedToNextLevel() {
-
-    //level 2
-    if (scene.score > 1000 && scene.score < 2000) {
-        level.textContent = 'Level 2';
-        game.speed = 2.5;
-        game.bugSpawnInterval = 800;
-        game.bitcoinSpawnInterval = 2750;
-
-        //level 3
-    } else if (scene.score > 2000 && scene.score < 2500) {
-        level.textContent = 'Level 3';
-        game.speed = 3;
-        game.bugSpawnInterval = 650;
-        game.bitcoinSpawnInterval = 2500;
-
-        //miniboss
-    } else if (scene.score > 2500 && scene.score < 3000 && !scene.isMiniBossFight &&
-        !scene.defeatedMiniBoss && !miniBossController.loadingMiniBoss) {
-        startMiniBossFight();
-
-        //level 4
-    } else if (scene.score > 3000 && scene.score < 5000) {
-        level.textContent = 'Level 4';
-        game.speed = 3.5;
-        game.bugSpawnInterval = 500;
-        game.bitcoinSpawnInterval = 2000;
-
-        //level Boss
-    } else if (scene.score > 5000 && !scene.isBossFight &&
-        !scene.defeatedBoss && !bossController.loadingBoss) {
-        level.textContent = 'BOSS';
-        level.style.color = '#880808';
-        game.speed = 2;
-        game.bugSpawnInterval = Infinity;
-        startBossFight();
-    }
-}
-
-//mini boss fight start and end
-function startMiniBossFight() {
-    miniBossController.loadingMiniBoss = true;
-    addMiniBoss();
-}
-
-function endMiniBossFight() {
-    scene.isMiniBossFight = false;
-    scene.defeatedMiniBoss = true;
-    scene.score += game.miniBossKillBonus;
-
-    const miniBoss = document.querySelector('.miniboss');
-    miniBoss.remove();
-}
-
-//boss fight start and end
-function startBossFight() {
-    bossController.loadingBoss = true;
-    scene.metBoss = true;
-
-    removeAllElements();
-    setTimeout(addBoss, 3000);
-
-    //show and remove get ready message
-    const getReady = document.createElement('div');
-    getReady.classList.add('get-ready');
-    getReady.textContent = 'Get Ready...';
-    gameArea.appendChild(getReady);
-
-    function removeGetReady() {
-        getReady.remove()
-    }
-    setTimeout(removeGetReady, 3000)
-
-    //render boss health bar with delay
-    bossHealthBox.classList.remove('hide');
-
-    (async function slowForLoop() {
-        for (let index = 0; index < bossController.health / 5; index++) {
-            let bossHealth = document.createElement('div');
-            bossHealth.classList.add('boss-hp');
-            bossHealthBar.appendChild(bossHealth);
-            await delay(150); // Delay each iteration by 150ms
-        }
-    })();
-
-    function delay(ms) {
-        return new Promise(resolve => setTimeout(resolve, ms));
-    }
-}
-
-function endBossFight() {
-    scene.isBossFight = false;
-    scene.defeatedBoss = true;
-    scene.score += game.bossKillBonus;
-
-    bossHealthBox.classList.add('hide');
-    gameOverAction();
-}
-
 function checkHardMode() {
     if (hardModeSwitch.checked) {
         game.isHardMode = true;
@@ -201,17 +101,6 @@ function checkHardMode() {
         game.isHardMode = false;
         player.lives = 3;
     }
-}
-
-function convertMillisecsToMins(milliseconds) {
-    // Convert milliseconds to seconds
-    let totalSeconds = Math.floor(milliseconds / 1000);
-
-    // Calculate minutes and remaining seconds
-    let minutes = Math.floor(totalSeconds / 60);
-    let seconds = totalSeconds % 60;
-
-    return `${minutes}:${seconds}`;
 }
 
 //end game
@@ -276,8 +165,9 @@ function gameOverAction() {
 
     scoreStats.textContent = Math.trunc(scene.score);
 
-    //killed by boss case
+    //killed by boss case or miniboss
     if (player.killedByBoss) bossHealthBox.classList.add('hide');
+    if (scene.isMiniBossFight) bossHealthBox.classList.add('hide');
 
     //defeated boss case
     if (scene.defeatedBoss) {
@@ -320,7 +210,7 @@ function removeAllElements() {
     bullets.forEach(bullet => bullet.remove());
     bitcoins.forEach(bitcoin => bitcoin.remove());
 
-    //delete additional elements in boss fight
+    //delete elements in boss fight
     if (scene.defeatedBoss || player.killedByBoss) {
         const meteorites = document.querySelectorAll('.meteorite');
         const boss = document.querySelector('.boss');
@@ -333,6 +223,17 @@ function removeAllElements() {
         bossBullets.forEach(bossBullet => bossBullet.remove());
     }
 
+    //delete elements in miniboss fight
+    if (scene.isMiniBossFight) {
+        const miniBoss = document.querySelector('.miniboss');
+        const miniBossBullets = document.querySelectorAll('.miniboss-bullet');
+
+        miniBoss.remove();
+        miniBossBullets.forEach(miniBossBullet => {
+            miniBossBullet.remove();
+        });
+    }
+
     //handles difference between displayed lives and actual lives
     if (scene.defeatedBoss) {
         const displayedLives = Array.from(document.querySelectorAll('.life')).length;
@@ -343,4 +244,18 @@ function removeAllElements() {
             }
         }
     }
+}
+
+function convertMillisecsToMins(milliseconds) {
+    // Convert milliseconds to seconds
+    let totalSeconds = Math.floor(milliseconds / 1000);
+
+    // Calculate minutes and remaining seconds
+    let minutes = Math.floor(totalSeconds / 60);
+    let seconds = totalSeconds % 60;
+
+    if (minutes < 10) minutes = minutes.toString().padStart(2, '0');
+    if (seconds < 10) seconds = seconds.toString().padStart(2, '0');
+
+    return `${minutes}:${seconds}`;
 }

@@ -1,0 +1,34 @@
+/* character styling */
+.character {
+    position: absolute;
+    z-index: 100;
+    width: 100px;
+    height: 180px;
+    background-image: url(../images/char/char.png);
+    background-size: cover;
+}
+
+.character-shoot {
+    background-image: url(../images/char/char-shoot.png);
+    background-size: cover;
+}
+
+.character-flying {
+    background-image: url(../images/char/char-flying.png);
+    background-size: cover;
+}
+
+.character-flyingshoot {
+    background-image: url(../images/char/char-flyingshoot.png);
+    background-size: cover;
+}
+
+.character-hit {
+    background-image: url(../images/char/char-hit.png);
+    background-size: cover;
+}
+
+.character-collect {
+    background-image: url(../images/char/char-collect.png);
+    background-size: cover;
+}

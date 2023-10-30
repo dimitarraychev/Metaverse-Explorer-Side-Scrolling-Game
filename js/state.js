@@ -40,8 +40,8 @@ const bossController = {
 }
 
 const miniBossController = {
-    miniBossBulletInterval: 1500,
-    miniBossBulletMultiplier: 6,
+    miniBossBulletInterval: 3000,
+    miniBossBulletMultiplier: 5,
     loadingMiniBoss: false
 };
 

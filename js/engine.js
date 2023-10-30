@@ -8,6 +8,7 @@ function gameAction(timestamp) {
     const miniBoss = document.querySelector('.miniboss');
     const meteorites = document.querySelectorAll('.meteorite');
     const bossBullets = document.querySelectorAll('.boss-bullet');
+    const miniBossBullets = document.querySelectorAll('.miniboss-bullet');
     const gamePoints = document.querySelector('.points');
 
     // start time snapshot
@@ -15,7 +16,7 @@ function gameAction(timestamp) {
         scene.runStartTime = timestamp;
         scene.takenSnapshot = true;
     }
-    
+
     //increment score count
     scene.score += 0.1;
 
@@ -25,12 +26,12 @@ function gameAction(timestamp) {
         player.y += game.speed;
         player.isAtBottom = false;
 
-    //penalty for staying at the bottom
+        //penalty for staying at the bottom
     } else {
         addHitEffect();
         player.isAtBottom = true;
     }
-    
+
     //add and modify elements
     addAndModifyBugs(timestamp);
     addAndModifyClouds(timestamp);
@@ -41,6 +42,7 @@ function gameAction(timestamp) {
     //add and modify elements in miniboss fight
     if (scene.isMiniBossFight) {
         modifyMiniBoss();
+        addAndModifyMiniBossBullets(timestamp, miniBoss);
         if (miniBossController.health <= 0) endMiniBossFight();
     }
 
@@ -56,7 +58,7 @@ function gameAction(timestamp) {
             endBossFight();
         }
     }
-    
+
     //register user input
     if (keys.ArrowUp && player.y > 0 || keys.KeyW && player.y > 0) {
         player.y -= game.speed * game.movingMultiplier;
@@ -66,7 +68,7 @@ function gameAction(timestamp) {
             addShootAndFlyEffects();
             addBullet(player);
             player.lastBullet = timestamp;
-        } 
+        }
     }
 
     if (keys.ArrowDown && isInAir || keys.KeyS && isInAir) {
@@ -77,7 +79,7 @@ function gameAction(timestamp) {
         player.x -= game.speed * game.movingMultiplier;
     }
 
-    if (keys.ArrowRight && player.x + player.width < gameArea.offsetWidth || 
+    if (keys.ArrowRight && player.x + player.width < gameArea.offsetWidth ||
         keys.KeyD && player.x + player.width < gameArea.offsetWidth) {
         player.x += game.speed * game.movingMultiplier;
     }
@@ -86,7 +88,7 @@ function gameAction(timestamp) {
         addShootEffect();
         addBullet(player);
         player.lastBullet = timestamp;
-    } 
+    }
 
     if (keys.Escape) {
         pauseMenu();
@@ -118,34 +120,38 @@ function gameAction(timestamp) {
     //detect collisions in minibossfight
     if (scene.isMiniBossFight) {
         bullets.forEach(bullet => {
-            if(isCollision(bullet, miniBoss)) {
+            if (isCollision(bullet, miniBoss)) {
                 bullet.remove();
-                addMiniBossHitEffect();
+                hitMiniBoss();
+            }
+        });
 
-                miniBossController.health -= 5;
-                scene.score += game.miniBossHitBonus;
+        miniBossBullets.forEach(miniBossBullet => {
+            if (isCollision(character, miniBossBullet)) {
+                miniBossBullet.remove();
+                loseLife(timestamp);
             }
         });
     }
 
     //detect collisions in boss fight
     if (scene.isBossFight) {
-        
+
         if (isCollision(character, boss)) loseLife(timestamp);
 
         bullets.forEach(bullet => {
-            if(isCollision(bullet, boss)) {
+            if (isCollision(bullet, boss)) {
                 bullet.remove();
                 hitBoss();
             }
         });
 
         meteorites.forEach(meteorite => {
-            if(isCollision(character, meteorite)) loseLife(timestamp);
+            if (isCollision(character, meteorite)) loseLife(timestamp);
         });
 
         bossBullets.forEach(bossBullet => {
-            if(isCollision(character, bossBullet)) {
+            if (isCollision(character, bossBullet)) {
                 bossBullet.remove();
                 loseLife(timestamp);
             }
@@ -219,4 +225,19 @@ function hitBoss() {
 
     bossController.health -= 5;
     scene.score += game.bossHitBonus;
+}
+
+function hitMiniBoss() {
+
+    addMiniBossHitEffect();
+    addBossLifeHitEffect();
+
+    function removeMiniBossLife() {
+        const bossSingleHPBar = document.querySelector('.boss-hp:last-child');
+        bossSingleHPBar.remove();
+    }
+    setTimeout(removeMiniBossLife, 250);
+
+    miniBossController.health -= 5;
+    scene.score += game.miniBossHitBonus;
 }
