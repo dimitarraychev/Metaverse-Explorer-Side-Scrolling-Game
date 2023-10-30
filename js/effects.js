@@ -1,6 +1,5 @@
 //character effects
-function addShootEffect() {
-    const character = document.querySelector('.character');
+function addShootEffect(character) {
     character.classList.add('character-shoot');
 
     function removeShootEffect() {
@@ -10,8 +9,7 @@ function addShootEffect() {
     setTimeout(removeShootEffect, 100);
 }
 
-function addFlyEffect() {
-    const character = document.querySelector('.character');
+function addFlyEffect(character) {
     character.classList.add('character-flying');
 
     function removeFlyEffect() {
@@ -21,8 +19,7 @@ function addFlyEffect() {
     setTimeout(removeFlyEffect, 100);
 }
 
-function addShootAndFlyEffects() {
-    const character = document.querySelector('.character');
+function addShootAndFlyEffects(character) {
     character.classList.add('character-flyingshoot');
 
     function removeFlyingEffect() {
@@ -32,8 +29,7 @@ function addShootAndFlyEffects() {
     setTimeout(removeFlyingEffect, 100);
 }
 
-function addHitEffect() {
-    const character = document.querySelector('.character');
+function addHitEffect(character) {
     character.classList.add('character-hit');
 
     function removeHitEffect() {
@@ -42,8 +38,7 @@ function addHitEffect() {
     setTimeout(removeHitEffect, 150);
 }
 
-function addCollectEffect() {
-    const character = document.querySelector('.character');
+function addCollectEffect(character) {
     character.classList.add('character-collect');
 
     function removeHitEffect() {
@@ -52,6 +47,15 @@ function addCollectEffect() {
     setTimeout(removeHitEffect, 150);
 }
 
+// bug effects
+function addBugHitEffect(bug) {
+    bug.classList.add('bug-hit');
+    
+    function removeBugHitEffect() {
+        bug.classList.remove('bug-hit');
+    }
+    setTimeout(removeBugHitEffect, 50);
+}
 
 //miniboss effects
 function addMiniBossHitEffect() {

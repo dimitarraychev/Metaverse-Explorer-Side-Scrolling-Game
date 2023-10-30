@@ -31,7 +31,12 @@
     z-index: 2;
     width: 70px;
     height: 70px;
-    background-image: url(../images/bug.png);
+    background-image: url(../images/bug/bug.png);
+    background-size: cover;
+}
+
+.bug-hit {
+    background-image: url(../images/bug/bug-hit.png);
     background-size: cover;
 }
 

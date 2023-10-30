@@ -28,7 +28,7 @@ function gameAction(timestamp) {
 
         //penalty for staying at the bottom
     } else {
-        addHitEffect();
+        addHitEffect(character);
         player.isAtBottom = true;
     }
 
@@ -62,10 +62,10 @@ function gameAction(timestamp) {
     //register user input
     if (keys.ArrowUp && player.y > 0 || keys.KeyW && player.y > 0) {
         player.y -= game.speed * game.movingMultiplier;
-        addFlyEffect();
+        addFlyEffect(character);
 
         if (keys.Space && timestamp - player.lastBullet > game.bulletInterval) {
-            addShootAndFlyEffects();
+            addShootAndFlyEffects(character);
             addBullet(player);
             player.lastBullet = timestamp;
         }
@@ -85,7 +85,7 @@ function gameAction(timestamp) {
     }
 
     if (keys.Space && timestamp - player.lastBullet > game.bulletInterval) {
-        addShootEffect();
+        addShootEffect(character);
         addBullet(player);
         player.lastBullet = timestamp;
     }
@@ -101,9 +101,14 @@ function gameAction(timestamp) {
         bullets.forEach(bullet => {
             if (isCollision(bullet, bug)) {
                 bullet.remove();
-                bug.remove();
-                scene.score += game.bugKillBonus;
-                scene.killedBugs++;
+                addBugHitEffect(bug);
+
+                function hitBug() {
+                    bug.remove();
+                    scene.score += game.bugKillBonus;
+                    scene.killedBugs++;
+                }
+                setTimeout(hitBug, 50);
             }
         });
     });
@@ -111,7 +116,7 @@ function gameAction(timestamp) {
     bitcoins.forEach(bitcoin => {
         if (isCollision(character, bitcoin)) {
             bitcoin.remove();
-            addCollectEffect();
+            addCollectEffect(character);
             scene.score += game.bitcoinCollectBonus;
             scene.collectedBitcoins++;
         }
@@ -189,9 +194,10 @@ function isCollision(firstElement, secondElement) {
 
 //get hit
 function loseLife(timestamp) {
+    const character = document.querySelector('.character');
     if (timestamp - player.lastLostLife > game.lostLifeInterval) {
 
-        addHitEffect();
+        addHitEffect(character);
         addLifeHitEffect();
 
         function removeLife() {
