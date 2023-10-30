@@ -1,3 +1,6 @@
+//encoding
+require('dotenv').config();
+
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
@@ -8,14 +11,14 @@ import { getDatabase } from "firebase/database";
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyCS1D4QbWjDyfdmOhPtQZcDwMhS5_nmfxA",
-  authDomain: "metaverse-explorer-game-298b6.firebaseapp.com",
-  databaseURL: "https://metaverse-explorer-game-298b6-default-rtdb.europe-west1.firebasedatabase.app",
-  projectId: "metaverse-explorer-game-298b6",
-  storageBucket: "metaverse-explorer-game-298b6.appspot.com",
-  messagingSenderId: "440963002699",
-  appId: "1:440963002699:web:c1b798ca409a2a287638ce",
-  measurementId: "G-QRJSZT539W"
+  apiKey: process.env.API_KEY,
+  authDomain: process.env.AUTH_DOMAIN,
+  databaseURL: process.env.DATABASE_URL,
+  projectId: process.env.PROJECT_ID,
+  storageBucket: process.env.STORAGE_BUCKET,
+  messagingSenderId: process.env.MESSAGING_SENDER_ID,
+  appId: process.env.APP_ID,
+  measurementId: process.env.MEASUREMENT_ID
 };
 
 // Initialize Firebase
