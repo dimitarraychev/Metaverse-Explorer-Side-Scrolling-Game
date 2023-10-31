@@ -102,6 +102,18 @@ body {
     display: inline-block;
 }
 
+.version {
+    position: absolute;
+    z-index: 2;
+    left: 90%;
+    top: 95%;
+    margin: 0;
+    padding: 0;
+    color: #00FF41;
+    text-align: center;
+    font-size: 16px;
+}
+
 
 /* user interface elements */
 .game-score {

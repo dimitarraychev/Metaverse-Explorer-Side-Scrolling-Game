@@ -12,10 +12,10 @@ Your determination and strategic prowess will be put to the test as you confront
 
 _Are you ready to take on the challenge and become the hero of the digital world? The metaverse awaits, explorer. Good luck, and happy gaming!_
 
-## Availabe on
-https://metaverse-explorer.web.app/
+## Available on
+https://play-metaverse-explorer.web.app/
 
-https://metaverse-explorer.firebaseapp.com/
+https://play-metaverse-explorer.firebaseapp.com/
 
 ## Author
 
@@ -29,9 +29,9 @@ draytchev@gmail.com
 
 ## Version History
 
-* 0.2
+* 1.0.1
     * Various bug fixes and optimizations
-* 0.1
+* 1.0.0
     * Initial Release
 
 ## License
