@@ -28,7 +28,7 @@ function playShootSound() {
 
 function playHitSound() {
     if (game.isAudioEnabled) {
-        hitSound.volume = 0.5;
+        hitSound.volume = 0.6;
         hitSound.currentTime = 0;
         hitSound.play();
     }
