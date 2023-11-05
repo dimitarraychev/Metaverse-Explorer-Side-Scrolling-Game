@@ -152,6 +152,66 @@ function addAndModifyBitcoins(timestamp) {
     });
 }
 
+//add and modify miniboss position
+function addMiniBoss() {
+    miniBossController.loadingMiniBoss = false;
+    scene.isMiniBossFight = true;
+
+    const miniBoss = document.createElement('div');
+    miniBoss.classList.add('miniboss');
+    miniBoss.x = gameArea.offsetWidth - 200;
+    miniBoss.y = 50;
+    miniBoss.style.left = miniBoss.x + 'px';
+    miniBoss.style.top = miniBoss.y + 'px';
+
+    gameArea.appendChild(miniBoss);
+}
+
+function modifyMiniBoss() {
+    const miniBoss = document.querySelector('.miniboss');
+
+    if (miniBossController.goingUp) {
+        miniBoss.y -= game.speed;
+        miniBoss.style.top = miniBoss.y + 'px';
+
+        if (miniBoss.y < 0) miniBossController.goingUp = false;
+    }
+
+    if (!miniBossController.goingUp) {
+        miniBoss.y += game.speed;
+        miniBoss.style.top = miniBoss.y + 'px';
+
+        if (miniBoss.y > gameArea.offsetHeight - 200) miniBossController.goingUp = true;
+    }
+}
+
+function addAndModifyMiniBossBullets(timestamp, miniBoss) {
+    //add miniboss bullets
+    if (timestamp - miniBossController.miniBossLastBullet > miniBossController.miniBossBulletInterval + 5000 * Math.random()) {
+        const miniBossBullet = document.createElement('div');
+        miniBossBullet.classList.add('miniboss-bullet');
+        miniBossBullet.y = miniBoss.y + miniBoss.offsetHeight - 50;
+        miniBossBullet.style.top = miniBossBullet.y + 'px';
+        miniBossBullet.x = miniBoss.x - 40;
+        miniBossBullet.style.left = miniBossBullet.x + 'px';
+
+        addMiniBossShootEffect();
+        gameArea.appendChild(miniBossBullet);
+        miniBossController.miniBossLastBullet = timestamp;
+    }
+
+    //modify miniboss bullets
+    const miniBossBullets = document.querySelectorAll('.miniboss-bullet');
+    miniBossBullets.forEach(miniBossBullet => {
+        miniBossBullet.x -= game.speed * miniBossController.miniBossBulletMultiplier;
+        miniBossBullet.style.left = miniBossBullet.x + 'px';
+
+        if (miniBossBullet.x + miniBossBullet.offsetWidth <= 0) {
+            miniBossBullet.remove();
+        }
+    });
+}
+
 //add and modify boss position
 function addBoss() {
     bossController.loadingBoss = false;
@@ -232,66 +292,6 @@ function addAndModifyBossBullets(timestamp, boss) {
 
         if (bossBullet.x + bossBullet.offsetWidth <= 0) {
             bossBullet.remove();
-        }
-    });
-}
-
-//add and modify miniboss position
-function addMiniBoss() {
-    miniBossController.loadingMiniBoss = false;
-    scene.isMiniBossFight = true;
-
-    const miniBoss = document.createElement('div');
-    miniBoss.classList.add('miniboss');
-    miniBoss.x = gameArea.offsetWidth - 200;
-    miniBoss.y = 50;
-    miniBoss.style.left = miniBoss.x + 'px';
-    miniBoss.style.top = miniBoss.y + 'px';
-
-    gameArea.appendChild(miniBoss);
-}
-
-function modifyMiniBoss() {
-    const miniBoss = document.querySelector('.miniboss');
-
-    if (miniBossController.goingUp) {
-        miniBoss.y -= game.speed;
-        miniBoss.style.top = miniBoss.y + 'px';
-
-        if (miniBoss.y < 0) miniBossController.goingUp = false;
-    }
-
-    if (!miniBossController.goingUp) {
-        miniBoss.y += game.speed;
-        miniBoss.style.top = miniBoss.y + 'px';
-
-        if (miniBoss.y > gameArea.offsetHeight - 200) miniBossController.goingUp = true;
-    }
-}
-
-function addAndModifyMiniBossBullets(timestamp, miniBoss) {
-    //add miniboss bullets
-    if (timestamp - miniBossController.miniBossLastBullet > miniBossController.miniBossBulletInterval + 5000 * Math.random()) {
-        const miniBossBullet = document.createElement('div');
-        miniBossBullet.classList.add('miniboss-bullet');
-        miniBossBullet.y = miniBoss.y + miniBoss.offsetHeight - 50;
-        miniBossBullet.style.top = miniBossBullet.y + 'px';
-        miniBossBullet.x = miniBoss.x - 40;
-        miniBossBullet.style.left = miniBossBullet.x + 'px';
-
-        addMiniBossShootEffect();
-        gameArea.appendChild(miniBossBullet);
-        miniBossController.miniBossLastBullet = timestamp;
-    }
-
-    //modify miniboss bullets
-    const miniBossBullets = document.querySelectorAll('.miniboss-bullet');
-    miniBossBullets.forEach(miniBossBullet => {
-        miniBossBullet.x -= game.speed * miniBossController.miniBossBulletMultiplier;
-        miniBossBullet.style.left = miniBossBullet.x + 'px';
-
-        if (miniBossBullet.x + miniBossBullet.offsetWidth <= 0) {
-            miniBossBullet.remove();
         }
     });
 }

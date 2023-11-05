@@ -99,6 +99,16 @@ function addBossShootEffect() {
     setTimeout(removeShootEffect, 150);
 }
 
+function addBossBackgroundEffect() {
+    const background = document.querySelector('.game-area');
+    background.style.background = 'linear-gradient(0deg, rgba(13,2,8,1) 0%, rgba(136,8,8,1) 33%, rgba(13,2,8,1) 100%)';
+}
+
+function removeBossBackgroundEffect() {
+    const background = document.querySelector('.game-area');
+    background.style.background = 'linear-gradient(0deg, rgba(13,2,8,1) 0%, rgba(9,9,121,1) 33%, rgba(13,2,8,1) 100%)';
+}
+
 //life effects
 function addLifeHitEffect() {
     const life = document.querySelector('.life');

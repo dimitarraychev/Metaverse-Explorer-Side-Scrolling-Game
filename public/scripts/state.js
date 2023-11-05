@@ -25,7 +25,8 @@ const game = {
     miniBossHitBonus: 50,
     bossKillBonus: 2000,
     miniBossKillBonus: 1000,
-    lostLifeInterval: 1000
+    lostLifeInterval: 1000,
+    isAudioEnabled: true
 };
 
 const scene = {
@@ -36,12 +37,12 @@ const scene = {
 
 const bossController = {
     bossBulletInterval: 1500,
-    bossBulletMultiplier: 6,
+    bossBulletMultiplier: 7,
     loadingBoss: false
 }
 
 const miniBossController = {
-    miniBossBulletInterval: 3000,
+    miniBossBulletInterval: 2500,
     miniBossBulletMultiplier: 5,
     loadingMiniBoss: false
 };

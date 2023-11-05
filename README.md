@@ -27,8 +27,31 @@ draytchev@gmail.com
 
 [LinkedIn](https://linkedin.com/in/dimitaraychev)
 
-## Version History
+## Music
+Main Theme - Powerful Trap Beat | Strong by Alex-Productions | https://onsound.eu/
+Music promoted by https://www.chosic.com/free-music/all/
+Creative Commons CC BY 3.0
+https://creativecommons.org/licenses/by/3.0/
 
+Boss Theme - Extreme Trap Racing Music | Power by Alex-Productions | https://onsound.eu/
+Music promoted by https://www.chosic.com/free-music/all/
+Creative Commons CC BY 3.0
+https://creativecommons.org/licenses/by/3.0/
+
+## SFX
+https://www.chosic.com/
+
+https://mixkit.co/
+
+## Art
+https://www.craiyon.com/ _+ Some amazing Photoshop skills by me_
+
+## Version History
+* 1.1.0
+    * Added musix and SFX
+    * Fixed issue with building slowing the game
+    * Boss fight visual improvements
+    * Code optimizations
 * 1.0.1
     * Various bug fixes and optimizations
 * 1.0.0

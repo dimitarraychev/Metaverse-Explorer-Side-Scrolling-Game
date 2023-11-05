@@ -114,6 +114,30 @@ body {
     font-size: 16px;
 }
 
+.audiobutton {
+    position: absolute;
+    background-image: url(../images/menu/audiobutton.png);
+    background-size: cover;
+    z-index: 2;
+    left: 95%;
+    top: 2%;
+    width: 50px;
+    height: 50px;
+    margin: 0;
+    padding: 0;
+}
+
+.audiobutton:hover {
+    cursor: pointer;
+    background-image: url(../images/menu/audiobutton-hover.png);
+    background-size: cover;
+}
+
+.audiobutton-paused {
+    background-image: url(../images/menu/audiobutton-paused.png);
+    background-size: cover;
+}
+
 
 /* user interface elements */
 .game-score {
@@ -132,6 +156,12 @@ body {
     height: 50px;
     top: 15px;
     left: 15px;
+}
+
+.pause-menu:hover {
+    cursor: pointer;
+    background-image: url(../images/menu/pause-btn-hover.png);
+    background-size: cover;
 }
 
 .lives-container {
@@ -158,7 +188,7 @@ body {
 
 .get-ready {
     position: absolute;
-    color: #880808;
+    color: #00FF41;
     z-index: 2;
     left: 35%;
     top: 40%;

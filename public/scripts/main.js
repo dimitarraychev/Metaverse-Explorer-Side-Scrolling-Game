@@ -23,16 +23,22 @@ const bossHealthBar = document.querySelector('.boss-bar');
 const bossSingleHPBar = document.querySelector('.boss-hp');
 const endMessage = document.querySelector('.end-message');
 const level = document.querySelector('.level');
+const audioBtn = document.querySelector('.audiobutton');
 
 gameStartBtn.addEventListener('click', onGameStart);
 restartGameBtn.addEventListener('click', restartGame);
 pauseBtn.addEventListener('click', pauseMenu);
+audioBtn.addEventListener('click', audioControl);
 
 document.addEventListener('keydown', onKeyDown);
 document.addEventListener('keyup', onKeyUp);
 
+
 // game start function
 function onGameStart(event) {
+
+    //play theme music
+    playThemeMusic();
 
     //initialize state objects
     initState();
@@ -54,6 +60,29 @@ function onGameStart(event) {
     window.requestAnimationFrame(gameAction);
 }
 
+//enable/disable audio
+function audioControl() {
+    if (game.isAudioEnabled) {
+        game.isAudioEnabled = false;
+        audioBtn.classList.add('audiobutton-paused');
+
+        if (!scene.isBossFight) {
+            pauseThemeMusic()
+        } else {
+            pauseBossMusic()
+        }
+    } else {
+        game.isAudioEnabled = true;
+        audioBtn.classList.remove('audiobutton-paused');
+
+        if (!scene.isBossFight) {
+            playThemeMusic();
+        } else {
+            playBossMusic();
+        }
+    }
+}
+
 //key handlers
 function onKeyDown(event) {
     keys[event.code] = true;
@@ -66,9 +95,17 @@ function onKeyUp(event) {
 //pause menu
 function pauseMenu() {
 
+    //add menu
     scene.isGameActive = false;
     startMenu.classList.remove('hide');
     pauseBtn.classList.add('hide');
+
+    //pause audio
+    if (!scene.isBossFight) {
+        pauseThemeMusic();
+    } else { 
+        pauseBossMusic();
+    }
 
     //remove start button and create continue button
     gameStartBtn.remove();
@@ -84,6 +121,13 @@ function pauseMenu() {
         scene.isGameActive = true;
         startMenu.classList.add('hide');
         pauseBtn.classList.remove('hide');
+
+        //resume audio
+        if (!scene.isBossFight) {
+            playThemeMusic();
+        } else {
+            playBossMusic();
+        }
 
         //remove continue button and add start button
         continueBtn.remove();
@@ -112,6 +156,8 @@ function gameOverAction() {
     level.textContent = '';
     level.classList.add('hide');
     scene.isGameActive = false;
+
+    pauseThemeMusic();
 
     gameOver.classList.remove('hide');
     endMessage.textContent = 'Game Over!';
@@ -179,7 +225,10 @@ function gameOverAction() {
     scoreStats.textContent = Math.trunc(scene.score);
 
     //killed by boss case or miniboss
-    if (player.killedByBoss) bossHealthBox.classList.add('hide');
+    if (player.killedByBoss) {
+        pauseBossMusic();
+        bossHealthBox.classList.add('hide');
+    }
     if (scene.isMiniBossFight) bossHealthBox.classList.add('hide');
 
     //defeated boss case
@@ -200,6 +249,9 @@ function restartGame() {
     const character = document.querySelector('.character');
     character.remove();
     removeAllElements();
+
+    //change background to default
+    removeBossBackgroundEffect();
 
     gameOver.classList.add('hide');
 

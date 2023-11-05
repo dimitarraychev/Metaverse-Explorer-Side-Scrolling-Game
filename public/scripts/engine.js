@@ -43,6 +43,8 @@ function gameAction(timestamp) {
     if (scene.isMiniBossFight) {
         modifyMiniBoss();
         addAndModifyMiniBossBullets(timestamp, miniBoss);
+
+        //check if miniboss is killed
         if (miniBossController.health <= 0) endMiniBossFight();
     }
 
@@ -55,6 +57,7 @@ function gameAction(timestamp) {
         //check if boss is killed
         if (bossController.health <= 0) {
             scene.runEndTime = timestamp;
+            playGameWonMusic();
             endBossFight();
         }
     }
@@ -65,6 +68,7 @@ function gameAction(timestamp) {
         addFlyEffect(character);
 
         if (keys.Space && timestamp - player.lastBullet > game.bulletInterval) {
+            playShootSound();
             addShootAndFlyEffects(character);
             addBullet(player);
             player.lastBullet = timestamp;
@@ -85,6 +89,7 @@ function gameAction(timestamp) {
     }
 
     if (keys.Space && timestamp - player.lastBullet > game.bulletInterval) {
+        playShootSound();
         addShootEffect(character);
         addBullet(player);
         player.lastBullet = timestamp;
@@ -101,6 +106,7 @@ function gameAction(timestamp) {
         bullets.forEach(bullet => {
             if (isCollision(bullet, bug)) {
                 bullet.remove();
+                playEnemyHitSound();
                 addBugHitEffect(bug);
 
                 function hitBug() {
@@ -116,6 +122,7 @@ function gameAction(timestamp) {
     bitcoins.forEach(bitcoin => {
         if (isCollision(character, bitcoin)) {
             bitcoin.remove();
+            playCollectSound();
             addCollectEffect(character);
             scene.score += game.bitcoinCollectBonus;
             scene.collectedBitcoins++;
@@ -199,6 +206,7 @@ function loseLife(timestamp) {
 
         addHitEffect(character);
         addLifeHitEffect();
+        playHitSound();
 
         function removeLife() {
             const currLife = document.querySelector('.life');
@@ -213,6 +221,7 @@ function loseLife(timestamp) {
         if (player.lives <= 0) {
             if (scene.isBossFight) player.killedByBoss = true;
             scene.runEndTime = timestamp;
+            playGameOverMusic();
             gameOverAction();
         }
     }
@@ -222,6 +231,7 @@ function hitBoss() {
 
     addBossHitEffect();
     addBossLifeHitEffect();
+    playEnemyHitSound();
 
     function removeBossLife() {
         const bossSingleHPBar = document.querySelector('.boss-hp:last-child');
@@ -237,6 +247,7 @@ function hitMiniBoss() {
 
     addMiniBossHitEffect();
     addBossLifeHitEffect();
+    playEnemyHitSound();
 
     function removeMiniBossLife() {
         const bossSingleHPBar = document.querySelector('.boss-hp:last-child');

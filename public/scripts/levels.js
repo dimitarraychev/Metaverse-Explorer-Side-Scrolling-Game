@@ -76,6 +76,13 @@ function startBossFight() {
     bossController.loadingBoss = true;
     scene.metBoss = true;
 
+    //change music
+    pauseThemeMusic();
+    playBossMusic();
+
+    //change background
+    addBossBackgroundEffect();
+
     removeAllElements();
     setTimeout(addBoss, 3000);
 
@@ -113,6 +120,8 @@ function endBossFight() {
     scene.isBossFight = false;
     scene.defeatedBoss = true;
     scene.score += game.bossKillBonus;
+
+    pauseBossMusic();
 
     bossHealthBox.classList.add('hide');
     gameOverAction();

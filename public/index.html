@@ -24,7 +24,8 @@
                 <input type="checkbox" id="switch" class="toggle-checkbox">
                 <label for="switch" class="toggle-label">Hard</label>
                 <div class="toggle-slider"></div>
-              </div>
+            </div>
+            <div class="audiobutton"></div>
             <button class="game-start" type="button" tabindex="0">Press to Play!</button>
             <article class="legend">
                 <div class="title-logo"></div>
@@ -78,14 +79,24 @@
         </div>
 
     </div>
+    
+    <audio id="theme-music" src="audio/theme.mp3" loop></audio>
+    <audio id="shoot-sound" src="audio/shoot.mp3"></audio>
+    <audio id="hit-sound" src="audio/hit.wav"></audio>
+    <audio id="enemy-hit-sound" src="audio/enemy-hit.mp3"></audio>
+    <audio id="collect-sound" src="audio/collect.wav"></audio>
+    <audio id="boss-music" src="audio/boss.mp3"></audio>
+    <audio id="gamewon-music" src="audio/game-won.wav"></audio>
+    <audio id="gameover-music" src="audio/game-over.wav"></audio>
 
-    <script src="js/app.js"></script>
-    <script src="js/state.js"></script>
-    <script src="js/main.js"></script>
-    <script src="js/engine.js"></script>
-    <script src="js/levels.js"></script>
-    <script src="js/elements.js"></script>
-    <script src="js/effects.js"></script>
+    <script src="scripts/app.js"></script>
+    <script src="scripts/state.js"></script>
+    <script src="scripts/main.js"></script>
+    <script src="scripts/engine.js"></script>
+    <script src="scripts/levels.js"></script>
+    <script src="scripts/elements.js"></script>
+    <script src="scripts/effects.js"></script>
+    <script src="scripts/audio.js"></script>
 
 </body>
 </html>
