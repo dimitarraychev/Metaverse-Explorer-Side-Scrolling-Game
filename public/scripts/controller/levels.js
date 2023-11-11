@@ -14,7 +14,7 @@ function proceedToNextLevel() {
     if (scene.score > 1000 && scene.score < 2000 && level.textContent === 'Level 1') {
         level.textContent = 'Level 2';
         levelNotification('Level 2', 1000);
-        game.speed = 2.5;
+        game.speed = 2.33;
         game.bugSpawnInterval = 800;
         game.bitcoinSpawnInterval = 2750;
 
@@ -22,7 +22,7 @@ function proceedToNextLevel() {
     } else if (scene.score > 2000 && scene.score < 2500 && level.textContent === 'Level 2') {
         level.textContent = 'Level 3';
         levelNotification('Level 3', 1000);
-        game.speed = 3;
+        game.speed = 2.66;
         game.bugSpawnInterval = 650;
         game.bitcoinSpawnInterval = 2500;
 
@@ -36,7 +36,7 @@ function proceedToNextLevel() {
     } else if (scene.score > 3000 && scene.score < 5000 && level.textContent === 'Level 3') {
         level.textContent = 'Level 4';
         levelNotification('Level 4', 1000);
-        game.speed = 3.5;
+        game.speed = 3;
         game.bugSpawnInterval = 500;
         game.bitcoinSpawnInterval = 2000;
 
