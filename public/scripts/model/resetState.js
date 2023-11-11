@@ -1,59 +1,11 @@
-const keys = {};
-
-const player = {
-    width: 0,
-    height: 0,
-    lives: 3,
-    isAtBottom: false,
-    lastLostLife: 0
-};
-
-const game = {
-    movingMultiplier: 4,
-    bulletMutliplier: 5,
-    bugMultiplier: 3,
-    bitcoinMultiplier: 5,
-    meteoriteMultiplier: 5,
-    bulletInterval: 1000,
-    cloudSpawnInterval: 1500,
-    buildingSpawnInterval: 4000,
-    bitcoinSpawnInterval: 3000,
-    meteoriteSpawnInterval: 800,
-    bugKillBonus: 75,
-    bitcoinCollectBonus: 125,
-    bossHitBonus: 100,
-    miniBossHitBonus: 50,
-    bossKillBonus: 2000,
-    miniBossKillBonus: 1000,
-    lostLifeInterval: 1000,
-    isAudioEnabled: true
-};
-
-const scene = {
-    timePlayed: 0,
-    startTimeSnapshot: 0,
-    highScore: 0
-};
-
-const bossController = {
-    bossBulletInterval: 1500,
-    bossBulletMultiplier: 7,
-    loadingBoss: false
-}
-
-const miniBossController = {
-    miniBossBulletInterval: 2500,
-    miniBossBulletMultiplier: 5,
-    loadingMiniBoss: false
-};
-
-function initState() {
+function resetState() {
     player.x = 150;
     player.y = 300;
     player.lastBullet = 0;
     player.killedByBoss = false;
 
     //retain hard mode choice if defeated boss
+    const hardModeSwitch = document.getElementById('switch');
     if (scene.defeatedBoss === true && hardModeSwitch.checked === true) {
         game.isHardMode = true;
     } else {
@@ -89,3 +41,5 @@ function initState() {
     miniBossController.goingUp = true;
     miniBossController.miniBossLastBullet = 0;
 }
+
+export { resetState };

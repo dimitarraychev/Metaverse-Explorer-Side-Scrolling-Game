@@ -2,8 +2,8 @@
 .miniboss {
     position: absolute;
     z-index: 3;
-    width: 90px;
-    height: 140px;
+    width: 7rem;
+    height: 8rem;
     background-image: url(../images/miniboss/miniboss.png);
     background-size: cover;
 }
@@ -21,8 +21,8 @@
 .miniboss-bullet {
     position: absolute;
     z-index: 2;
-    width: 62px;
-    height: 15px;
+    width: 3rem;
+    height: 0.8rem;
     background-image: url(../images/miniboss/miniboss-bullet.png);
     background-size: cover;
 }
@@ -32,8 +32,8 @@
 .boss {
     position: absolute;
     z-index: 3;
-    width: 350px;
-    height: 280px;
+    width: 20rem;
+    height: 16rem;
     background-image: url(../images/boss/boss.png);
     background-size: cover;
 }
@@ -49,19 +49,21 @@
 }
 
 .boss-health {
-    position: absolute;
-    color: white;
-    text-align: center;
     z-index: 2;
     width: 75%;
     height: 12%;
     top: 80%;
-    left: 12.5%;
+    left: 50%;
+    transform: translateX(-50%); /* This centers the element properly */
+    position: absolute;
+    color: white;
+    text-align: center;
 }
 
 .boss-health p {
     margin: 0;
     padding: 0;
+    font-size: 2rem;
 }
 
 .boss-hp {
@@ -69,9 +71,9 @@
     display: inline-block;
     background-image: url(../images/boss/boss-hp.png);
     background-size: cover;
-    height: 33px;
-    width: 45px;
-    margin: 2px;
+    height: 2rem;
+    width: 2.8rem;
+    margin: 0.1rem;
 }
 
 .bosshp-hit {
@@ -82,8 +84,8 @@
 .boss-bullet {
     position: absolute;
     z-index: 2;
-    width: 160px;
-    height: 45px;
+    width: 10rem;
+    height: 3rem;
     background-image: url(../images/boss/boss-bullet.png);
     background-size: cover;
 }

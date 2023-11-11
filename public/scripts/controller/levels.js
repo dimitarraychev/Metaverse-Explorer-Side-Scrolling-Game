@@ -1,16 +1,24 @@
+const bossHealthBox = document.querySelector('.boss-health');
+const bossHealthBar = document.querySelector('.boss-bar');
+const level = document.querySelector('.level');
+
 //next level requirements and changes
 function proceedToNextLevel() {
+    
+    let isBoss = false;
 
     //level 2
-    if (scene.score > 1000 && scene.score < 2000) {
+    if (scene.score > 1000 && scene.score < 2000 && level.textContent === 'Level 1') {
         level.textContent = 'Level 2';
+        levelNotification('Level 2', 1000);
         game.speed = 2.5;
         game.bugSpawnInterval = 800;
         game.bitcoinSpawnInterval = 2750;
 
         //level 3
-    } else if (scene.score > 2000 && scene.score < 2500) {
+    } else if (scene.score > 2000 && scene.score < 2500 && level.textContent === 'Level 2') {
         level.textContent = 'Level 3';
+        levelNotification('Level 3', 1000);
         game.speed = 3;
         game.bugSpawnInterval = 650;
         game.bitcoinSpawnInterval = 2500;
@@ -18,11 +26,12 @@ function proceedToNextLevel() {
         //miniboss
     } else if (scene.score > 2500 && scene.score < 3000 && !scene.isMiniBossFight &&
         !scene.defeatedMiniBoss && !miniBossController.loadingMiniBoss) {
-        startMiniBossFight();
+        isBoss = 'miniboss';
 
         //level 4
-    } else if (scene.score > 3000 && scene.score < 5000) {
+    } else if (scene.score > 3000 && scene.score < 5000 && level.textContent === 'Level 3') {
         level.textContent = 'Level 4';
+        levelNotification('Level 4', 1000);
         game.speed = 3.5;
         game.bugSpawnInterval = 500;
         game.bitcoinSpawnInterval = 2000;
@@ -34,14 +43,14 @@ function proceedToNextLevel() {
         level.style.color = '#880808';
         game.speed = 2;
         game.bugSpawnInterval = Infinity;
-        startBossFight();
+        isBoss = 'boss';
     }
+
+    return isBoss;
 }
 
 //mini boss fight start and end
 function startMiniBossFight() {
-    miniBossController.loadingMiniBoss = true;
-    addMiniBoss();
 
     //render miniboss health bar
     bossHealthBox.classList.remove('hide');
@@ -73,29 +82,9 @@ function endMiniBossFight() {
 
 //boss fight start and end
 function startBossFight() {
-    bossController.loadingBoss = true;
-    scene.metBoss = true;
-
-    //change music
-    pauseThemeMusic();
-    playBossMusic();
-
-    //change background
-    addBossBackgroundEffect();
-
-    removeAllElements();
-    setTimeout(addBoss, 3000);
 
     //show and remove get ready message
-    const getReady = document.createElement('div');
-    getReady.classList.add('get-ready');
-    getReady.textContent = 'Get Ready...';
-    gameArea.appendChild(getReady);
-
-    function removeGetReady() {
-        getReady.remove()
-    }
-    setTimeout(removeGetReady, 3000)
+    levelNotification('Get Ready...', 3000);
 
     //render boss health bar with delay
     bossHealthBox.classList.remove('hide');
@@ -121,8 +110,26 @@ function endBossFight() {
     scene.defeatedBoss = true;
     scene.score += game.bossKillBonus;
 
-    pauseBossMusic();
-
     bossHealthBox.classList.add('hide');
-    gameOverAction();
+}
+
+function levelNotification(level, timeout) {
+    const notification = document.createElement('div');
+    notification.classList.add('level-notification');
+    notification.textContent = level;
+    const gameArea = document.querySelector('.game-area');
+    gameArea.appendChild(notification);
+
+    function removeNotification() {
+        notification.remove()
+    }
+    setTimeout(removeNotification, timeout);
+}
+
+export {
+    proceedToNextLevel,
+    startMiniBossFight,
+    endMiniBossFight,
+    startBossFight,
+    endBossFight
 }

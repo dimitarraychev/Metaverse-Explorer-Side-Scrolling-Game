@@ -47,6 +47,12 @@ https://mixkit.co/
 https://www.craiyon.com/ _+ Some amazing Photoshop skills by me_
 
 ## Version History
+* 1.1.1
+    * Visuals improvements
+    * Minor gameplay fixes
+    * CSS stylings universalized
+    * A lot of code optimizations
+    * Audio files size reduced
 * 1.1.0
     * Added musix and SFX
     * Fixed issue with building slowing the game

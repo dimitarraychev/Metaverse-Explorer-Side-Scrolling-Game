@@ -1,3 +1,7 @@
+import { addEffect } from "../view/visualEffects.js";
+
+const gameArea = document.querySelector('.game-area');
+
 //add character
 function addCharacter() {
     const character = document.createElement('div');
@@ -108,7 +112,7 @@ function addBullet(player) {
     bullet.classList.add('bullet');
     bullet.y = player.y + player.height / 3 + 5;
     bullet.style.top = bullet.y + 'px';
-    bullet.x = player.x + player.width;
+    bullet.x = player.x + player.width - 30;
     bullet.style.left = bullet.x + 'px';
 
     gameArea.appendChild(bullet);
@@ -190,12 +194,12 @@ function addAndModifyMiniBossBullets(timestamp, miniBoss) {
     if (timestamp - miniBossController.miniBossLastBullet > miniBossController.miniBossBulletInterval + 5000 * Math.random()) {
         const miniBossBullet = document.createElement('div');
         miniBossBullet.classList.add('miniboss-bullet');
-        miniBossBullet.y = miniBoss.y + miniBoss.offsetHeight - 50;
+        miniBossBullet.y = miniBoss.y + miniBoss.offsetHeight - 40;
         miniBossBullet.style.top = miniBossBullet.y + 'px';
-        miniBossBullet.x = miniBoss.x - 40;
+        miniBossBullet.x = miniBoss.x - 20;
         miniBossBullet.style.left = miniBossBullet.x + 'px';
 
-        addMiniBossShootEffect();
+        addEffect(miniBoss, 'miniboss-shoot', 150);
         gameArea.appendChild(miniBossBullet);
         miniBossController.miniBossLastBullet = timestamp;
     }
@@ -274,12 +278,12 @@ function addAndModifyBossBullets(timestamp, boss) {
     if (timestamp - bossController.bossLastBullet > bossController.bossBulletInterval + 5000 * Math.random()) {
         const bossBullet = document.createElement('div');
         bossBullet.classList.add('boss-bullet');
-        bossBullet.y = boss.y + boss.offsetHeight - 100;
+        bossBullet.y = boss.y + boss.offsetHeight - 110;
         bossBullet.style.top = bossBullet.y + 'px';
-        bossBullet.x = boss.x - 100;
+        bossBullet.x = boss.x - 130;
         bossBullet.style.left = bossBullet.x + 'px';
 
-        addBossShootEffect();
+        addEffect(boss, 'boss-shoot', 150);
         gameArea.appendChild(bossBullet);
         bossController.bossLastBullet = timestamp;
     }
@@ -295,3 +299,21 @@ function addAndModifyBossBullets(timestamp, boss) {
         }
     });
 }
+
+export const elementController = {
+    addCharacter,
+    addLives,
+    addAndModifyBugs,
+    addAndModifyClouds,
+    addAndModifyBuildings,
+    addBullet,
+    modifyBulletsPositions,
+    addAndModifyBitcoins,
+    addMiniBoss,
+    modifyMiniBoss,
+    addAndModifyMiniBossBullets,
+    addBoss,
+    modifyBoss,
+    addAndModifyMeteorites,
+    addAndModifyBossBullets
+};

@@ -1,6 +1,6 @@
 body {
     font-family: 'Orbitron';
-    font-size: 32px;
+    font-size: 2rem;
     margin: 0;
 }
 
@@ -19,87 +19,91 @@ body {
 
 /* start menu */
 .game-start {
-    font-family: 'Orbitron';
-    font-size: 32px;
     position: absolute;
-    width: 30%;
-    top: 100px;
-    left: 35%;
     z-index: 2;
+    width: 30%;
+    top: 5rem;
+    left: 50%;
+    transform: translateX(-50%); /* This centers the element properly */
+    padding: 2rem;
+    border-radius: 2rem;
     background-color: #0D0208;
-    border-radius: 30px;
+    font-family: 'Orbitron';
+    font-size: 2rem;
     text-align: center;
     color: #00FF41;
-    padding: 30px;
 }
 
 .game-start:hover {
     cursor: pointer;
     background-color:  #003B00;
-    border: 2px solid  #008F11;
+    border: 0.1rem solid  #008F11;
+}
+
+.legend {
+    position: absolute;
+    z-index: 2;
+    width: 45%;
+    height: 28rem;
+    top: 13rem;
+    left: 50%;
+    transform: translateX(-50%); /* This centers the element properly */
+    padding: 1rem;
+    background-color: #0D0208;
+    border-radius: 2rem;
+    border: 0.1rem solid  #008F11;
+    text-align: center;
+    font-size: 1rem;
+    color: #00FF41;
 }
 
 .title-logo {
     position: absolute;
     z-index: 2;
+    width: 16rem;
+    height: 7rem;
+    top: 1rem;
+    left: 50%;
+    transform: translateX(-50%); /* This centers the element properly */
     background-image: url(../images/menu/title-logo.png);
-    width: 280px;
-    height: 120px;
-    top: 0px;
-    left: 31%;
-}
-
-.controls {
-    position: absolute;
-    z-index: 2;
-    left: 30%;
-    top: 220px;
-    margin: 15px;
-}
-
-.legend {
-    position: absolute;
-    width: 45%;
-    height: 400px;
-    top: 220px;
-    left: 25.5%;
-    z-index: 2;
-    background-color: #0D0208;
-    border-radius: 30px;
-    border: 2px solid  #008F11;
-    text-align: center;
-    font-size: 16px;
-    color: #00FF41;
-    padding: 30px;
 }
 
 .legend ul {
-    margin-top: 80px;
+    margin-top: 7rem;
     list-style-type: none;
 }
 
 .legend ul p {
     display: inline-block;
-    margin-right: 40px;
-}
-
-.legend h4 {
-    margin-top: 180px;
-    padding: 0;
-    text-align: center;
-    font-style: italic;
+    margin-right: 2rem;
 }
 
 .legend-bug {
-    width: 50px;
-    height: 50px;
     display: inline-block;
+    width: 3rem;
+    height: 3rem;
 }
 
 .legend-bitcoin {
-    width: 50px;
-    height: 30px;
     display: inline-block;
+    width: 3rem;
+    height: 1.8rem;
+}
+
+.controls {
+    position: absolute;
+    z-index: 2;
+    margin-top: 2rem;
+    top: 14rem;
+    left: 50%;
+    transform: translateX(-50%); /* This centers the element properly */
+}
+
+.legend h4 {
+    margin-top: 11.5rem;
+    padding: 0;
+    text-align: center;
+    font-style: italic;
 }
 
 .version {
@@ -111,20 +115,20 @@ body {
     padding: 0;
     color: #00FF41;
     text-align: center;
-    font-size: 16px;
+    font-size: 1rem;
 }
 
 .audiobutton {
     position: absolute;
-    background-image: url(../images/menu/audiobutton.png);
-    background-size: cover;
     z-index: 2;
     left: 95%;
     top: 2%;
-    width: 50px;
-    height: 50px;
+    width: 3rem;
+    height: 3rem;
     margin: 0;
     padding: 0;
+    background-image: url(../images/menu/audiobutton.png);
+    background-size: cover;
 }
 
 .audiobutton:hover {
@@ -141,21 +145,21 @@ body {
 
 /* user interface elements */
 .game-score {
+    height: 2rem;
     background-color: rgb(13,2,8);
     color: #00FF41;
     text-align: center;
-    height: 32px;
 }
 
 .pause-menu {
     position: absolute;
+    z-index: 2;
+    width: 2.5rem;
+    height: 3rem;
+    top: 1rem;
+    left: 1rem;
     background-image: url(../images/menu/pause-btn.png);
     background-size: cover;
-    z-index: 2;
-    width: 40px;
-    height: 50px;
-    top: 15px;
-    left: 15px;
 }
 
 .pause-menu:hover {
@@ -167,15 +171,14 @@ body {
 .lives-container {
     position: absolute;
     z-index: 2;
-    width: 15%;
+    width: 20%;
     height: 10%;
-    top: 0px;
+    top: 0;
     left: 10%;
 }
 
 .level {
     position: absolute;
-    color: #00FF41;
     z-index: 2;
     width: 10%;
     height: 10%;
@@ -184,88 +187,96 @@ body {
     padding: 0;
     left: 45%;
     text-align: center;
+    color: #00FF41;
 }
 
-.get-ready {
+.level-notification {
     position: absolute;
-    color: #00FF41;
     z-index: 2;
-    left: 35%;
+    opacity: 0.5;
+    left: 50%;
+    transform: translateX(-50%); /* This centers the element properly */
     top: 40%;
     text-align: center;
-    font-size: 72px;
+    color: #00FF41;
+    font-size: 5rem;
 }
 
 .continue-btn {
-    font-family: 'Orbitron';
-    font-size: 32px;
     position: absolute;
-    width: 30%;
-    top: 100px;
-    left: 35%;
     z-index: 2;
+    width: 30%;
+    top: 6rem;
+    left: 50%;
+    transform: translateX(-50%); /* This centers the element properly */
+    padding: 2rem;
+    border-radius: 2rem;
     background-color: #0D0208;
-    border-radius: 30px;
+    font-family: 'Orbitron';
+    font-size: 2rem;
     text-align: center;
     color: #00FF41;
-    padding: 30px;
 }
+
 
 .continue-btn:hover {
     cursor: pointer;
     background-color:  #003B00;
-    border: 2px solid  #008F11;
+    border: 0.1rem solid  #008F11;
 }
 
 
 /* game over menu */
 .endgame-stats {
     position: absolute;
-    width: 30%;
-    height: 300px;
-    top: 100px;
-    left: 33%;
     z-index: 2;
+    width: 30%;
+    height: 20rem;
+    top: 8rem;
+    left: 50%;
+    transform: translateX(-50%); /* This centers the element properly */
+    padding: 2rem;
     background-color: #0D0208;
-    border-radius: 30px;
-    border: 2px solid  #008F11;
-    font-size: 16px;
+    border-radius: 2rem;
+    border: 0.1rem solid  #008F11;
+    font-size: 1rem;
     color: #00FF41;
-    padding: 30px;
 }
 
 .end-message {
     text-align: center;
+    margin: 0 0 2rem 0;
 }
 
 .stats {
     text-align: center;
-    margin: 5px;
+    margin: 0.3rem;
 }
 
 .stats:last-of-type {
-    margin-top: 30px;
+    margin-top: 2.5rem;
 }
 
 .restart-game {
-    font-family: 'Orbitron';
-    font-size: 32px;
     position: absolute;
-    width: 30%;
-    top: 500px;
-    left: 35%;
     z-index: 2;
+    width: 30%;
+    top: 33rem;
+    left: 50%;
+    transform: translateX(-50%); /* This centers the element properly */
+    padding: 2rem;
     background-color: #0D0208;
-    border-radius: 30px;
+    border-radius: 2rem;
+    font-family: 'Orbitron';
+    font-size: 2rem;
     text-align: center;
     color: #00FF41;
-    padding: 30px;
 }
 
 .restart-game:hover {
     cursor: pointer;
     background-color:  #003B00;
-    border: 2px solid  #008F11;
+    border: 0.1rem solid  #008F11;
 }
 
 
@@ -273,11 +284,12 @@ body {
 .toggle {
     position: absolute;
     z-index: 2;
-    top: 20px;
-    left: 47%;
-    width: 100px;
-    height: 50px;
-    font-size: 16px;
+    top: 1rem;
+    left: 50%;
+    transform: translateX(-50%); /* This centers the element properly */
+    width: 6rem;
+    height: 3rem;
+    font-size: 1rem;
     color: #880808;
     text-align: center;
   }
@@ -287,24 +299,20 @@ body {
   }
   
   .toggle-label {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    height: 25px;
+    position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+    height: 1.5rem;
     background-color: #00FF41;
-    border-radius: 20px;
+    border-radius: 1.5rem;
     cursor: pointer;
     transition: background-color 0.4s;
   }
   
   .toggle-slider {
     position: absolute;
-    top: 2px;
-    left: 2px;
-    width: 20px;
-    height: 20px;
+    top: 0.15rem;
+    left: 0.15rem;
+    width: 1.2rem;
+    height: 1.2rem;
     background-color: #0D0208;
     border-radius: 50%;
     transition: transform 0.4s;
@@ -316,5 +324,5 @@ body {
   }
   
   .toggle-checkbox:checked + .toggle-label + .toggle-slider {
-    transform: translateX(75px); /* Move the slider to the right */
+    transform: translateX(4.5rem); /* Move the slider to the right */
   }

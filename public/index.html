@@ -34,7 +34,7 @@
                         <p>Software Bugs - exterminate them for 75 points!</p><img class="legend-bug" src="./images/bug/bug.png" alt="bug">
                     </li>
                     <li>
-                        <p>Bitcoins - collecting them rewards you 125 points!</p><img class="legend-bitcoin" src="./images/bitcoin.png" alt="bitcoin">
+                        <p>Bitcoins - collecting them rewards you 125 points!</p><img class="legend-bitcoin" src="./images/environment/bitcoin.png" alt="bitcoin">
                     </li>
                 </ul>
                 <div class="controls">
@@ -56,7 +56,7 @@
         <div class="game-area">
             <p class="level"></p>
             <div class="boss-health hide">
-                <p>Bug Prime</p>
+                <p>name</p>
                 <div class="boss-bar"></div>
             </div>
         </div>
@@ -81,22 +81,17 @@
     </div>
     
     <audio id="theme-music" src="audio/theme.mp3" loop></audio>
+    <audio id="boss-music" src="audio/boss.mp3" loop></audio>
     <audio id="shoot-sound" src="audio/shoot.mp3"></audio>
-    <audio id="hit-sound" src="audio/hit.wav"></audio>
+    <audio id="hit-sound" src="audio/hit.mp3"></audio>
     <audio id="enemy-hit-sound" src="audio/enemy-hit.mp3"></audio>
-    <audio id="collect-sound" src="audio/collect.wav"></audio>
-    <audio id="boss-music" src="audio/boss.mp3"></audio>
-    <audio id="gamewon-music" src="audio/game-won.wav"></audio>
-    <audio id="gameover-music" src="audio/game-over.wav"></audio>
+    <audio id="collect-sound" src="audio/collect.mp3"></audio>
+    <audio id="gamewon-music" src="audio/game-won.mp3"></audio>
+    <audio id="gameover-music" src="audio/game-over.mp3"></audio>
 
-    <script src="scripts/app.js"></script>
-    <script src="scripts/state.js"></script>
-    <script src="scripts/main.js"></script>
-    <script src="scripts/engine.js"></script>
-    <script src="scripts/levels.js"></script>
-    <script src="scripts/elements.js"></script>
-    <script src="scripts/effects.js"></script>
-    <script src="scripts/audio.js"></script>
+    <!-- <script src="scripts/app.js"></script> -->
+    <script src="scripts/model/initState.js"></script>
+    <script src="scripts/view/startView.js" type="module"></script>
 
 </body>
 </html>
