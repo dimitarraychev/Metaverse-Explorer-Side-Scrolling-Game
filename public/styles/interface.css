@@ -206,7 +206,7 @@ body {
     position: absolute;
     z-index: 2;
     width: 30%;
-    top: 6rem;
+    top: 5rem;
     left: 50%;
     transform: translateX(-50%); /* This centers the element properly */
     padding: 2rem;
