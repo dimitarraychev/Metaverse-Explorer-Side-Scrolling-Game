@@ -1,9 +1,8 @@
-import { playMusic, pauseMusic, playSoundEffect } from "../view/audioManager.js";
-import { addEffect, bossBackgroundEffect } from "../view/visualEffects.js";
+import { pauseMusic, playSoundEffect } from "../view/audioManager.js";
+import { addEffect } from "../view/visualEffects.js";
 import { gameOverAction } from "../view/endView.js";
 import { pauseMenu } from "../view/startView.js";
-import { removeAllElements } from "../general/utils.js";
-import { proceedToNextLevel, startBossFight, endBossFight, startMiniBossFight, endMiniBossFight } from "./levels.js";
+import { proceedToNextLevel, endBossFight, endMiniBossFight } from "./levels.js";
 import { collisionDetection } from "./collisionDetection.js";
 import { elementController } from "./elementController.js";
 import { events } from "./events.js";
@@ -81,26 +80,7 @@ function gameAction(timestamp) {
     gamePoints.textContent = Math.trunc(scene.score);
 
     //proceed to next levels
-    const isBoss = proceedToNextLevel();
-    if (isBoss === 'miniboss') {
-        miniBossController.loadingMiniBoss = true;
-        elementController.addMiniBoss();
-        startMiniBossFight();
-    } else if (isBoss === 'boss') {
-        bossController.loadingBoss = true;
-        scene.metBoss = true;
-    
-        //change music
-        pauseMusic('theme');
-        playMusic('boss');
-    
-        //change background
-        bossBackgroundEffect(true);
-    
-        removeAllElements();
-        setTimeout(elementController.addBoss, 3000);
-        startBossFight();
-    }
+    proceedToNextLevel();
 
     if (scene.isGameActive) window.requestAnimationFrame(gameAction);
 }

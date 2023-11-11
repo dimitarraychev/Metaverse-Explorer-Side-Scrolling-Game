@@ -1,11 +1,14 @@
+import { elementController } from "./elementController.js";
+import { playMusic, pauseMusic } from "../view/audioManager.js";
+import { bossBackgroundEffect } from "../view/visualEffects.js";
+import { removeAllElements } from "../general/utils.js";
+
 const bossHealthBox = document.querySelector('.boss-health');
 const bossHealthBar = document.querySelector('.boss-bar');
 const level = document.querySelector('.level');
 
 //next level requirements and changes
 function proceedToNextLevel() {
-    
-    let isBoss = false;
 
     //level 2
     if (scene.score > 1000 && scene.score < 2000 && level.textContent === 'Level 1') {
@@ -26,7 +29,8 @@ function proceedToNextLevel() {
         //miniboss
     } else if (scene.score > 2500 && scene.score < 3000 && !scene.isMiniBossFight &&
         !scene.defeatedMiniBoss && !miniBossController.loadingMiniBoss) {
-        isBoss = 'miniboss';
+        miniBossController.loadingMiniBoss = true;
+        startMiniBossFight();
 
         //level 4
     } else if (scene.score > 3000 && scene.score < 5000 && level.textContent === 'Level 3') {
@@ -39,18 +43,19 @@ function proceedToNextLevel() {
         //level Boss
     } else if (scene.score > 5000 && scene.defeatedMiniBoss && !scene.isBossFight &&
         !scene.defeatedBoss && !bossController.loadingBoss) {
+        bossController.loadingBoss = true;
         level.textContent = 'BOSS';
         level.style.color = '#880808';
         game.speed = 2;
         game.bugSpawnInterval = Infinity;
-        isBoss = 'boss';
+        startBossFight();
     }
-
-    return isBoss;
 }
 
 //mini boss fight start and end
 function startMiniBossFight() {
+
+    elementController.addMiniBoss();
 
     //render miniboss health bar
     bossHealthBox.classList.remove('hide');
@@ -82,6 +87,18 @@ function endMiniBossFight() {
 
 //boss fight start and end
 function startBossFight() {
+    
+    scene.metBoss = true;
+
+    //change music
+    pauseMusic('theme');
+    playMusic('boss');
+
+    //change background
+    bossBackgroundEffect(true);
+
+    removeAllElements();
+    setTimeout(elementController.addBoss, 3000);
 
     //show and remove get ready message
     levelNotification('Get Ready...', 3000);
