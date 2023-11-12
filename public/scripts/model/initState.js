@@ -24,7 +24,7 @@ const game = {
     bossHitBonus: 100,
     miniBossHitBonus: 50,
     bossKillBonus: 2000,
-    miniBossKillBonus: 1000,
+    miniBossKillBonus: 500,
     lostLifeInterval: 1000,
     isAudioEnabled: true
 };
