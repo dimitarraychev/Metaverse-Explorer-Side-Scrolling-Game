@@ -47,6 +47,8 @@ https://mixkit.co/
 https://www.craiyon.com/ _+ Some amazing Photoshop skills by me_
 
 ## Version History
+* 1.1.3
+    * A lot of visual fixes and improvements
 * 1.1.2
     * Preloading images
     * Minor gameplay fixes

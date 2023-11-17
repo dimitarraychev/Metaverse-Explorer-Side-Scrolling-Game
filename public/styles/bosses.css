@@ -49,21 +49,42 @@
 }
 
 .boss-health {
+    position: absolute;
     z-index: 2;
-    width: 75%;
+    width: 65%;
     height: 12%;
-    top: 80%;
+    top: 85%;
     left: 50%;
     transform: translateX(-50%); /* This centers the element properly */
-    position: absolute;
     color: white;
     text-align: center;
 }
 
+.boss-bar {
+    padding: 0.2rem;
+    padding-top: 0.6rem;
+    background-color: rgb(13,2,8);
+    box-shadow: 0.05rem 0.05rem 0.3rem #880808, -0.05rem -0.05rem 0.3rem #880808;
+    border: 0.1rem solid  #008F11;
+    border-bottom: 0;
+    border-left: 0;
+    border-radius: 0.5rem;
+}
+
 .boss-health p {
-    margin: 0;
-    padding: 0;
+    position: absolute;
+    bottom: 3.4rem;
+    padding-bottom: 0.5rem;
     font-size: 2rem;
+    width: 30%;
+    left: 50%;
+    transform: translateX(-50%); /* This centers the element properly */
+    background-color: rgb(13,2,8);
+    box-shadow: 0.05rem 0.05rem 0.3rem #880808, -0.05rem -0.05rem 0.3rem #880808;
+    border: 0.1rem solid  #008F11;
+    border-bottom: 0;
+    border-left: 0;
+    border-radius: 0.5rem;
 }
 
 .boss-hp {

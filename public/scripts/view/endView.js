@@ -1,6 +1,7 @@
 import { resetState } from "../model/resetState.js";
 import { removeAllElements, convertMillisecsToMins } from "../general/utils.js";
 import { onGameStart } from "./startView.js";
+import { attachParalax, removeParalax } from "./parallax.js";
 
 const gameOver = document.querySelector('.game-over');
 const endMessage = document.querySelector('.end-message');
@@ -24,15 +25,20 @@ const toggleHard = document.querySelector('.toggle');
 
 //end game
 function gameOverAction() {
+    const livesContainer = document.querySelector('.lives-container');
+
     //standart case
     gameScore.classList.add('hide');
     pauseBtn.classList.add('hide');
     level.textContent = '';
     level.classList.add('hide');
+    livesContainer.classList.add('hide');
 
     gameOver.classList.remove('hide');
     endMessage.textContent = 'Game Over!';
     endMessage.style.color = 'red';
+
+    attachParalax('.endgame-stats');
 
     //abillity to remove hard mode if it is on
     if (hardModeSwitch.checked) {
@@ -113,6 +119,8 @@ function gameOverAction() {
 
 //restart game
 function restartGame() {
+
+    removeParalax();
     
     //remove elements
     const character = document.querySelector('.character');

@@ -3,6 +3,7 @@ import { playMusic, pauseMusic } from "../view/audioManager.js";
 import { elementController } from "../controller/elementController.js";
 import { gameAction } from "../controller/engine.js";
 import { bossBackgroundEffect } from "../view/visualEffects.js";
+import { attachParalax, removeParalax } from "./parallax.js";
 
 const gameStartBtn = document.querySelector('.game-start');
 const startMenu = document.querySelector('.start-menu');
@@ -19,6 +20,8 @@ audioBtn.addEventListener('click', audioControl);
 document.addEventListener('keydown', onKeyDown);
 document.addEventListener('keyup', onKeyUp);
 
+attachParalax('.legend');
+
 //initialize state objects
 function initialStart(event) {
     resetState();
@@ -28,6 +31,8 @@ function initialStart(event) {
 // game start function
 function onGameStart(event) {
     const gameScore = document.querySelector('.score');
+
+    removeParalax();
 
     //play theme music
     playMusic('theme');
@@ -85,11 +90,16 @@ function audioControl() {
 
 //pause menu
 function pauseMenu() {
+    const livesContainer = document.querySelector('.lives-container');
 
     //add menu
     scene.isGameActive = false;
     startMenu.classList.remove('hide');
     pauseBtn.classList.add('hide');
+    level.classList.add('hide');
+    livesContainer.classList.add('hide');
+
+    attachParalax('.legend');
 
     //pause audio
     if (!scene.isBossFight) {
@@ -112,6 +122,10 @@ function pauseMenu() {
         scene.isGameActive = true;
         startMenu.classList.add('hide');
         pauseBtn.classList.remove('hide');
+        level.classList.remove('hide');
+        livesContainer.classList.remove('hide');
+
+        removeParalax();
 
         //resume audio
         if (!scene.isBossFight) {

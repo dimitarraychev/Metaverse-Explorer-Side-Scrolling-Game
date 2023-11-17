@@ -6,6 +6,7 @@ import { removeAllElements } from "../general/utils.js";
 const bossHealthBox = document.querySelector('.boss-health');
 const bossHealthBar = document.querySelector('.boss-bar');
 const level = document.querySelector('.level');
+const bossNameRef = document.querySelector('.boss-health p');
 
 //next level requirements and changes
 function proceedToNextLevel() {
@@ -61,6 +62,8 @@ function startMiniBossFight() {
     bossHealthBox.classList.remove('hide');
     const bossName = bossHealthBox.querySelector('p');
     bossName.textContent = 'Bug Monarch';
+    bossHealthBox.style.width = '20%';
+    bossNameRef.style.width = '85%';
 
     for (let index = 0; index < miniBossController.health / 5; index++) {
         let miniBossHealth = document.createElement('div');
@@ -89,6 +92,9 @@ function endMiniBossFight() {
 function startBossFight() {
     
     scene.metBoss = true;
+
+    bossHealthBox.style.width = '68%';
+    bossNameRef.style.width = '30%';
 
     //change music
     pauseMusic('theme');

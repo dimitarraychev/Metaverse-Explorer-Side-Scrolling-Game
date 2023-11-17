@@ -27,6 +27,7 @@ body {
     transform: translateX(-50%); /* This centers the element properly */
     padding: 2rem;
     border-radius: 2rem;
+    box-shadow: 0.05rem 0.05rem 0.2rem rgba(9,9,121,1), -0.05rem -0.05rem 0.2rem rgba(9,9,121,1);
     background-color: #0D0208;
     font-family: 'Orbitron';
     font-size: 2rem;
@@ -147,17 +148,37 @@ body {
 .game-score {
     height: 2rem;
     background-color: rgb(13,2,8);
-    color: #00FF41;
     text-align: center;
+}
+
+.score {
+    border: 0.1rem solid  #008F11;
+    position: absolute;
+    z-index: 2;
+    width: 17%;
+    height: 6%;
+    top: 0;
+    margin: 0;
+    padding: 0;
+    left: 50%;
+    transform: translateX(-50%); /* This centers the element properly */
+    text-align: center;
+    box-shadow: 0.05rem 0.05rem 0.3rem rgba(9,9,121,1), -0.05rem -0.05rem 0.3rem rgba(9,9,121,1);
+    color: #00FF41;
+    border: 0.1rem solid  #008F11;
+    border-top: 0;
+    border-left: 0;
+    /* border-bottom: 0; */
+    border-radius: 0 0 0.5rem 0.5rem;
 }
 
 .pause-menu {
     position: absolute;
     z-index: 2;
-    width: 2.5rem;
-    height: 3rem;
-    top: 1rem;
-    left: 1rem;
+    width: 3rem;
+    height: 3.5rem;
+    top: 1.5rem;
+    left: 1.5rem;
     background-image: url(../images/menu/pause-btn.png);
     background-size: cover;
 }
@@ -171,23 +192,39 @@ body {
 .lives-container {
     position: absolute;
     z-index: 2;
-    width: 20%;
-    height: 10%;
+    width: 16%;
+    height: 7%;
+    padding: 0.5rem;
+    padding-top: 0.4rem;
     top: 0;
     left: 10%;
+    background-color: rgb(13,2,8);
+    box-shadow: 0.05rem 0.05rem 0.3rem rgba(9,9,121,1), -0.05rem -0.05rem 0.3rem rgba(9,9,121,1);
+    border: 0.1rem solid  #008F11;
+    border-top: 0;
+    border-right: 0;
+    border-radius: 1rem;
 }
 
 .level {
     position: absolute;
     z-index: 2;
-    width: 10%;
-    height: 10%;
-    top: 0;
+    width: 12%;
+    height: 6%;
+    top: 0.4rem;
     margin: 0;
+    margin-top: 0.5rem;
     padding: 0;
-    left: 45%;
+    left: 50%;
+    transform: translateX(-50%); /* This centers the element properly */
     text-align: center;
+    background-color: rgb(13,2,8);
+    box-shadow: 0.05rem 0.05rem 0.3rem rgba(9,9,121,1), -0.05rem -0.05rem 0.3rem rgba(9,9,121,1);
     color: #00FF41;
+    border: 0.1rem solid  #008F11;
+    border-top: 0;
+    border-left: 0;
+    border-radius: 0 0 0.5rem 0.5rem;
 }
 
 .level-notification {
@@ -210,6 +247,7 @@ body {
     left: 50%;
     transform: translateX(-50%); /* This centers the element properly */
     padding: 2rem;
+    box-shadow: 0.05rem 0.05rem 0.2rem rgba(9,9,121,1), -0.05rem -0.05rem 0.2rem rgba(9,9,121,1);
     border-radius: 2rem;
     background-color: #0D0208;
     font-family: 'Orbitron';
@@ -231,8 +269,8 @@ body {
     position: absolute;
     z-index: 2;
     width: 30%;
-    height: 20rem;
-    top: 8rem;
+    height: 22rem;
+    top: 5rem;
     left: 50%;
     transform: translateX(-50%); /* This centers the element properly */
     padding: 2rem;
@@ -245,7 +283,7 @@ body {
 
 .end-message {
     text-align: center;
-    margin: 0 0 2rem 0;
+    margin: 0 0 3rem 0;
 }
 
 .stats {
@@ -254,7 +292,7 @@ body {
 }
 
 .stats:last-of-type {
-    margin-top: 2.5rem;
+    margin-top: 3rem;
 }
 
 .restart-game {
@@ -265,6 +303,7 @@ body {
     left: 50%;
     transform: translateX(-50%); /* This centers the element properly */
     padding: 2rem;
+    box-shadow: 0.05rem 0.05rem 0.2rem rgba(9,9,121,1), -0.05rem -0.05rem 0.2rem rgba(9,9,121,1);
     background-color: #0D0208;
     border-radius: 2rem;
     font-family: 'Orbitron';
@@ -320,6 +359,7 @@ body {
   
   .toggle-checkbox:checked + .toggle-label {
     background-color: #880808; /* Toggle on color */
+    box-shadow: 0.1rem 0.1rem 0.4rem #880808, -0.1rem -0.1rem 0.4rem #880808;
     color: #00FF41;
   }
   
