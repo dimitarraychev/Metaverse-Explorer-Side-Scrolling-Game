@@ -4,6 +4,7 @@ import { elementController } from "../controller/elementController.js";
 import { gameAction } from "../controller/engine.js";
 import { bossBackgroundEffect } from "../view/visualEffects.js";
 import { attachParalax, removeParalax } from "./parallax.js";
+import { preloadImages } from "../general/imgPreload.js";
 
 const gameStartBtn = document.querySelector('.game-start');
 const startMenu = document.querySelector('.start-menu');
@@ -21,6 +22,7 @@ document.addEventListener('keydown', onKeyDown);
 document.addEventListener('keyup', onKeyUp);
 
 attachParalax('.legend');
+preloadImages();
 
 //initialize state objects
 function initialStart(event) {

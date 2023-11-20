@@ -67,6 +67,11 @@ body {
     left: 50%;
     transform: translateX(-50%); /* This centers the element properly */
     background-image: url(../images/menu/title-logo.png);
+    transition: transform 0.3s ease-in-out;
+}
+
+.title-logo:hover {
+    transform: translateX(-125px) scale(1.5);
 }
 
 .legend ul {
@@ -283,7 +288,8 @@ body {
 
 .end-message {
     text-align: center;
-    margin: 0 0 3rem 0;
+    margin: 0 0 1rem 0;
+    font-size: 1.5rem;
 }
 
 .stats {
