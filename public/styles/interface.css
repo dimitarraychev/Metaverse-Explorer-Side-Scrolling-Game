@@ -88,12 +88,22 @@ body {
     display: inline-block;
     width: 3rem;
     height: 3rem;
+    transition: transform 0.3s ease-in-out;
+}
+
+.legend-bug:hover {
+    transform: rotate(360deg) scale(2);
 }
 
 .legend-bitcoin {
     display: inline-block;
-    width: 3rem;
-    height: 1.8rem;
+    width: 3.2rem;
+    height: 2rem;
+    transition: transform 0.3s ease-in-out;
+}
+
+.legend-bitcoin:hover {
+    transform: rotate(360deg) scale(2);
 }
 
 .controls {
