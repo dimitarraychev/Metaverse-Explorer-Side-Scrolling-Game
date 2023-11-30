@@ -134,6 +134,23 @@ body {
     font-size: 1rem;
 }
 
+.pause-menu {
+    position: absolute;
+    z-index: 2;
+    width: 3rem;
+    height: 3.5rem;
+    top: 1.5rem;
+    left: 1.5rem;
+    background-image: url(../images/menu/pause-btn.png);
+    background-size: cover;
+}
+
+.pause-menu:hover {
+    cursor: pointer;
+    background-image: url(../images/menu/pause-btn-hover.png);
+    background-size: cover;
+}
+
 .audiobutton {
     position: absolute;
     z-index: 2;
@@ -158,50 +175,37 @@ body {
     background-size: cover;
 }
 
-
-/* user interface elements */
-.game-score {
-    height: 2rem;
-    background-color: rgb(13,2,8);
+.user-interface {
+    position: absolute;
+    z-index: 2;
+    width: 22%;
+    height: 6%;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
     text-align: center;
+    color: #00FF41;
 }
 
 .score {
     border: 0.1rem solid  #008F11;
-    position: absolute;
-    z-index: 2;
-    width: 17%;
-    height: 6%;
-    top: 0;
-    margin: 0;
-    padding: 0;
-    left: 50%;
-    transform: translateX(-50%); /* This centers the element properly */
-    text-align: center;
+    border-top: 0;
+    border-left: 0;
+    border-radius: 0 0 0.5rem 0.5rem;
     box-shadow: 0.05rem 0.05rem 0.3rem rgba(9,9,121,1), -0.05rem -0.05rem 0.3rem rgba(9,9,121,1);
-    color: #00FF41;
+}
+
+.level {
+    position: absolute;
+    width: 60%;
+    left: 50%;
+    transform: translateX(-50%);
     border: 0.1rem solid  #008F11;
     border-top: 0;
     border-left: 0;
-    /* border-bottom: 0; */
     border-radius: 0 0 0.5rem 0.5rem;
-}
-
-.pause-menu {
-    position: absolute;
-    z-index: 2;
-    width: 3rem;
-    height: 3.5rem;
-    top: 1.5rem;
-    left: 1.5rem;
-    background-image: url(../images/menu/pause-btn.png);
-    background-size: cover;
-}
-
-.pause-menu:hover {
-    cursor: pointer;
-    background-image: url(../images/menu/pause-btn-hover.png);
-    background-size: cover;
+    box-shadow: 0.05rem 0.05rem 0.3rem rgba(9,9,121,1), -0.05rem -0.05rem 0.3rem rgba(9,9,121,1);
+    margin: 0;
 }
 
 .lives-container {
@@ -211,7 +215,7 @@ body {
     height: 7%;
     padding: 0.5rem;
     padding-top: 0.4rem;
-    top: 0;
+    top: 2rem;
     left: 10%;
     background-color: rgb(13,2,8);
     box-shadow: 0.05rem 0.05rem 0.3rem rgba(9,9,121,1), -0.05rem -0.05rem 0.3rem rgba(9,9,121,1);
@@ -219,27 +223,6 @@ body {
     border-top: 0;
     border-right: 0;
     border-radius: 1rem;
-}
-
-.level {
-    position: absolute;
-    z-index: 2;
-    width: 12%;
-    height: 6%;
-    top: 0.4rem;
-    margin: 0;
-    margin-top: 0.5rem;
-    padding: 0;
-    left: 50%;
-    transform: translateX(-50%); /* This centers the element properly */
-    text-align: center;
-    background-color: rgb(13,2,8);
-    box-shadow: 0.05rem 0.05rem 0.3rem rgba(9,9,121,1), -0.05rem -0.05rem 0.3rem rgba(9,9,121,1);
-    color: #00FF41;
-    border: 0.1rem solid  #008F11;
-    border-top: 0;
-    border-left: 0;
-    border-radius: 0 0 0.5rem 0.5rem;
 }
 
 .level-notification {

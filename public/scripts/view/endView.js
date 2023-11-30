@@ -17,7 +17,7 @@ const scoreStats = document.querySelector('.score-stats');
 const highScoreStats = document.querySelector('.highscore-stats');
 const bossHealthBox = document.querySelector('.boss-health');
 const restartGameBtn = document.querySelector('.restart-game');
-const gameScore = document.querySelector('.score');
+const userInterface = document.querySelector('.user-interface');
 const pauseBtn = document.querySelector('.pause-menu');
 const level = document.querySelector('.level');
 const hardModeSwitch = document.getElementById('switch');
@@ -28,10 +28,9 @@ function gameOverAction() {
     const livesContainer = document.querySelector('.lives-container');
 
     //standart case
-    gameScore.classList.add('hide');
+    userInterface.classList.add('hide');
     pauseBtn.classList.add('hide');
     level.textContent = '';
-    level.classList.add('hide');
     livesContainer.classList.add('hide');
 
     gameOver.classList.remove('hide');

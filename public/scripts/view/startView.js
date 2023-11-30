@@ -32,7 +32,7 @@ function initialStart(event) {
 
 // game start function
 function onGameStart(event) {
-    const gameScore = document.querySelector('.score');
+    const userInterface = document.querySelector('.user-interface');
 
     removeParalax();
 
@@ -46,11 +46,10 @@ function onGameStart(event) {
 
     startMenu.classList.add('hide');
     pauseBtn.classList.remove('hide');
-    gameScore.classList.remove('hide');
+    userInterface.classList.remove('hide');
     toggleHard.classList.add('hide');
     level.textContent = 'Level 1';
     level.style.color = '#00FF41';
-    level.classList.remove('hide');
 
     elementController.addCharacter();
     elementController.addLives();

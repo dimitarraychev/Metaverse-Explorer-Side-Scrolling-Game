@@ -106,7 +106,9 @@ function applyGravity(character) {
 //register user input
 function registerUserInput(timestamp, character, isInAir) {
 
-    if (keys.ArrowUp && player.y > 0 || keys.KeyW && player.y > 0) {
+    const topPadding = 20;
+
+    if (keys.ArrowUp && player.y > topPadding || keys.KeyW && player.y > topPadding) {
         player.y -= game.speed * game.movingMultiplier;
         addEffect(character, 'character-flying', 100);
 

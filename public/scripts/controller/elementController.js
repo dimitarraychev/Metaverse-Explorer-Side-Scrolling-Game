@@ -140,6 +140,8 @@ function addAndModifyBitcoins(timestamp) {
         bitcoin.style.left = bitcoin.x + 'px';
         bitcoin.style.top = (gameArea.offsetHeight - 100) * Math.random() + 'px';
 
+        if (bitcoin.style.top.replace('px', '') < 50) bitcoin.style.top = '50px';
+
         gameArea.appendChild(bitcoin);
         scene.lastBitcoinSpawn = timestamp;
     }
@@ -178,7 +180,7 @@ function modifyMiniBoss() {
         miniBoss.y -= game.speed;
         miniBoss.style.top = miniBoss.y + 'px';
 
-        if (miniBoss.y < 0) miniBossController.goingUp = false;
+        if (miniBoss.y < 20) miniBossController.goingUp = false;
     }
 
     if (!miniBossController.goingUp) {
@@ -237,7 +239,7 @@ function modifyBoss() {
         boss.y -= game.speed;
         boss.style.top = boss.y + 'px';
 
-        if (boss.y < 0) bossController.goingUp = false;
+        if (boss.y < 20) bossController.goingUp = false;
     }
 
     if (!bossController.goingUp) {
