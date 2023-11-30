@@ -88,7 +88,7 @@ function gameAction(timestamp) {
 //apply gravitation
 function applyGravity(character) {
 
-    const isInAir = (player.y + player.height) <= gameArea.offsetHeight - 30;
+    const isInAir = (player.y + player.height) <= gameArea.offsetHeight;
 
     if (isInAir) {
         player.y += game.speed;

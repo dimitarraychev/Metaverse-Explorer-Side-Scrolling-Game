@@ -87,7 +87,7 @@ function addAndModifyBuildings(timestamp) {
         building.classList.add('building');
         building.x = gameArea.offsetWidth;
         building.style.left = building.x + 'px';
-        building.style.top = (gameArea.offsetHeight - 340) + 'px';
+        building.style.top = (gameArea.offsetHeight - 310) + 'px';
 
         gameArea.appendChild(building);
         scene.lastBuildingSpawn = timestamp;

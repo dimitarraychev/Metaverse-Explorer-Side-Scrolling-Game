@@ -61,7 +61,7 @@ function startMiniBossFight() {
     //render miniboss health bar
     bossHealthBox.classList.remove('hide');
     const bossName = bossHealthBox.querySelector('p');
-    bossName.textContent = 'Bug Monarch';
+    bossName.textContent = 'Minor Bug';
     bossHealthBox.style.width = '20%';
     bossNameRef.style.width = '85%';
 
