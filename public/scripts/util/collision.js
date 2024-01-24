@@ -1,24 +1,4 @@
-function isCollision(firstElement, secondElement) {
-    const firstRect = firstElement.getBoundingClientRect();
-    const secondRect = secondElement.getBoundingClientRect();
-
-    //moving the collisions further inside for the character and boss
-    const character = document.querySelector('.character');
-    const boss = document.querySelector('.boss');
-    const miniBoss = document.querySelector('.miniboss');
-    const charException = firstElement === character ? 30 : 0;
-    let bossException = 10;
-    if (secondElement === boss) bossException = 50;
-    if (secondElement === miniBoss) bossException = 20;
-
-    return !(firstRect.top + charException > secondRect.bottom - bossException ||
-        firstRect.bottom - charException < secondRect.top + bossException ||
-        firstRect.right - charException < secondRect.left + bossException ||
-        firstRect.left + charException > secondRect.right - bossException);
-}
-
-//detect collisions
-function collisionDetection(character, miniBoss, boss) {
+export function collisionDetection(character, miniBoss, boss) {
     const bugs = document.querySelectorAll('.bug');
     const bullets = document.querySelectorAll('.bullet');
     const bitcoins = document.querySelectorAll('.bitcoin');
@@ -52,7 +32,6 @@ function collisionDetection(character, miniBoss, boss) {
         }
     });
 
-    //detect collisions in minibossfight
     if (scene.isMiniBossFight) {
         bullets.forEach(bullet => {
             if (isCollision(bullet, miniBoss)) {
@@ -69,7 +48,6 @@ function collisionDetection(character, miniBoss, boss) {
         });
     }
 
-    //detect collisions in boss fight
     if (scene.isBossFight) {
 
         if (isCollision(character, boss)) collision.element = character;
@@ -96,4 +74,20 @@ function collisionDetection(character, miniBoss, boss) {
     return collision;
 }
 
-export { collisionDetection };
+function isCollision(firstElement, secondElement) {
+    const firstRect = firstElement.getBoundingClientRect();
+    const secondRect = secondElement.getBoundingClientRect();
+
+    const character = document.querySelector('.character');
+    const boss = document.querySelector('.boss');
+    const miniBoss = document.querySelector('.miniboss');
+    const charException = firstElement === character ? 30 : 0;
+    let bossException = 10;
+    if (secondElement === boss) bossException = 50;
+    if (secondElement === miniBoss) bossException = 20;
+
+    return !(firstRect.top + charException > secondRect.bottom - bossException ||
+        firstRect.bottom - charException < secondRect.top + bossException ||
+        firstRect.right - charException < secondRect.left + bossException ||
+        firstRect.left + charException > secondRect.right - bossException);
+}

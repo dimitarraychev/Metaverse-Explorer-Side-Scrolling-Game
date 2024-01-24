@@ -1,8 +1,7 @@
-import { playSoundEffect, pauseMusic } from "../view/audioManager.js";
-import { addEffect } from "../view/visualEffects.js";
-import { gameOverAction } from "../view/endView.js";
+import { playSoundEffect, pauseMusic } from "../fx/audio.js";
+import { addEffect } from "../fx/visual.js";
+import { gameOverAction } from "../menu/endMenu.js";
 
-//character events
 function collectBitcoin(character) {
     playSoundEffect('collect');
     addEffect(character, 'character-collect', 150);
@@ -28,7 +27,6 @@ function loseLife(timestamp, character) {
         player.lives--;
         player.lastLostLife = timestamp;
 
-        //get killed
         if (player.lives <= 0) {
             if (scene.isBossFight) player.killedByBoss = true;
             scene.runEndTime = timestamp;
@@ -41,7 +39,6 @@ function loseLife(timestamp, character) {
     }
 }
 
-//enemy events
 function hitBug(bug) {
     playSoundEffect('enemyhit');
     addEffect(bug, 'bug-hit', 50);
@@ -87,6 +84,9 @@ function hitMiniBoss(miniBoss) {
 }
 
 export const events = {
-    hitBug, collectBitcoin,
-    loseLife, hitBoss, hitMiniBoss
-};
+    collectBitcoin,
+    loseLife,
+    hitBug,
+    hitBoss,
+    hitMiniBoss
+}

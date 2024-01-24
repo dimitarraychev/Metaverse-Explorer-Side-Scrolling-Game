@@ -1,56 +1,47 @@
-import { pauseMusic, playSoundEffect } from "../view/audioManager.js";
-import { addEffect } from "../view/visualEffects.js";
-import { gameOverAction } from "../view/endView.js";
-import { pauseMenu } from "../view/startView.js";
-import { proceedToNextLevel, endBossFight, endMiniBossFight } from "./levels.js";
-import { collisionDetection } from "./collisionDetection.js";
-import { elementController } from "./elementController.js";
-import { events } from "./events.js";
+import { pauseMusic, playSoundEffect } from "./fx/audio.js";
+import { addEffect } from "./fx/visual.js";
+import { gameOverAction } from "./menu/endMenu.js";
+import { pauseMenu } from "./menu/pauseMenu.js";
+import { proceedToNextLevel, endBossFight, endMiniBossFight } from "./game/levels.js";
+import { collisionDetection } from "./util/collision.js";
+import { elements } from "./game/elements.js";
+import { events } from "./game/events.js";
 
 const gameArea = document.querySelector('.game-area');
 
-//game loop function
-function gameAction(timestamp) {
+export function gameLoop(timestamp) {
     const character = document.querySelector('.character');
     const boss = document.querySelector('.boss');
     const miniBoss = document.querySelector('.miniboss');
     const gamePoints = document.querySelector('.points');
 
-    //start time snapshot
     if (!scene.takenSnapshot) {
         scene.runStartTime = timestamp;
         scene.takenSnapshot = true;
     }
 
-    //increment score count
     scene.score += 0.1;
 
-    //handles gravitation
     const isInAir = applyGravity(character);
 
-    //add and modify elements
-    elementController.addAndModifyBugs(timestamp);
-    elementController.addAndModifyClouds(timestamp);
-    elementController.addAndModifyBuildings(timestamp);
-    elementController.addAndModifyBitcoins(timestamp);
-    elementController.modifyBulletsPositions();
+    elements.addAndModifyBugs(timestamp);
+    elements.addAndModifyClouds(timestamp);
+    elements.addAndModifyBuildings(timestamp);
+    elements.addAndModifyBitcoins(timestamp);
+    elements.modifyBulletsPositions();
 
-    //add and modify elements in miniboss fight
     if (scene.isMiniBossFight) {
-        elementController.modifyMiniBoss();
-        elementController.addAndModifyMiniBossBullets(timestamp, miniBoss);
+        elements.modifyMiniBoss();
+        elements.addAndModifyMiniBossBullets(timestamp, miniBoss);
 
-        //check if miniboss is killed
         if (miniBossController.health <= 0) endMiniBossFight();
     }
 
-    //add and modify elements in boss fight
     if (scene.isBossFight) {
-        elementController.modifyBoss();
-        elementController.addAndModifyMeteorites(timestamp);
-        elementController.addAndModifyBossBullets(timestamp, boss);
+        elements.modifyBoss();
+        elements.addAndModifyMeteorites(timestamp);
+        elements.addAndModifyBossBullets(timestamp, boss);
 
-        //check if boss is killed
         if (bossController.health <= 0) {
             scene.runEndTime = timestamp;
             scene.isGameActive = false;
@@ -61,10 +52,8 @@ function gameAction(timestamp) {
         }
     }
 
-    //handles user input
     registerUserInput(timestamp, character, isInAir);
 
-    //handles collisions
     const collision = collisionDetection(character, miniBoss, boss);
     if (collision.element === character) events.loseLife(timestamp, character);
     if (collision.isBug === true) events.hitBug(collision.element);
@@ -72,20 +61,16 @@ function gameAction(timestamp) {
     if (collision.element === miniBoss) events.hitMiniBoss(miniBoss);
     if (collision.element === boss) events.hitBoss(boss);
 
-    //apply movement
     character.style.top = player.y + 'px';
     character.style.left = player.x + 'px';
 
-    //apply score
     gamePoints.textContent = Math.trunc(scene.score);
 
-    //proceed to next levels
     proceedToNextLevel();
 
-    if (scene.isGameActive) window.requestAnimationFrame(gameAction);
+    if (scene.isGameActive) window.requestAnimationFrame(gameLoop);
 }
 
-//apply gravitation
 function applyGravity(character) {
 
     const isInAir = (player.y + player.height) <= gameArea.offsetHeight;
@@ -93,8 +78,6 @@ function applyGravity(character) {
     if (isInAir) {
         player.y += game.speed;
         player.isAtBottom = false;
-    
-        //penalty for staying at the bottom
     } else {
         addEffect(character, 'character-hit', 150);
         player.isAtBottom = true;
@@ -103,7 +86,6 @@ function applyGravity(character) {
     return isInAir;
 }
 
-//register user input
 function registerUserInput(timestamp, character, isInAir) {
 
     const topPadding = 20;
@@ -115,7 +97,7 @@ function registerUserInput(timestamp, character, isInAir) {
         if (keys.Space && timestamp - player.lastBullet > game.bulletInterval) {
             playSoundEffect('shoot');
             addEffect(character, 'character-flyingshoot', 100);
-            elementController.addBullet(player);
+            elements.addBullet(player);
             player.lastBullet = timestamp;
         }
     }
@@ -136,7 +118,7 @@ function registerUserInput(timestamp, character, isInAir) {
     if (keys.Space && timestamp - player.lastBullet > game.bulletInterval) {
         playSoundEffect('shoot');
         addEffect(character, 'character-shoot', 100);
-        elementController.addBullet(player);
+        elements.addBullet(player);
         player.lastBullet = timestamp;
     }
 
@@ -144,6 +126,3 @@ function registerUserInput(timestamp, character, isInAir) {
         pauseMenu();
     }
 }
-
-//used to start the game at startView
-export { gameAction };

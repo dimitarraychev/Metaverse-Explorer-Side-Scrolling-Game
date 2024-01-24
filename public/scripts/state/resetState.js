@@ -1,10 +1,9 @@
-function resetState() {
+export function resetState() {
     player.x = 150;
     player.y = 300;
     player.lastBullet = 0;
     player.killedByBoss = false;
 
-    //retain hard mode choice if defeated boss
     const hardModeSwitch = document.getElementById('switch');
     if (scene.defeatedBoss === true && hardModeSwitch.checked === true) {
         game.isHardMode = true;
@@ -41,5 +40,3 @@ function resetState() {
     miniBossController.goingUp = true;
     miniBossController.miniBossLastBullet = 0;
 }
-
-export { resetState };

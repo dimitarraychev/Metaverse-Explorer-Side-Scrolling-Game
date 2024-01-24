@@ -1,5 +1,4 @@
-//element visual effects
-function addEffect(element, effect, timeout) {
+export function addEffect(element, effect, timeout) {
     element.classList.add(effect);
 
     function removeEffect() {
@@ -9,8 +8,7 @@ function addEffect(element, effect, timeout) {
     setTimeout(removeEffect, timeout);
 }
 
-//background visual effects
-function bossBackgroundEffect(bool) {
+export function bossBackgroundEffect(bool) {
     const background = document.querySelector('.game-area');
 
     if (bool) {
@@ -19,5 +17,3 @@ function bossBackgroundEffect(bool) {
         background.style.background = 'linear-gradient(0deg, rgba(13,2,8,1) 0%, rgba(9,9,121,1) 33%, rgba(13,2,8,1) 100%)';
     }
 }
-
-export { addEffect, bossBackgroundEffect };

@@ -1,17 +1,15 @@
-import { elementController } from "./elementController.js";
-import { playMusic, pauseMusic } from "../view/audioManager.js";
-import { bossBackgroundEffect } from "../view/visualEffects.js";
-import { removeAllElements } from "../general/utils.js";
+import {elements} from "../game/elements.js";
+import { playMusic, pauseMusic } from "../fx/audio.js";
+import {bossBackgroundEffect} from "../fx/visual.js";
+import {removeAllElements} from "../util/removeElements.js";
 
 const bossHealthBox = document.querySelector('.boss-health');
 const bossHealthBar = document.querySelector('.boss-bar');
 const level = document.querySelector('.level');
 const bossNameRef = document.querySelector('.boss-health p');
 
-//next level requirements and changes
-function proceedToNextLevel() {
+export function proceedToNextLevel() {
 
-    //level 2
     if (scene.score > 1000 && scene.score < 2000 && level.textContent === 'Level 1') {
         level.textContent = 'Level 2';
         levelNotification('Level 2', 1000);
@@ -19,7 +17,6 @@ function proceedToNextLevel() {
         game.bugSpawnInterval = 800;
         game.bitcoinSpawnInterval = 2750;
 
-        //level 3
     } else if (scene.score > 2000 && scene.score < 2500 && level.textContent === 'Level 2') {
         level.textContent = 'Level 3';
         levelNotification('Level 3', 1000);
@@ -27,13 +24,11 @@ function proceedToNextLevel() {
         game.bugSpawnInterval = 650;
         game.bitcoinSpawnInterval = 2500;
 
-        //miniboss
     } else if (scene.score > 2500 && scene.score < 3000 && !scene.isMiniBossFight &&
         !scene.defeatedMiniBoss && !miniBossController.loadingMiniBoss) {
         miniBossController.loadingMiniBoss = true;
         startMiniBossFight();
 
-        //level 4
     } else if (scene.score > 3000 && scene.score < 5000 && level.textContent === 'Level 3') {
         level.textContent = 'Level 4';
         levelNotification('Level 4', 1000);
@@ -41,7 +36,6 @@ function proceedToNextLevel() {
         game.bugSpawnInterval = 500;
         game.bitcoinSpawnInterval = 2000;
 
-        //level Boss
     } else if (scene.score > 5000 && scene.defeatedMiniBoss && !scene.isBossFight &&
         !scene.defeatedBoss && !bossController.loadingBoss) {
         bossController.loadingBoss = true;
@@ -53,12 +47,10 @@ function proceedToNextLevel() {
     }
 }
 
-//mini boss fight start and end
-function startMiniBossFight() {
+export function startMiniBossFight() {
 
-    elementController.addMiniBoss();
+    elements.addMiniBoss();
 
-    //render miniboss health bar
     bossHealthBox.classList.remove('hide');
     const bossName = bossHealthBox.querySelector('p');
     bossName.textContent = 'Minor Bug';
@@ -72,12 +64,11 @@ function startMiniBossFight() {
     }
 }
 
-function endMiniBossFight() {
+export function endMiniBossFight() {
     scene.isMiniBossFight = false;
     scene.defeatedMiniBoss = true;
     scene.score += game.miniBossKillBonus;
 
-    //remove all miniboss bullets
     const miniBossBullets = document.querySelectorAll('.miniboss-bullet');
     miniBossBullets.forEach(miniBossBullet => {
         miniBossBullet.remove();
@@ -88,28 +79,23 @@ function endMiniBossFight() {
     miniBoss.remove();
 }
 
-//boss fight start and end
-function startBossFight() {
+export function startBossFight() {
     
     scene.metBoss = true;
 
     bossHealthBox.style.width = '68%';
     bossNameRef.style.width = '30%';
 
-    //change music
     pauseMusic('theme');
     playMusic('boss');
 
-    //change background
     bossBackgroundEffect(true);
 
     removeAllElements();
-    setTimeout(elementController.addBoss, 3000);
+    setTimeout(elements.addBoss, 3000);
 
-    //show and remove get ready message
     levelNotification('Get Ready...', 3000);
 
-    //render boss health bar with delay
     bossHealthBox.classList.remove('hide');
     const bossName = bossHealthBox.querySelector('p');
     bossName.textContent = 'Bug Prime';
@@ -128,7 +114,7 @@ function startBossFight() {
     }
 }
 
-function endBossFight() {
+export function endBossFight() {
     scene.isBossFight = false;
     scene.defeatedBoss = true;
     scene.score += game.bossKillBonus;
@@ -147,12 +133,4 @@ function levelNotification(level, timeout) {
         notification.remove()
     }
     setTimeout(removeNotification, timeout);
-}
-
-export {
-    proceedToNextLevel,
-    startMiniBossFight,
-    endMiniBossFight,
-    startBossFight,
-    endBossFight
 }

@@ -1,7 +1,8 @@
-import { resetState } from "../model/resetState.js";
-import { removeAllElements, convertMillisecsToMins } from "../general/utils.js";
-import { onGameStart } from "./startView.js";
-import { attachParalax, removeParalax } from "./parallax.js";
+import {resetState} from "../state/resetState.js";
+import {removeAllElements} from "../util/removeElements.js";
+import {convertMillisecsToMins} from "../util/converter.js";
+import {onGameStart} from "../menu/startMenu.js";
+import { attachParalax, removeParalax } from "../fx/parallax.js";
 
 const gameOver = document.querySelector('.game-over');
 const endMessage = document.querySelector('.end-message');
@@ -23,11 +24,9 @@ const level = document.querySelector('.level');
 const hardModeSwitch = document.getElementById('switch');
 const toggleHard = document.querySelector('.toggle');
 
-//end game
-function gameOverAction() {
+export function gameOverAction() {
     const livesContainer = document.querySelector('.lives-container');
 
-    //standart case
     userInterface.classList.add('hide');
     pauseBtn.classList.add('hide');
     level.textContent = '';
@@ -39,13 +38,11 @@ function gameOverAction() {
 
     attachParalax('.endgame-stats');
 
-    //abillity to remove hard mode if it is on
     if (hardModeSwitch.checked) {
         gameOver.appendChild(toggleHard);
         toggleHard.classList.remove('hide');
     }
 
-    //stats
     bugStats.textContent = scene.killedBugs;
     bitcoinStats.textContent = scene.collectedBitcoins;
 
@@ -100,15 +97,12 @@ function gameOverAction() {
 
     scoreStats.textContent = Math.trunc(scene.score);
 
-    //killed by boss case or miniboss
     if (player.killedByBoss || scene.isMiniBossFight) bossHealthBox.classList.add('hide');
 
-    //defeated boss case
     if (scene.defeatedBoss) {
         endMessage.textContent = 'Congratulations, you have defeated Bug Prime!';
         endMessage.style.color = 'green';
 
-        //hard mode switch
         gameOver.appendChild(toggleHard);
         toggleHard.classList.remove('hide');
     }
@@ -116,22 +110,16 @@ function gameOverAction() {
     restartGameBtn.addEventListener('click', restartGame);
 }
 
-//restart game
 function restartGame() {
 
     removeParalax();
-    
-    //remove elements
+
     const character = document.querySelector('.character');
     character.remove();
     removeAllElements();
 
     gameOver.classList.add('hide');
 
-    //reset state objects
     resetState();
-
     onGameStart();
 }
-
-export { gameOverAction };

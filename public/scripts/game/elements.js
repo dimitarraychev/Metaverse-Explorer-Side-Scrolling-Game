@@ -1,8 +1,7 @@
-import { addEffect } from "../view/visualEffects.js";
+import {addEffect} from "../fx/visual.js";
 
 const gameArea = document.querySelector('.game-area');
 
-//add character
 function addCharacter() {
     const character = document.createElement('div');
     character.classList.add('character');
@@ -14,7 +13,6 @@ function addCharacter() {
     player.height = character.offsetHeight;
 }
 
-//add lives
 function addLives() {
     const livesContainer = document.createElement('div');
     livesContainer.classList.add('lives-container');
@@ -29,7 +27,6 @@ function addLives() {
 }
 
 function addAndModifyBugs(timestamp) {
-    //add bugs
     if (timestamp - scene.lastBugSpawn > game.bugSpawnInterval + 5000 * Math.random()) {
         const bug = document.createElement('div');
         bug.classList.add('bug');
@@ -43,7 +40,7 @@ function addAndModifyBugs(timestamp) {
         scene.lastBugSpawn = timestamp;
     }
 
-    //modify bug positions
+    //modify
     const bugs = document.querySelectorAll('.bug');
     bugs.forEach(bug => {
         bug.x -= game.speed * game.bugMultiplier;
@@ -56,7 +53,6 @@ function addAndModifyBugs(timestamp) {
 }
 
 function addAndModifyClouds(timestamp) {
-    //add clouds
     if (timestamp - scene.lastCloudSpawn > game.cloudSpawnInterval + 20000 * Math.random()) {
         const cloud = document.createElement('div');
         cloud.classList.add('cloud');
@@ -68,7 +64,7 @@ function addAndModifyClouds(timestamp) {
         scene.lastCloudSpawn = timestamp;
     }
 
-    //modify clouds position
+    //modify
     const clouds = document.querySelectorAll('.cloud');
     clouds.forEach(cloud => {
         cloud.x -= game.speed;
@@ -81,7 +77,6 @@ function addAndModifyClouds(timestamp) {
 }
 
 function addAndModifyBuildings(timestamp) {
-    //add buildings
     if (timestamp - scene.lastBuildingSpawn > game.buildingSpawnInterval + 20000 * Math.random()) {
         const building = document.createElement('div');
         building.classList.add('building');
@@ -93,7 +88,7 @@ function addAndModifyBuildings(timestamp) {
         scene.lastBuildingSpawn = timestamp;
     }
 
-    //modify building position
+    //modify
     const buildings = document.querySelectorAll('.building');
     buildings.forEach(building => {
         building.x -= game.speed;
@@ -105,7 +100,6 @@ function addAndModifyBuildings(timestamp) {
     });
 }
 
-// add and modify bullets functions
 function addBullet(player) {
     const bullet = document.createElement('div');
 
@@ -132,7 +126,6 @@ function modifyBulletsPositions() {
 }
 
 function addAndModifyBitcoins(timestamp) {
-    //add bitcoins
     if (timestamp - scene.lastBitcoinSpawn > game.bitcoinSpawnInterval + 5000 * Math.random()) {
         const bitcoin = document.createElement('div');
         bitcoin.classList.add('bitcoin');
@@ -146,7 +139,7 @@ function addAndModifyBitcoins(timestamp) {
         scene.lastBitcoinSpawn = timestamp;
     }
 
-    //modify bitcoins position
+    //modify
     const bitcoins = document.querySelectorAll('.bitcoin');
     bitcoins.forEach(bitcoin => {
         bitcoin.x -= game.speed * game.bitcoinMultiplier;
@@ -158,7 +151,6 @@ function addAndModifyBitcoins(timestamp) {
     });
 }
 
-//add and modify miniboss position
 function addMiniBoss() {
     miniBossController.loadingMiniBoss = false;
     scene.isMiniBossFight = true;
@@ -192,7 +184,6 @@ function modifyMiniBoss() {
 }
 
 function addAndModifyMiniBossBullets(timestamp, miniBoss) {
-    //add miniboss bullets
     if (timestamp - miniBossController.miniBossLastBullet > miniBossController.miniBossBulletInterval + 5000 * Math.random()) {
         const miniBossBullet = document.createElement('div');
         miniBossBullet.classList.add('miniboss-bullet');
@@ -206,7 +197,7 @@ function addAndModifyMiniBossBullets(timestamp, miniBoss) {
         miniBossController.miniBossLastBullet = timestamp;
     }
 
-    //modify miniboss bullets
+    //modify
     const miniBossBullets = document.querySelectorAll('.miniboss-bullet');
     miniBossBullets.forEach(miniBossBullet => {
         miniBossBullet.x -= game.speed * miniBossController.miniBossBulletMultiplier;
@@ -218,7 +209,6 @@ function addAndModifyMiniBossBullets(timestamp, miniBoss) {
     });
 }
 
-//add and modify boss position
 function addBoss() {
     bossController.loadingBoss = false;
     scene.isBossFight = true;
@@ -251,7 +241,6 @@ function modifyBoss() {
 }
 
 function addAndModifyMeteorites(timestamp) {
-    //add metorites
     if (timestamp - scene.lastMeteoriteSpawn > game.meteoriteSpawnInterval + 5000 * Math.random()) {
         const meteorite = document.createElement('div');
         meteorite.classList.add('meteorite');
@@ -263,7 +252,7 @@ function addAndModifyMeteorites(timestamp) {
         scene.lastMeteoriteSpawn = timestamp;
     }
 
-    //modify meteorites position
+    //modify
     const meteorites = document.querySelectorAll('.meteorite');
     meteorites.forEach(meteorite => {
         meteorite.x -= game.speed * game.meteoriteMultiplier;
@@ -276,7 +265,6 @@ function addAndModifyMeteorites(timestamp) {
 }
 
 function addAndModifyBossBullets(timestamp, boss) {
-    //add boss bullets
     if (timestamp - bossController.bossLastBullet > bossController.bossBulletInterval + 5000 * Math.random()) {
         const bossBullet = document.createElement('div');
         bossBullet.classList.add('boss-bullet');
@@ -290,7 +278,7 @@ function addAndModifyBossBullets(timestamp, boss) {
         bossController.bossLastBullet = timestamp;
     }
 
-    //modify boss bullets
+    //modify
     const bossBullets = document.querySelectorAll('.boss-bullet');
     bossBullets.forEach(bossBullet => {
         bossBullet.x -= game.speed * bossController.bossBulletMultiplier;
@@ -302,7 +290,7 @@ function addAndModifyBossBullets(timestamp, boss) {
     });
 }
 
-export const elementController = {
+export const elements = {
     addCharacter,
     addLives,
     addAndModifyBugs,
